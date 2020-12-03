@@ -1,14 +1,9 @@
 name: Lint LaTeX document
 on: 
   pull_request:
-    branches: 
-      - master
+    branches: [master]
   push:
-    branches: 
-      - Shreyas
-      - Atharva
-      - Pranav
-      - Hrushikesh
+    branches: [Shreyas, Atharva, Pranav, Hrushikesh]
 jobs:
     lint_latex:
         runs-on: ubuntu-latest
@@ -18,7 +13,7 @@ jobs:
             - name: Lint LaTeX document
               uses: ChiefGokhlayeh/textidote-action@v3
               with:
-                  root_file: Literature%20Review/Review.tex
+                  root_file: Literature Review/Review.tex
 
                   ## Implied defaults:
                   # working_directory:
