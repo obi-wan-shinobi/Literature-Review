@@ -1,5 +1,9 @@
 \begin{thebibliography}{}
 
+\bibitem[Cheng et~al., 2016]{cheng2016deep}
+Cheng, Z., Yang, Q., and Sheng, B. (2016).
+\newblock Deep colorization.
+
 \bibitem[Dahl, 2016]{dahl2016automatic}
 Dahl, R. (2016).
 \newblock Automatic colorization.
@@ -28,6 +32,12 @@ Levin, A., Lischinski, D., and Weiss, Y. (2004).
 \newblock Colorization using optimization.
 \newblock In {\em ACM SIGGRAPH 2004 Papers}, pages 689--694.
 
+\bibitem[{Long} et~al., 2015]{long2015semantic}
+{Long}, J., {Shelhamer}, E., and {Darrell}, T. (2015).
+\newblock Fully convolutional networks for semantic segmentation.
+\newblock In {\em 2015 IEEE Conference on Computer Vision and Pattern
+  Recognition (CVPR)}, pages 3431--3440.
+
 \bibitem[Mirza and Osindero, 2014]{mirza2014conditional}
 Mirza, M. and Osindero, S. (2014).
 \newblock Conditional generative adversarial nets.
@@ -45,6 +55,11 @@ Radford, A., Metz, L., and Chintala, S. (2016).
 \bibitem[Simonyan and Zisserman, 2015]{simonyan2015deep}
 Simonyan, K. and Zisserman, A. (2015).
 \newblock Very deep convolutional networks for large-scale image recognition.
+
+\bibitem[Tola et~al., 2008]{tola2008descriptor}
+Tola, E., Lepetit, V., and Fua, P. (2008).
+\newblock A fast local descriptor for dense matching.
+\newblock {\em Proc. CVPR}.
 
 \bibitem[Welsh et~al., 2002]{welsh2002color}
 Welsh, T., Ashikhmin, M., and Mueller, K. (2002).

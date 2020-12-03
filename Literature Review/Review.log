@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.11.2)  3 DEC 2020 17:41
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.11.2)  3 DEC 2020 22:48
 entering extended mode
 **./Review.tex
 (Review.tex
@@ -115,39 +115,39 @@ File: ./figures//levin_scribble_based_colorization_example.jpg Graphic file (ty
 pe jpg)
 <use ./figures//levin_scribble_based_colorization_example.jpg>
 Package pdftex.def Info: ./figures//levin_scribble_based_colorization_example.j
-pg  used on input line 37.
+pg  used on input line 38.
 (pdftex.def)             Requested size: 390.0pt x 195.72845pt.
 
 [2] [3 <./figures//levin_scribble_based_colorization_example.jpg>]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 45.
+(Font)              <12> on input line 47.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 45.
+(Font)              <8> on input line 47.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 45.
- (Review.bbl
-[4]) [5] (Review.aux) ) 
+(Font)              <6> on input line 47.
+ [4]
+(Review.bbl [5]) [6] (Review.aux) ) 
 Here is how much of TeX's memory you used:
- 1606 strings out of 479799
- 24460 string characters out of 2869723
- 297193 words of memory out of 3000000
- 18623 multiletter control sequences out of 15000+200000
+ 1615 strings out of 479799
+ 24673 string characters out of 2869723
+ 297289 words of memory out of 3000000
+ 18632 multiletter control sequences out of 15000+200000
  540904 words of font info for 48 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 66i,6n,72p,964b,218s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Users/shrey/AppData/Local/Programs/MiKTeX/fonts/type
-1/public/amsfonts/cm/cmbx10.pfb><C:/Users/shrey/AppData/Local/Programs/MiKTeX/f
-onts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/shrey/AppData/Local/Programs
-/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/shrey/AppData/Local
-/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/shrey/AppDa
-ta/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/shr
-ey/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/U
-sers/shrey/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.p
-fb><C:/Users/shrey/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm
-/cmti12.pfb>
-Output written on Review.pdf (5 pages, 222436 bytes).
+ 66i,6n,72p,964b,225s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Users/shrey/AppData/Local/Programs/MiKTe
+X/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/shrey/AppData/Local/Progr
+ams/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/shrey/AppData/Lo
+cal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/shrey/A
+ppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users
+/shrey/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><
+C:/Users/shrey/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr
+12.pfb><C:/Users/shrey/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfont
+s/cm/cmr17.pfb><C:/Users/shrey/AppData/Local/Programs/MiKTeX/fonts/type1/public
+/amsfonts/cm/cmti12.pfb>
+Output written on Review.pdf (6 pages, 224753 bytes).
 PDF statistics:
- 51 PDF objects out of 1000 (max. 8388607)
+ 54 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
