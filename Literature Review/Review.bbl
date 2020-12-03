@@ -1,7 +1,15 @@
 \begin{thebibliography}{}
 
-\bibitem[Zhang et~al., 2016]{zhang2016colorful}
-Zhang, R., Isola, P., and Efros, A.~A. (2016).
-\newblock Colorful image colorization.
+\bibitem[Dahl, 2016]{dahl2016automatic}
+Dahl, R. (2016).
+\newblock Automatic colorization.
+
+\bibitem[He et~al., 2015]{he2015deep}
+He, K., Zhang, X., Ren, S., and Sun, J. (2015).
+\newblock Deep residual learning for image recognition.
+
+\bibitem[Simonyan and Zisserman, 2015]{simonyan2015deep}
+Simonyan, K. and Zisserman, A. (2015).
+\newblock Very deep convolutional networks for large-scale image recognition.
 
 \end{thebibliography}
