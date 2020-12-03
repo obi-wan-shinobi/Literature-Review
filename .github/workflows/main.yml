@@ -13,7 +13,7 @@ jobs:
             - name: Lint LaTeX document
               uses: ChiefGokhlayeh/textidote-action@v3
               with:
-                  root_file: 'Literature Review/Review.tex'
+                  root_file: 'Literature\ Review/Review.tex'
 
                   ## Implied defaults:
                   # working_directory:
