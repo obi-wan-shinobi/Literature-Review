@@ -61,6 +61,11 @@ Tola, E., Lepetit, V., and Fua, P. (2008).
 \newblock A fast local descriptor for dense matching.
 \newblock {\em Proc. CVPR}.
 
+\bibitem[TSAI, 1984]{tsai}
+TSAI, R. (1984).
+\newblock Multiframe image restoration and registration.
+\newblock {\em Advance Computer Visual and Image Processing}, 1:317--339.
+
 \bibitem[Welsh et~al., 2002]{welsh2002color}
 Welsh, T., Ashikhmin, M., and Mueller, K. (2002).
 \newblock Transferring color to greyscale images.

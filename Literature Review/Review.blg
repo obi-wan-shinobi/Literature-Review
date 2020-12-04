@@ -7,45 +7,45 @@ Reallocating 'name_of_file' (item size: 1) to 11 items.
 Database file #1: References.bib
 Warning--empty booktitle in huang2005edge
 Warning--empty publisher in levin2004colorization
-You've used 16 entries,
+You've used 17 entries,
             1935 wiz_defined-function locations,
-            545 strings with 5883 characters,
-and the built_in function-call counts, 6207 in all, are:
-= -- 600
-> -- 312
-< -- 7
-+ -- 110
-- -- 106
-* -- 511
-:= -- 1100
-add.period$ -- 39
-call.type$ -- 16
-change.case$ -- 133
-chr.to.int$ -- 16
-cite$ -- 18
-duplicate$ -- 227
-empty$ -- 378
-format.name$ -- 128
-if$ -- 1201
+            551 strings with 5995 characters,
+and the built_in function-call counts, 6555 in all, are:
+= -- 635
+> -- 319
+< -- 8
++ -- 112
+- -- 108
+* -- 538
+:= -- 1161
+add.period$ -- 42
+call.type$ -- 17
+change.case$ -- 139
+chr.to.int$ -- 17
+cite$ -- 19
+duplicate$ -- 241
+empty$ -- 407
+format.name$ -- 131
+if$ -- 1271
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 7
-newline$ -- 74
-num.names$ -- 48
-pop$ -- 127
+missing$ -- 8
+newline$ -- 79
+num.names$ -- 51
+pop$ -- 130
 preamble$ -- 1
-purify$ -- 133
+purify$ -- 139
 quote$ -- 0
-skip$ -- 183
+skip$ -- 194
 stack$ -- 0
-substring$ -- 371
-swap$ -- 35
+substring$ -- 404
+swap$ -- 36
 text.length$ -- 3
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 96
+type$ -- 102
 warning$ -- 2
-while$ -- 43
+while$ -- 46
 width$ -- 0
-write$ -- 181
+write$ -- 194
 (There were 2 warnings)
