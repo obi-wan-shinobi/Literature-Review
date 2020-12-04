@@ -1,7 +1,78 @@
 \begin{thebibliography}{}
 
-\bibitem[Zhang et~al., 2016]{zhang2016colorful}
-Zhang, R., Isola, P., and Efros, A.~A. (2016).
-\newblock Colorful image colorization.
+\bibitem[Cheng et~al., 2016]{cheng2016deep}
+Cheng, Z., Yang, Q., and Sheng, B. (2016).
+\newblock Deep colorization.
+
+\bibitem[Dahl, 2016]{dahl2016automatic}
+Dahl, R. (2016).
+\newblock Automatic colorization.
+
+\bibitem[Goodfellow et~al., 2014]{goodfellow2014generative}
+Goodfellow, I.~J., Pouget-Abadie, J., Mirza, M., Xu, B., Warde-Farley, D.,
+  Ozair, S., Courville, A., and Bengio, Y. (2014).
+\newblock Generative adversarial networks.
+
+\bibitem[He et~al., 2015]{he2015deep}
+He, K., Zhang, X., Ren, S., and Sun, J. (2015).
+\newblock Deep residual learning for image recognition.
+
+\bibitem[Huang et~al., 2005]{huang2005edge}
+Huang, Y.-C., Tung, Y.-S., Chen, J.-C., Wang, S.-W., and Wu, J.-L. (2005).
+\newblock An adaptive edge detection based colorization algorithm and its
+  applications.
+\newblock pages 351--354.
+
+\bibitem[Isola et~al., 2018]{isola2018imagetoimage}
+Isola, P., Zhu, J.-Y., Zhou, T., and Efros, A.~A. (2018).
+\newblock Image-to-image translation with conditional adversarial networks.
+
+\bibitem[Levin et~al., 2004]{levin2004colorization}
+Levin, A., Lischinski, D., and Weiss, Y. (2004).
+\newblock Colorization using optimization.
+\newblock In {\em ACM SIGGRAPH 2004 Papers}, pages 689--694.
+
+\bibitem[{Long} et~al., 2015]{long2015semantic}
+{Long}, J., {Shelhamer}, E., and {Darrell}, T. (2015).
+\newblock Fully convolutional networks for semantic segmentation.
+\newblock In {\em 2015 IEEE Conference on Computer Vision and Pattern
+  Recognition (CVPR)}, pages 3431--3440.
+
+\bibitem[Mirza and Osindero, 2014]{mirza2014conditional}
+Mirza, M. and Osindero, S. (2014).
+\newblock Conditional generative adversarial nets.
+
+\bibitem[Qu et~al., 2006]{qu2006manga}
+Qu, Y., Wong, T.-T., and Heng, P.-A. (2006).
+\newblock Manga colorization.
+\newblock {\em ACM Transactions on Graphics (TOG)}, 25(3):1214--1220.
+
+\bibitem[Radford et~al., 2016]{radford2016unsupervised}
+Radford, A., Metz, L., and Chintala, S. (2016).
+\newblock Unsupervised representation learning with deep convolutional
+  generative adversarial networks.
+
+\bibitem[Simonyan and Zisserman, 2015]{simonyan2015deep}
+Simonyan, K. and Zisserman, A. (2015).
+\newblock Very deep convolutional networks for large-scale image recognition.
+
+\bibitem[Tola et~al., 2008]{tola2008descriptor}
+Tola, E., Lepetit, V., and Fua, P. (2008).
+\newblock A fast local descriptor for dense matching.
+\newblock {\em Proc. CVPR}.
+
+\bibitem[Welsh et~al., 2002]{welsh2002color}
+Welsh, T., Ashikhmin, M., and Mueller, K. (2002).
+\newblock Transferring color to greyscale images.
+\newblock {\em ACM Trans. Graph.}, 21:277--280.
+
+\bibitem[{Yatziv} and {Sapiro}, 2006]{yatziv2006chrominance}
+{Yatziv}, L. and {Sapiro}, G. (2006).
+\newblock Fast image and video colorization using chrominance blending.
+\newblock {\em IEEE Transactions on Image Processing}, 15(5):1120--1129.
+
+\bibitem[Zhu et~al., 2018]{zhu2018generative}
+Zhu, J.-Y., Krähenbühl, P., Shechtman, E., and Efros, A.~A. (2018).
+\newblock Generative visual manipulation on the natural image manifold.
 
 \end{thebibliography}
