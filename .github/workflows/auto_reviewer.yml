@@ -1,6 +1,7 @@
 name: Add Pull Request Reviewer
-  # You may pin to the exact commit or the version.
-  # uses: AveryCameronUofR/add-reviewer-gh-action@f574f65795839c31449ee23885271e20571a4920
+on: 
+  pull_request:
+    branches: [master]
   uses: AveryCameronUofR/add-reviewer-gh-action@1.0.3
   with:
     # Reviewer(s) to add, in comma separated list.
