@@ -1,0 +1,9 @@
+name: Add Pull Request Reviewer
+  # You may pin to the exact commit or the version.
+  # uses: AveryCameronUofR/add-reviewer-gh-action@f574f65795839c31449ee23885271e20571a4920
+  uses: AveryCameronUofR/add-reviewer-gh-action@1.0.3
+  with:
+    # Reviewer(s) to add, in comma separated list.
+    reviewers: Twon99, hrushipandit, Atharva1701, obi-wan-shinobi
+    # GitHub Personal Access Token
+    token: d4624ac374daa2faa4f5079b18a1911cfa05c515
