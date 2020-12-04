@@ -1,13 +1,13 @@
-\documentclass{article}
+\documentclass[12pt, letterpaper]{article}
 \usepackage[utf8]{inputenc}
 \usepackage{natbib}
 \usepackage{graphicx}
 
 \graphicspath{{./figures/}}
 
-\title{Literature-Review BE-project}
+\title{Literature Review}
 
-\date{November 2020}
+\author{Shreyas Kalvankar \and Hrushikesh Pandit \and Pranav Parwate \and Atharva Patil}
 
 \begin{document}
 	\maketitle
@@ -56,8 +56,29 @@ The Hubble Legacy Archive (HLA) endeavours to create calibrated science data fro
 		\hspace*{0.25 in}  The principle objective of Super Resolution imaging is to reconstruct a low resolution image into a high-resolution one based on a set of low-resolution images to rectify the limitations that existed while the procurement of the original low-resolution images. This is to insure better visualization and recognition for either scientific or non-scientific purposes.
 
 		\subsection{Frequency-domain-based SR image approach}
-	  		\hspace*{0.25 in} \cite{tsai} is stupid
+	  		\hspace*{0.25 in} \cite{tsai1984multiframe} proposed the frequency domain SR method, where SR computation was considered for the noise free low resolution images. They transformed the low resolution images into Discrete Fourier transform (DFT) and further combined it as per the relationship between the aliased DFT coefficient of the observed low resolution image and that of unknown high resolution image. Then the output is transformed back into the spatial domain where a higher resolution is now achieved.
+        \hspace*{0.25 in} While Frequency-domain-based SR extrapolates high frequeny information from the low resolution images and is thus useful, however they fall short in real world applications.
 
+		\subsection{The interpolation based SR image approach}
+			\hspace*{0.25 in} The interpolation-based SR approach constructs a high resolution image by casting all the low resolution images to the reference image and then combining all the information available from every image available.
+			The method consists of the following three stages
+			(i) the registration stage for aligning the low-resolution input images,
+	    (ii) the interpolation stage for producing a higher-resolution image, and
+			(iii) the deblurring stage for enhancing the
+       reconstructed high-resolution image produced in the step ii).
+
+
+			However, as each low resolution image adds a few new details before finally deblurring them, this method cannot be used if only a single reference image is available.
+
+		\subsection{Regularization-based SR image approach}
+		  \hspace*{0.25 in} Most known Bayesian-based SR approaches are
+maximum likelihood (ML) estimation approach  and maximum a posterior (MAP) estimation approach.
+    \hspace*{0.25 in}  While \citep{Brian1996ML} proposed the first ML estimation based SR approach with the aim to find the ML estimation of high resolution image, some proposed a MAP estimation approach. MAP SR tries to takes into consideration the prior image model to reflect the expectation of the unknown high resolution image.
+
+			\subsection{Super Resolution - Generative Adversarial Networks (SR-GAN)}
+
+			\hspace*{0.25 in} \cite{goodfellow2014generative} introduced Generative Adversarial Networks, it has two neural networks, the Generator and the Discriminator, they compete with each other in a zero-sum game.
+      \citep{ledig2017photorealistic} introduced SRGAN in 2017, which used a SRResNet to upscale images with an upscaling factor of 4x. SRGAN is currently the state of the art on public benchmark datasets.
 
 
 \renewcommand\bibname{References}
