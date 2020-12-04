@@ -7,8 +7,5 @@ jobs:
     steps:
       - uses: kentaro-m/auto-assign-action@v1.1.2
         with:
-          key: d4624ac374daa2faa4f5079b18a1911cfa05c515
+          repo-token: d4624ac374daa2faa4f5079b18a1911cfa05c515
           configuration-path: ".github/workflows/auto_assign.yml"
-          addReviewers: true
-          addAssignees: false
-          reviewers: hrushipandit
