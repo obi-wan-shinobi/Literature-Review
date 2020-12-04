@@ -2,9 +2,9 @@ name: Add Pull Request Reviewer
 on: 
   pull_request:
     branches: [master]
-  uses: AveryCameronUofR/add-reviewer-gh-action@1.0.3
-  with:
-    # Reviewer(s) to add, in comma separated list.
-    reviewers: Twon99, hrushipandit, Atharva1701, obi-wan-shinobi
-    # GitHub Personal Access Token
-    token: d4624ac374daa2faa4f5079b18a1911cfa05c515
+uses: AveryCameronUofR/add-reviewer-gh-action@1.0.3
+with:
+  # Reviewer(s) to add, in comma separated list.
+  reviewers: Twon99, hrushipandit, Atharva1701, obi-wan-shinobi
+  # GitHub Personal Access Token
+  token: d4624ac374daa2faa4f5079b18a1911cfa05c515
