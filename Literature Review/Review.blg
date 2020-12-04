@@ -1,0 +1,51 @@
+This is BibTeX, Version 0.99d
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: Review.aux
+Reallocating 'name_of_file' (item size: 1) to 8 items.
+The style file: apalike.bst
+Reallocating 'name_of_file' (item size: 1) to 11 items.
+Database file #1: References.bib
+Warning--empty booktitle in huang2005edge
+Warning--empty publisher in levin2004colorization
+You've used 17 entries,
+            1935 wiz_defined-function locations,
+            551 strings with 5995 characters,
+and the built_in function-call counts, 6555 in all, are:
+= -- 635
+> -- 319
+< -- 8
++ -- 112
+- -- 108
+* -- 538
+:= -- 1161
+add.period$ -- 42
+call.type$ -- 17
+change.case$ -- 139
+chr.to.int$ -- 17
+cite$ -- 19
+duplicate$ -- 241
+empty$ -- 407
+format.name$ -- 131
+if$ -- 1271
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 8
+newline$ -- 79
+num.names$ -- 51
+pop$ -- 130
+preamble$ -- 1
+purify$ -- 139
+quote$ -- 0
+skip$ -- 194
+stack$ -- 0
+substring$ -- 404
+swap$ -- 36
+text.length$ -- 3
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 102
+warning$ -- 2
+while$ -- 46
+width$ -- 0
+write$ -- 194
+(There were 2 warnings)
