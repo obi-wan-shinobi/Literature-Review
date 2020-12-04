@@ -11,9 +11,4 @@ jobs:
           configuration-path: ".github/workflows/auto_assign.yml"
           addReviewers: true
           addAssignees: false
-          reviewers: 
-            - Twon99
-            - hrushipandit
-            - Atharva1701
-            - obi-wan-shinobi
-          numberOfReviewers: 0
+          reviewers: obi-wan-shinobi
