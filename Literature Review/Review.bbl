@@ -27,6 +27,12 @@ Huang, Y.-C., Tung, Y.-S., Chen, J.-C., Wang, S.-W., and Wu, J.-L. (2005).
 Isola, P., Zhu, J.-Y., Zhou, T., and Efros, A.~A. (2018).
 \newblock Image-to-image translation with conditional adversarial networks.
 
+\bibitem[Ledig et~al., 2017]{ledig2017photorealistic}
+Ledig, C., Theis, L., Huszar, F., Caballero, J., Cunningham, A., Acosta, A.,
+  Aitken, A., Tejani, A., Totz, J., Wang, Z., and Shi, W. (2017).
+\newblock Photo-realistic single image super-resolution using a generative
+  adversarial network.
+
 \bibitem[Levin et~al., 2004]{levin2004colorization}
 Levin, A., Lischinski, D., and Weiss, Y. (2004).
 \newblock Colorization using optimization.
@@ -60,6 +66,20 @@ Simonyan, K. and Zisserman, A. (2015).
 Tola, E., Lepetit, V., and Fua, P. (2008).
 \newblock A fast local descriptor for dense matching.
 \newblock {\em Proc. CVPR}.
+
+\bibitem[Tom and Katsaggelos, 1996]{Brian1996ML}
+Tom and Katsaggelos (1996).
+\newblock Reconstruction of a high-resolution image by simultaneous
+  registration, restoration, and interpolation of low-resolution images.
+\newblock In Anon, editor, {\em IEEE International Conference on Image
+  Processing}, volume~2, pages 539--542. IEEE.
+\newblock Proceedings of the 1995 IEEE International Conference on Image
+  Processing. Part 3 (of 3) ; Conference date: 23-10-1995 Through 26-10-1995.
+
+\bibitem[TSAI, 1984]{tsai1984multiframe}
+TSAI, R. (1984).
+\newblock Multiframe image restoration and registration.
+\newblock {\em Advance Computer Visual and Image Processing}, 1:317--339.
 
 \bibitem[Welsh et~al., 2002]{welsh2002color}
 Welsh, T., Ashikhmin, M., and Mueller, K. (2002).
