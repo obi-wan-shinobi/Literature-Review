@@ -21,10 +21,10 @@ jobs:
     - name: Build paper
       run: |
         echo ${MANUSCRIPT_PATH}.tex
-        ${LATEX} ${MANUSCRIPT_PATH##*/}.tex
-        ${BIBTEX} ${MANUSCRIPT_PATH##*/}.aux
-        ${LATEX} ${MANUSCRIPT_PATH##*/}.tex
-        ${LATEX} ${MANUSCRIPT_PATH##*/}.tex
+        ${LATEX} ${MANUSCRIPT_PATH}.tex
+        ${BIBTEX} ${MANUSCRIPT_PATH}.aux
+        ${LATEX} ${MANUSCRIPT_PATH}.tex
+        ${LATEX} ${MANUSCRIPT_PATH}.tex
     - name: Push paper
       run: |
         git checkout --orphan ${GITHUB_REF##*/}-pdf
