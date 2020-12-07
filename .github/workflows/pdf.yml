@@ -20,6 +20,7 @@ jobs:
                              texlive-fonts-extra
     - name: Build paper
       run: |
+        echo ${MANUSCRIPT_PATH}
         ${LATEX} ${MANUSCRIPT_PATH##*/}.tex
         ${BIBTEX} ${MANUSCRIPT_PATH##*/}.aux
         ${LATEX} ${MANUSCRIPT_PATH##*/}.tex
