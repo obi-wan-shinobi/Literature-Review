@@ -1,0 +1,68 @@
+\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Project Idea}{2}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Motivation of the Project}{2}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Literature Survey}{2}{section.1.3}%
+\contentsline {chapter}{\numberline {2}Problem Definition and scope}{3}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Problem Statement}{4}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Goals and objectives}{4}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Statement of scope}{4}{subsection.2.1.2}%
+\contentsline {section}{\numberline {2.2}Major Constraints}{4}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Methodologies of Problem solving and efficiency issues}{4}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Scenario in which multi-core, Embedded and Distributed Computing used}{4}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Outcome}{5}{section.2.5}%
+\contentsline {section}{\numberline {2.6}Applications}{5}{section.2.6}%
+\contentsline {section}{\numberline {2.7}Hardware Resources Required}{5}{section.2.7}%
+\contentsline {section}{\numberline {2.8}Software Resources Required}{5}{section.2.8}%
+\contentsline {chapter}{\numberline {3}Project Plan}{6}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Project Estimates}{7}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Reconciled Estimates}{7}{subsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.1.1}Cost Estimate}{7}{subsubsection.3.1.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.1.2}Time Estimates}{7}{subsubsection.3.1.1.2}%
+\contentsline {subsection}{\numberline {3.1.2}Project Resources}{7}{subsection.3.1.2}%
+\contentsline {section}{\numberline {3.2}Risk Management }{7}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Risk Identification}{7}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Risk Analysis}{8}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Overview of Risk Mitigation, Monitoring, Management}{9}{subsection.3.2.3}%
+\contentsline {section}{\numberline {3.3}Project Schedule}{9}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Project task set}{9}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Task network}{10}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Timeline Chart}{10}{subsection.3.3.3}%
+\contentsline {section}{\numberline {3.4}Team Organization}{10}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Team structure}{10}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Management reporting and communication}{10}{subsection.3.4.2}%
+\contentsline {chapter}{\numberline {4}Software requirement specification }{11}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Introduction}{12}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Purpose and Scope of Document}{12}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Overview of responsibilities of Developer}{12}{subsection.4.1.2}%
+\contentsline {section}{\numberline {4.2}Usage Scenario}{12}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}User profiles}{12}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Use-cases}{12}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Use Case View}{12}{subsection.4.2.3}%
+\contentsline {section}{\numberline {4.3}Data Model and Description}{13}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Data Description}{13}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Data objects and Relationships}{13}{subsection.4.3.2}%
+\contentsline {section}{\numberline {4.4}Functional Model and Description}{13}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Data Flow Diagram}{14}{subsection.4.4.1}%
+\contentsline {subsubsection}{\numberline {4.4.1.1}Level 0 Data Flow Diagram}{14}{subsubsection.4.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.4.1.2}Level 1 Data Flow Diagram}{14}{subsubsection.4.4.1.2}%
+\contentsline {subsection}{\numberline {4.4.2}Description of functions}{14}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}Activity Diagram:}{15}{subsection.4.4.3}%
+\contentsline {subsection}{\numberline {4.4.4}Non Functional Requirements:}{15}{subsection.4.4.4}%
+\contentsline {subsection}{\numberline {4.4.5}State Diagram:}{15}{subsection.4.4.5}%
+\contentsline {subsection}{\numberline {4.4.6}Design Constraints}{15}{subsection.4.4.6}%
+\contentsline {subsection}{\numberline {4.4.7}Software Interface Description}{15}{subsection.4.4.7}%
+\contentsline {chapter}{\numberline {5}Detailed Design Document }{17}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Introduction}{18}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Architectural Design}{18}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Data design }{18}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Internal software data structure}{18}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Global data structure}{19}{subsection.5.3.2}%
+\contentsline {subsection}{\numberline {5.3.3}Temporary data structure}{19}{subsection.5.3.3}%
+\contentsline {subsection}{\numberline {5.3.4}Database description}{19}{subsection.5.3.4}%
+\contentsline {chapter}{\numberline {6}Dataset and Experimental setup}{20}{chapter.6}%
+\contentsline {chapter}{\numberline {7}Summary and Conclusion}{21}{chapter.7}%
+\contentsline {chapter}{Annexure \numberline {A}Mathematical Model}{23}{appendix.1.A}%
+\contentsline {chapter}{Annexure \numberline {B}Plagiarism Report }{24}{appendix.1.B}%
+\contentsline {chapter}{Annexure \numberline {C}Paper Published (if any)}{25}{appendix.1.C}%
+\contentsline {chapter}{Annexure \numberline {D}Sponsorship detail (if any)}{26}{appendix.1.D}%
+\contentsfinish 
