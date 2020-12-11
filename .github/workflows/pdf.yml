@@ -21,7 +21,7 @@ jobs:
     - name: Build paper
       run: |
         ${LATEX} "${MANUSCRIPT_PATH}.tex"
-        ${BIBTEX} "${MANUSCRIPT_PATH}.aux"
+        ${BIBTEX} "${MANUSCRIPT_PATH}.bib"
         ${LATEX} "${MANUSCRIPT_PATH}.tex"
         ${LATEX} "${MANUSCRIPT_PATH}.tex"
     - name: Push paper
