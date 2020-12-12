@@ -49,7 +49,7 @@
 % \vspace*{1\baselineskip}
 {\bfseries A  PROJECT REPORT ON \\}
  \vspace*{2\baselineskip}
-{\bfseries \fontsize{16}{12} \selectfont BE PROJECT TITLE \\ \vspace*{2\baselineskip}}
+{\bfseries \fontsize{16}{12} \selectfont Astronomical Image colorization and super-resolution using GANs \\ \vspace*{2\baselineskip}}
 {\fontsize{12}{12} \selectfont SUBMITTED TOWARDS THE
  \\PARTIAL FULFILMENT OF THE REQUIREMENTS OF \\
 
@@ -59,14 +59,14 @@ Engineering) \\
 \vspace*{1\baselineskip}} 
 {\bfseries \fontsize{14}{12} \selectfont BY \\ 
 \vspace*{1\baselineskip}} 
-Student Name  \hspace{25 mm} Exam No:  \\
-Student Name \hspace{25 mm} Exam No:   \\
-Student Name \hspace{25 mm} Exam No:  \\
-Student Name \hspace{25 mm} Exam No:\\
+Shreyas Kalvankar  \hspace{25 mm} Exam No:  \\
+Hrushikesh Pandit \hspace{25 mm} Exam No:   \\
+Pranav Parwate \hspace{30 mm} Exam No:  \\
+Atharva Patil \hspace{34 mm} Exam No:\\
 \vspace*{2\baselineskip}
 {\bfseries \fontsize{14}{12} \selectfont Under The Guidance of \\  
 \vspace*{2\baselineskip}} 
-Prof. Guide Name\\
+Prof. Dr. S.M. Kamalapur\\
 \includegraphics[width=100pt]{collegelogo.png} \\
 {\bfseries \fontsize{14}{12} \selectfont Department of Computer Engineering \\
 K. K. Wagh Institute of Engineering Education \& Research \\
@@ -98,23 +98,23 @@ A. Y. 2020-21 Sem I
 \vspace*{1\baselineskip} 
 
 
-{\bfseries \fontsize{14}{12} \selectfont \centerline{BE PROJECT TITLE}
+{\bfseries \fontsize{14}{12} \selectfont \centerline{Astronomical Image colorization and super-resolution using GANs}
 \vspace*{1\baselineskip}}
 
 \centerline{Submitted by}
 \vspace*{1\baselineskip} 
-\centerline{Student Name  \hspace{25 mm} Exam No: } 
-\centerline{Student Name \hspace{25 mm} Exam No:  } 
-\centerline{Student Name \hspace{25 mm} Exam No: }
-\centerline{Student Name \hspace{25 mm} Exam No: }
+\centerline{Shreyas Kalvankar  \hspace{25 mm} Exam No: } 
+\centerline{Hrushikesh Pandit \hspace{25 mm} Exam No:  } 
+\centerline{Pranav Parwate \hspace{30 mm} Exam No: }
+\centerline{Atharva Patil \hspace{34 mm} Exam No: }
 \vspace*{1\baselineskip} 
-is a bonafide work carried out by Students under the supervision of Prof. Guide Name and it
+is a bonafide work carried out by Students under the supervision of Prof. Dr. S.M. Kamalapur and it
 is submitted towards the partial fulfilment of the requirement of Bachelor of Engineering (Computer Engineering) Project during academic year 2020-21.\\\\\\
 
 \bgroup
 \def\arraystretch{0.7}
 \begin{tabular}{c c }
-Prof. Guide Name &  \hspace{25 mm} Prof. Dr. S. S. Sane \\								
+Prof. Dr. S.M. Kamalapur &  \hspace{25 mm} Prof. Dr. S. S. Sane \\								
 Internal Guide   &  \hspace{25 mm} Head \\
 Department of Computer Engineering  &	\hspace{25 mm}Department of Computer Engineering  \\
 \end{tabular}
@@ -138,8 +138,9 @@ Department of Computer Engineering  &	\hspace{25 mm}Department of Computer Engin
 {  \newpage {\bfseries \fontsize{14}{12} \selectfont \centerline{Abstract} 
 \vspace*{2\baselineskip}} \setlength{\parindent}{11mm} }
 { \setlength{\parindent}{0mm} }
-Please Write here One Page Abstract. It should mainly include introduction, motivation,outcome and innovation if any.
-
+\hspace*{0.25 in}Automated colorization of black and white images has been subject to much research within the computer vision and machine learning communities. Beyond simply being fascinating from an aesthetic and artificial intelligence perspective, such capability has broad practical applications. It is an area of research that possesses great potentials in applications: from black and white photo reconstruction, image augmentation, video restoration to image enhancement for improved interpretability.\\
+\hspace*{0.25 in}Image downscaling is an innately lossy process. The principal objective of super resolution imaging is to reconstruct a low resolution image into a high resolution one based on a set of low-resolution images to rectify the limitations that existed while the procurement of the original low-resolution images. This is to insure better visualization and recognition for either scientific or non-scientific purposes. No matter how good an upscaling algorithm is, there will always be some amount of high frequency data lost from a downscale-upscale function performed on the image. Ultimately, even the best upscaling algorithms cannot effectively reconstruct data that does not exist. Traditional methods for image upsampling rely on low-information, smooth interpolation between known pixels. Such methods can be treated as a convolution with a kernel encoding no information about the original image. A solution to the problem is by using Generative Adversarial Networks (GANs) to hallucinate high-frequency data in a super-resolved image that does not exist in the smaller image. Although they increase the resolution of an image, they fail to produce the clarity desired in the super-resolution task. By using the above mentioned method, not a perfect reconstruction can be obtained albeit instead a rather plausible guess can be made at what the lost data might be, constrained to reality by a loss function penalizing deviations from the ground truth image.
+\hspace*{0.25 in}A huge number of raw images lie unprocessed and unseen in the Hubble Legacy Archives. These raw images are typically low-resolution, black and white and unfit to be shared with the world. It takes huge amounts of hours to process them. This processing is necessary because astronomers often struggle to distinguish objects from the raw images. Random and synthetic noise from the sensors in the telescope, changing optical characteristics in the system and noise from other bodies in the universe all make the processing further necessary. Furthermore, colorization is needed to help highlight small features that ordinarily wouldn't be able to be picked out against noise of the image. The processing of the images is so time consuming that the images are rarely seen by human eyes. The problem is only likely to get worse. Not only is new data being continuously produced by Hubble Telescope, but new telescopes are soon to come online. A simplification of image processing by using artificial image colorization and super-resolution can be done in an automated fashion to make it easier for astronomers to visually identify and analyze objects in Hubble dataset.
 
 {  \newpage {\bfseries \fontsize{14}{12} \selectfont \centerline{Acknowledgments} 
 \vspace*{2\baselineskip}} \setlength{\parindent}{11mm} }
