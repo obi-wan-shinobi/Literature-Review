@@ -148,10 +148,10 @@ Department of Computer Engineering  &	\hspace{25 mm}Department of Computer Engin
 please enter text here.\\
 \vspace*{3\baselineskip} \\
 \begin{tabular}{p{8.2cm}c}
-&Student Name1\\
-&Student Name2\\
-&Student Name3\\
-&Student Name4\\
+&Shreyas Kalvankar\\
+&Hrushikesh Pandit\\
+&Pranav Parwate\\
+&Atharva Patil\\
 &(B.E. Computer Engg.)
 %}
 \end{tabular}
@@ -191,13 +191,13 @@ please enter text here.\\
 \chapter{Introduction}
 \section{Project Idea}
 \begin{itemize}
-\item Project Idea
+\item The idea of the project is to create a efficient mathematical model for image colorization and super resolution using Generative Adversarial Networks (GANs)
 \end{itemize}
 
 
 \section{Motivation of the Project}  
 \begin{itemize}
-\item Motivation of the Project
+\item A large number of images lie dormant in most of the space survey data archives which never go through any kind of processing and are low resolution and black \& white. These images could be processed automatically by an algorithm that will colorize and super-resolve the images which can make it easier for astronomers to visually inspect the images
 \end{itemize}
 
 \section{Literature Survey}
@@ -208,19 +208,57 @@ please enter text here.\\
 
 \chapter{Problem Definition and scope}
 \section{Problem Statement}
-Description of Problem
+The problem can be divided into two sub-problems:
+\begin{itemize}
+	\item Create an efficient model to colorize grayscale images
+	\item Take a colorized image and upscale it $n$ times the original size
+\end{itemize}
 
 
 \subsection{Goals and objectives}  
 Goal and Objectives: 
 \begin{itemize}
-  	\item Overall goals and objectives of software, input and output description with necessary syntax, format etc are described
+\item Auto-Colorization:
+	\begin{itemize}
+		\item The first model will be given input a grayscale, low resolution image of dimensions ($64\times 64\times 1$)
+  		\item The model will perform a series of mathematical operations that will increase the channel width of the image from 1 (single channel grayscale image) to 3 (RGB)
+  		\item The output of the model will be a colorized version of the input image with dimensions ($64\times 64\times 3$)
+	\end{itemize}
+\item Upscaling/super-resolution:
+  	\begin{itemize}
+  		\item The input to the model will be a colorized image of shape ($64\times 64\times 3$)
+  		\item The model will increase the dimensions of the image from ($64\times 64$) to ($(64\cdot n)\times (64\cdot n)$) by performing a series of upscaling operations and predicting information that may be lost while downscaling
+  		\item The output of the model will be an upscaled RGB image with dimensions ($(64\cdot n)\times (64\cdot n)\times 3$)
+  	\end{itemize}
+  	\item The models may be combined to form a single model that will take a low resolution, grayscale image as its input and produce a high resolution, colorized image as its output
 \end{itemize}
 
  \subsection{Statement of scope} 
 	\begin{itemize}  
-	\item	A description of the software with Size of input, bounds on input, input validation, input dependency, i/o state diagram, Major inputs, and outputs are described without regard to implementation detail.
-	\item The scope identifies what the product is and is not, what it will and won?t do, what it will and wont contain.
+	\item The model will consist of neural networks implemented using deep learning frameworks that will accept images of input format \textit{JPEG}
+	\item The input will be grayscale images of size $64\times 64$ 
+	\item Input bounds:
+	\begin{itemize}
+		\item Lower bound: $64\times 64\times 1$
+		\item Upper bound: no limit
+	\end{itemize}
+	\item The output will be produced in two phases:
+	\begin{itemize}
+		\item A colorized output of model 1 with shape $64\times 64\times 3$
+		\item A upscaled output of model 2 from the colorized output of model 1 with shape $(64\cdot n)\times (64\cdot n)\times 3$
+	\end{itemize}
+	\item The model will:
+	\begin{itemize}
+		\item take input black \& white images
+		\item produce colorized images of the same size
+		\item produce upscaled images of size $n$ times the input size (currently 64)
+	\end{itemize}
+	\item The model will \textbf{not}:
+	\begin{itemize}
+		\item take a colorized image as an input
+		\item take an image of size less than $(64 \times 64)$ in size
+		\item produce accurate upscaling or coloring albeit merely make a guess at what the lost values might be
+	\end{itemize}
 	\end{itemize}
 
 \section{Major Constraints}
