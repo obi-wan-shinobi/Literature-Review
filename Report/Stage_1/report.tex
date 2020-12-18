@@ -310,6 +310,9 @@ Goal and Objectives:
 		\item produce accurate upscaling or coloring albeit merely make a guess at what the lost values might be
 	\end{itemize}
 	\end{itemize}
+  \end{itemize}
+
+
 
 \section{Major Constraints}
 \begin{itemize}
@@ -480,8 +483,8 @@ The risks for the Project can be analyzed within the constraints of time and qua
 \hline
 \multirow{2}{*}{ID} & \multirow{2}{*}{Risk Description}	& \multirow{2}{*}{Probability} & \multicolumn{3}{|c|}{Impact} \\ \cline{4-6}
 	& & &	Schedule	& Quality	& Overall \\ \hline
-1	& Description 1	& Low	& Low	& High	& High \\ \hline
-2	& Description 2	& Low	& Low	& High	& High \\ \hline
+1	& Garbage images in dataset	& Medium	& Low	& High	& High \\ \hline
+2	& Vanishing Gradients 	& Low	& Low	& High	& High \\ \hline
 \end{tabularx}
 \end{center}
 \caption{Risk Table}
@@ -522,9 +525,7 @@ Medium	& $ < 5 \% $ & Schedule impact or Barely noticeable degradation in qualit
 \end{table}
 
 \subsection{Overview of Risk Mitigation, Monitoring, Management}
-
-
-Following are the details for each risk.
+Following are the details for each risk
 \begin{table}[!htbp]
 \begin{center}
 %\def\arraystretch{1.5}
@@ -532,13 +533,13 @@ Following are the details for each risk.
 \begin{tabularx}{\textwidth}{| l | X |}
 \hline
 Risk ID	& 1 \\ \hline
-Risk Description	& Description 1 \\ \hline
-Category	& Development Environment. \\ \hline
+Risk Description	& There are Garbage images in dataset which can lead to improper training of discriminator. It can lead to undesired outputs \\ \hline
+Category	& Pre processing. \\ \hline
 Source	& Software requirement Specification document. \\ \hline
 Probability	& Low \\ \hline
 Impact	& High \\ \hline
 Response	& Mitigate \\ \hline
-Strategy	& Strategy \\ \hline
+Strategy	& To manually remove garbage images from the dataset  \\ \hline
 Risk Status	& Occurred \\ \hline
 \end{tabularx}
 \end{center}
@@ -553,64 +554,46 @@ Risk Status	& Occurred \\ \hline
 \begin{tabularx}{\textwidth}{| l | X |}
 \hline
 Risk ID	& 2 \\ \hline
-Risk Description	& Description 2 \\ \hline
+Risk Description	& If discriminator is too good , then generator training can fail due to Vanishing gradients  \\ \hline
 Category	& Requirements \\ \hline
 Source	& Software Design Specification documentation review. \\ \hline
 Probability	& Low \\ \hline
 Impact	& High \\ \hline
 Response	& Mitigate \\ \hline
-Strategy	& Better testing will resolve this issue.  \\ \hline
+Strategy	& Wasserstein loos and Modifed minimax loss are desigend to prevent vanishing gradients.  \\ \hline
 Risk Status	& Identified \\ \hline
 \end{tabularx}
 \end{center}
 \label{tab:risk2}
 \end{table}
 
-\begin{table}[!htbp]
-\begin{center}
-%\def\arraystretch{1.5}
-\def\arraystretch{1.5}
-\begin{tabularx}{\textwidth}{| l | X |}
-\hline
-Risk ID	& 3 \\ \hline
-Risk Description	& Description 3 \\ \hline
-Category	& Technology \\ \hline
-Source	& This was identified during early development and testing. \\ \hline
-Probability	& Low \\ \hline
-Impact	& Very High \\ \hline
-Response	& Accept \\ \hline
-Strategy	& Example Running Service Registry behind proxy balancer  \\ \hline
-Risk Status	& Identified \\ \hline
-\end{tabularx}
-\end{center}
-\label{tab:risk3}
-\end{table}
-
+\newpage
 \section{Project Schedule}
 \subsection{Project task set}
 Major Tasks in the Project stages are:
 \begin{itemize}
-  \item Task 1:
-  \item Task 2:
-  \item Task 3:
-  \item Task 4:
-  \item Task 5:
+  \item Task 1: Colledting Dataset
+  \item Task 2: Cleaning Dataset
+  \item Task 3: Creating GAN model of image colorization and super-resolution
+  \item Task 4: Training  the GAN model
+  \item Task 5: Fine tuning the GAN model
 \end{itemize}
 
-\subsection{Task network}
-Project tasks and their dependencies are noted in this diagrammatic form.
-\subsection{Timeline Chart}
-A project timeline chart is presented. This may include a time line for the entire project.
-Above points should be covered  in Project Planner as Annex C and you can mention here Please refer Annex C for the planner
-
-
 \section{Team Organization}
-The manner in which staff is organized and the mechanisms for reporting are noted.
+\begin{itemize}
+\item Team of 4 members
+\item 1 Project guide
+\item 1 Project coordinator
+\end{itemize}
 \subsection{Team structure}
-The team structure for the project is identified. Roles are defined.
+Team of 4 members
 
 \subsection{Management reporting and communication}
-Mechanisms for progress reporting and inter/intra team communication are identified as per assessment sheet and lab time table
+\begin{itemize}
+\item Weekly meeting with guide about the work
+\item Weekly meeting among team for updates and work distribution
+\item Daily updates on work progress
+\end{itemize}
 \chapter{Software requirement specification }
 
 \section{Introduction}
