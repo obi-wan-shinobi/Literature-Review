@@ -233,20 +233,20 @@ Goal and Objectives:
   	\item The models may be combined to form a single model that will take a low resolution, grayscale image as its input and produce a high resolution, colorized image as its output
 \end{itemize}
 
-<<<<<<< HEAD
+
  \subsection{Statement of scope}
 	\begin{itemize}
 	\item The model will consist of neural networks implemented using deep learning frameworks that will accept images of input format \textit{JPEG}
 	\item The input will be grayscale images of size $64\times 64$
-=======
+	\end{itemize}
+
  \subsection{Statement of scope} 
 	\begin{itemize}  
 	\item The model will consist of neural networks implemented using deep learning frameworks that will accept images of input format \textit{JPEG}
 	\item The input will be grayscale images of size $64\times 64$ 
-<<<<<<< HEAD
->>>>>>> b06246886dc291c4cbb1d82aa0c7f846134b8448
-=======
->>>>>>> b06246886dc291c4cbb1d82aa0c7f846134b8448
+
+
+
 	\item Input bounds:
 	\begin{itemize}
 		\item Lower bound: $64\times 64\times 1$
@@ -524,13 +524,12 @@ The manner in which staff is organized and the mechanisms for reporting are note
 The team structure for the project is identified. Roles are defined.
 
 \subsection{Management reporting and communication}
-<<<<<<< HEAD
+
 Mechanisms for progress reporting and inter/intra team communication are identified as per assessment sheet and lab time table.
 
-=======
 Mechanisms for progress reporting and inter/intra team communication are identified as per assessment sheet and lab time table.
 
->>>>>>> origin/Hrushikesh
+
 \chapter{Software requirement specification }
 
 \section{Introduction}
@@ -546,7 +545,7 @@ This section provides various usage scenarios for the system to be developed.
 The profiles of all user categories are described here.(Actors and their Description)
 
 \subsection{Use-cases}
-All use-cases for the software are presented. Description of all main Use cases using use case template is to be provided.
+Following is the use case table.
 
 \begin{table}[!htbp]
 \begin{center}
@@ -556,8 +555,9 @@ All use-cases for the software are presented. Description of all main Use cases 
 \hline
 Sr No.	& Use Case	& Description	& Actors	& Assumptions \\
 \hline
-1& Use Case 1 & Description & Actors & Assumption \\
-\hline
+1& Input image & Image is loaded & User & Image of size 64x64 and format jpg/jpeg is uploaded  \\ \hline
+2& Colourising & GAN colourises the image & GAN & The image is colourised from its black and white format \\ \hline
+3& Upscaling & GAN upscales the image & GAN & The image is upscaled to resolution 768x768 and is not pixelated. \\ \hline
 \end{tabularx}
 \end{center}
 \caption{Use Cases}
@@ -570,7 +570,7 @@ Use Case Diagram. Example is given below
 \begin{center}
 	\begin{figure}[!htbp]
 		\centering
-		\fbox{\includegraphics[width=\textwidth]{use-case.jpg}}
+		\fbox{\includegraphics[width=\textwidth]{use.jpg}}
 	  \caption{Use case diagram}
 	  \label{fig:usecase}
 	\end{figure}
