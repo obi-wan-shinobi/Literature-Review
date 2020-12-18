@@ -192,18 +192,62 @@ please enter text here.\\
 \section{Project Idea}
 \begin{itemize}
 \item The idea of the project is to create a efficient mathematical model for image colorization and super resolution using Generative Adversarial Networks (GANs)
+\item Having two networks compete will stimulate greater performance by the virtue of minimization of loss functions that traditional Convolutional Neural Network cant do
 \end{itemize}
 
 
 \section{Motivation of the Project}
 \begin{itemize}
+\item Image colorization seems to be evolving as computers get better and better at predicting missing variables. Different methods and techniques have been applied for colorizing images that have shown promising results
+\item Introduction of convolutional neural networks has made this task even more precise and accurate. Convoluting grayscale images to RGB provides unprecedented results with reference to visual inspection
+\item With the introduction of Generative Adversarial Networks, this particular task can be developed and modified to increase the efficiency and precision for colorizing images instead
+\item Furthermore, image upscaling is another problem that has been under research in the computer vision community. It has been studied and many approached have been developed to accurately predict the missing pixel values while upscaling an image
+\item Application of GANs to this discipline has successfully improved the performance and computers are getting better and better at predicting accurate missing pixel values and upscaling images many folds the original size
+\item All this computation power can be used for astronomical research by processing large data archives 
 \item A large number of images lie dormant in most of the space survey data archives which never go through any kind of processing and are low resolution and black \& white. These images could be processed automatically by an algorithm that will colorize and super-resolve the images which can make it easier for astronomers to visually inspect the images
 \end{itemize}
 
 \section{Literature Survey}
-\begin{itemize}
-\item Review of the papers, Description , Mathematical Terms
-\end{itemize}
+\subsection{Image Colorization}
+\subsubsection{Hint Based Colorization}
+\hspace*{0.25 in}\cite{levin2004colorization} proposed using colorization hints from the user in a quadratic cost function which imposed that neighboring pixels in space-time with similar intensities should have similar colours. This was a simple but effective method but only had hints which were provided in form of imprecise colored scribbles on the grayscale input image. But with no additional information about the image, the method was able to efficiently generate high quality colorizations. \cite{huang2005edge} addressed the color bleeding issue faced in this approach and solved it using adaptive edge detection. \cite{yatziv2006chrominance} used luminescence based weighting for hints to boost efficiency. \cite{qu2006manga} extended the original cost function to enforce color continuity over similar textures along with intensities.\\
+		\hspace*{0.25 in}\cite{welsh2002color} had proposed another approach that reduced the burden on the user by only requiring a full color example of an image with similar composition. It matched the texture and luminescence between the example and the target grayscale image and received realistic results as long as the example image was sufficiently similar.\\
+		\hspace*{0.25 in}Regardless of the scribble based or example based approach, the algorithms still needed sufficient human assistance in form of hand drawn or colorized images.
+		\subsubsection{Deep Colorization}
+		\hspace*{0.25 in}Owing to recent advances, the Convolutional Neural Networks are a de facto standard for solving image classification problems and their popularity continues to rise with continual improvements. CNNs are peculiar in their ability to learn and differentiate colors, patterns and shapes within an image and their ability to associate them with different classes.\\
+		\hspace*{0.25 in}\cite{cheng2016deep} proposed a per pixel training for neural networks using DAISY \cite{tola2008descriptor}, and semantic \cite{long2015semantic} features to predict the chrominance value for each pixel, that used bilateral filtering to smooth out accidental image artifacts. With a large enough dataset, this method proved to be superior to the example based techniques even with a simple Euclidean loss function against the ground truth values.\\
+		\hspace*{0.25 in}Finally, \cite{dahl2016automatic} successfully implemented a system to automatically colorize black \& white images using several ImageNet-trained layers from VGG-16 \cite{simonyan2015deep} and integrating them with auto-encoders that contained residual connections. These residual connections merged the outputs produced by the encoding VGG16 layers and the decoding portion of the network in the later stages. \cite{he2015deep} showed that deeper neural networks can be trained by reformulating layers to learn residual function with reference to layer inputs. Using this \textit{Residual Connections}, \cite{he2015deep} created the \textit{ResNets} that went as deep as 152 layers and won the 2015 ImageNet Challenge.
+		\subsubsection{Generative Adversarial Networks}
+		\hspace*{0.25 in}\cite{goodfellow2014generative} introduced the adversarial framework that provides an approach to training a neural network which uses the generative distribution of $p_g(x)$ over the input data $x$.\\
+		\hspace*{0.25 in}Since it's inception in 2015, many extended works of GAN have been proposed over years including DCGAN \cite{radford2016unsupervised}, Conditional-GAN \cite{mirza2014conditional}, iGAN \cite{zhu2018generative}, Pix2Pix \cite{isola2018imagetoimage}.\\
+		\hspace*{0.25 in}\cite{radford2016unsupervised} applied the adversarial framework for training convolutional neural networks as generative models for images, demonstrating the viability of \textit{deep convolutional generative adversarial networks}.\\
+		\hspace*{0.25 in}DCGAN is the standard architecture to generate images from random noise. Instead of generating images from random noise, Conditional-GAN \cite{mirza2014conditional} uses a condition to generate output image. For e.g. a grayscale image is the condition for colorization of image. Pix2Pix \cite{isola2018imagetoimage} is a Conditional-GAN with images as the conditions. Besides learning the mapping from input image to output image, it can also learn a separate loss function to train this mapping. Pix2Pix is considered to be the state of the art architecture for image-image translation problems like colorization.
+		\subsection{Image Upscaling}
+		\subsubsection{Frequency-domain-based SR image approach}
+	  		\hspace*{0.25 in} \cite{tsai1984multiframe} proposed the frequency domain SR method, where SR computation was considered for the noise free low resolution images. They transformed the low resolution images into Discrete Fourier transform (DFT) and further combined it as per the relationship between the aliased DFT coefficient of the observed low resolution image and that of unknown high resolution image. Then the output is transformed back into the spatial domain where a higher resolution is now achieved.\\
+        \hspace*{0.25 in} While Frequency-domain-based SR extrapolates high frequeny information from the low resolution images and is thus useful, however they fall short in real world applications.
+
+		\subsubsection{The interpolation based SR image approach}
+			\hspace*{0.25 in} The interpolation-based SR approach constructs a high resolution image by casting all the low resolution images to the reference image and then combining all the information available from every image available.
+			The method consists of the following three stages
+			(i) the registration stage for aligning the low-resolution input images,
+	    (ii) the interpolation stage for producing a higher-resolution image, and
+			(iii) the deblurring stage for enhancing the
+       reconstructed high-resolution image produced in the step ii).
+
+
+			However, as each low resolution image adds a few new details before finally deblurring them, this method cannot be used if only a single reference image is available.
+
+		\subsubsection{Regularization-based SR image approach}
+		  \hspace*{0.25 in} Most known Bayesian-based SR approaches are
+maximum likelihood (ML) estimation approach  and maximum a posterior (MAP) estimation approach.\\
+    \hspace*{0.25 in}  While \cite{Brian1996ML} proposed the first ML estimation based SR approach with the aim to find the ML estimation of high resolution image, some proposed a MAP estimation approach. MAP SR tries to takes into consideration the prior image model to reflect the expectation of the unknown high resolution image.
+
+			\subsubsection{Super Resolution - Generative Adversarial Networks (SR-GAN)}
+
+			\hspace*{0.25 in} The Genrative Adversarial Network \cite{goodfellow2014generative}, has two neural networks, the Generator and the Discriminator. These networks compete with each other in a zero-sum game.
+      \cite{ledig2017photorealistic} introduced SRGAN in 2017, which used a SRResNet to upscale images with an upscaling factor of 4x. SRGAN is currently the state of the art on public benchmark datasets.
+
 
 
 \chapter{Problem Definition and scope}
@@ -263,12 +307,58 @@ Goal and Objectives:
 
 \section{Major Constraints}
 \begin{itemize}
-\item Any constraints that will impact the manner in which the software is to be specified, designed, implemented or tested are noted here.
+\item The astronomical image data required for training purposes is mostly raw. There exists no structured dataset that is already cleaned. The unavailability of a dataset is a major constraint for the project
+\item Scraped data from the archives is noisy and requires heavy processing and cleaning in order to be usable by the model
+\item The images available for download are of low resolution, which sets an upper bound on the maximal upscale factor
+\item The image data is large and needs high computation power to process
+\item The data needs to be cleaned manually as there exist no methods to automatically do this particular task
+\item The model involves neural networks which heavily rely on computation power for its training. The hardware required for training is not readily available because of absence of a workstation supporting heavy computations
+\item The training part requires large amount of memory
+\item Absence of an NVIDIA workstation GPU will slow down the training further
 \end{itemize}
 
 \section{Methodologies of Problem solving and efficiency issues}
 \begin{itemize}
-	\item The single problem can be solved by different solutions.  This considers the performance parameters for each approach. Thus considers the efficiency issues.
+	\item Data gathering and processing
+	\begin{itemize}
+	\item Data Scraping
+		\begin{itemize}
+		\item Owing to unavailability of a dataset, raw data can be acquired by the means of web scraping 
+		\item Images from the snapshots of entire night sky can be obtained in such a way from the Hubble Legacy Archive
+		\end{itemize}
+	\item Data Cleaning
+		\begin{itemize}
+		\item The scraped data consists of snapshots of the entire night sky with 1 degree deviation of the telescope
+		\item This results in large amount of noisy, overexposed, irregular data images
+		\item This data needs to be cleaned manually before it can be used for any kind of study
+		\end{itemize}
+	\end{itemize}
+	\item Image colorization 
+	\begin{itemize}
+		\item The problem of image colorization has been solved using multiple methodologies
+		\item \cite{dahl2016automatic} used convolutional neural networks with residual encoders using the VGG16 architecture
+		\item Though the system performs extremely well in realistically colorizing various images, it consisted of $L2$ loss which was a function of the Euclidean distance between the pixel's blurred color channel value in the target and predicted image
+		\begin{equation}
+			L2 loss = \sum_{i=1}^n(y_{true} - y_{predicted})^2
+		\end{equation}
+		\item This is a regression based approach and the pixel-wise L2 loss will impose an averaging effect over all possible candidates and will result in dimmer and patchy colorization 
+		\item Generative Adversarial Networks introduced by \cite{goodfellow2014generative} use a minimax loss which is different than the $L2$ loss as it will choose a color to fill an area rather than averaging. This is similar to a classification based approach 
+	\end{itemize}
+	\item Image Upscaling
+	\begin{itemize}
+		\item One of the most popular approach to image upscaling was sparse-coding. This approach assumes that images can be sparsely represented by a dictionary of atoms in some transformed domain \cite{yang2008sparse}. The dictionary is learned during the training process. 
+		\item The main drawback for this was that the optimization algorithm was computationally expensive
+		\item Dong et. al explored super-resolution using convolutional neural network and calling it SRCNN \cite{dong2014super}. They explained how CNN had many similarities to the sparse-coding-based super-resolution.
+		\item Kim et. al improved upon SRCNN's results using their very own model inspired from the VGG-net architecture\cite{kim2016super}.
+		\item After the introduction of GANs, Ledig et. al applied them to super-resolution (SRGAN) using a network inspired by the ResNets \cite{ledig2017photorealistic}\cite{he2015deep}. 
+		\item SR-GAN works well with for single image super-resolution as it also uses an intelligent content loss function that uses pre-trained VGG-net layers. However, Ledig et. al noted that further information could be used if this network were to be adapted to a video, such as temporal information. 
+	\end{itemize}
+	\item A generative network, $G$, is meant to learn the underlying distribution of a data set, $Y$. For e.g. we can train a GAN over face images to generate images similar to those faces. With just a generative network however, we must visually assess the quality of network outputs and judge how we can adapt the network to produce more convincing results. 
+	\item With a discriminative network $D$, we can incorporate this tweaking directly into training. The discriminative network takes in both fabricated inputs generated by $G$ and the real inputs from $Y$. It's sole purpose is to classify if the input has come from $G$ or $Y$. 
+	\item The key idea is back propagation of the gradients from the results of $D$'s classification to $G$ so that $G$ gets better at producing images and in turn fooling $D$. 
+	\item For the project, we split the data into three categories: $X$ that serves as the data for the Y, which are its corresponding labels. 
+	\item $G_1$ takes in a low resolution $x\in X$ which is black \& white and produces $\hat{y}$, a colorized version of $x$. The descriminator D, in turn takes in a colorized image and outputs the probability that the image comes from $Y$, instead of as outputs from $G$, $G(x)$. As such, if the discriminator is fooled by out generator, it should output a probability greater than 0.5 for the set of inputs coming from $G(x)$ and a probability less than 0.5 for images coming from Y.
+	\item The same is the process for generator $G_2$ with the only difference being that the $X$ is the set of colorized images but having low resolution and $Y$ is the set of high resolution images that serve as the labels for underlying mapping of $X$. $G_2$ takes in the low resolution image $x \in X$ and produces $\hat{y}$ and the discriminator outputs a probability determining whether the image is super-resolved by $G_2$ or the ground truth images from $Y$.
 \end{itemize}
 
 \section{Scenario in which multi-core, Embedded and Distributed Computing used}
