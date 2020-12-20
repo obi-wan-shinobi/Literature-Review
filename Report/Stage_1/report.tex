@@ -769,10 +769,11 @@ The project is largely inspired by Christian Ledig's SRGAN paper \cite{ledig2017
 	$$
 	
 	$D_{\theta_d}(G_{\theta_g}(I^{LR}))$ is the probability that the reconstructed image $G_{\theta_g}(I^{LR}))$ is a natural HR image. For beter gradient behavior, we minimize $-\log D_{\theta_d}(G_{\theta_g}(I^{LR}))$ instead of $\log \big[1-D_{\theta_d}(G_{\theta_g}(I^{LR}))\big]$.
+	
  \chapter{Dataset and Experimental setup}
-
-
-
+Initially, we started by scraping the data off Hubble Legacy Archive. Using puppeteer(headless chrome), we scraped off hundreds of thousands of colorized images it has available. The Hubble Legacy archive is slow and produces grainy images with lots of noise and unprocessed images. A filter for M101 (Messier 101) galaxy rendered more than 80 thousand images with a 1 degree difference between consecutive right ascension. The data is large and has no particularly efficient way to clean without human investment. Cleaning tens of thousands of images by handpicking noiseless and well colored images is time consuming. For training the SRGAN, we need high resolution, well colored images. \\ \\
+To that end, we scraped the Hubble Heritage project instead. The Hubble Heritage project releases the highest-quality astronomical images. They are all stitched together, colorized and processed to eliminate noise. Hubble Heritage then selects the best, most striking of these for public release. However, there are only $\sim150$ of these images that are actually useful. To increase the amount of data we had, we scraped images from the main Hubble website as well. This provided an extra approximately $\sim1000$ images.
+Each image is a JPG image with dimensions of $256\times 256$ pixels and contains 3 channels of RGB. 
 
  \chapter{Summary and Conclusion}
 Write one page summary and conclusion
