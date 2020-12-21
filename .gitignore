@@ -8,3 +8,5 @@
 **/*/*.toc
 **/*/*.lof
 **/*.lot
+**/*/*.fdb_latexmk
+**/*/*.fls
