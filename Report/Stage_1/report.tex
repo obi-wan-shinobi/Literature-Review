@@ -382,9 +382,8 @@ Goal and Objectives:
 \end{itemize}
 
 \section{Hardware Resources Required}
-\begin{center}
-	\input{tables/hardware_requirements.tex}
-\end{center}
+The project is based Machine Learning, and the use of Tensorflow-GPU brought forward the need for a very high end hardware. Google Colab (or Colaboratory) is a free Jupyter notebook environment offered by Google which runs notebooks from Python kernels and uses Google Drive for storage.
+\input{tables/hardware_requirements.tex}
 
 %\section{Hardware Resources Required}
 %The project is based Machine Learning, and the use of Tensorflow-GPU brought forward the need for a very high end hardware. Google Colab (or Colaboratory) is a free Jupyter notebook environment offered by Google which runs notebooks from Python kernels and uses Google Drive for storage.
@@ -615,23 +614,7 @@ The profiles of all user categories are described here.(Actors and their Descrip
 \subsection{Use-cases}
 Following is the use case table.
 
-\begin{table}[!htbp]
-\begin{center}
-%\def\arraystretch{1.5}
-\def\arraystretch{1.5}
-\begin{tabularx}{\textwidth}{| c | c | X | c | X |}
-\hline
-Sr No.	& Use Case	& Description	& Actors	& Assumptions \\
-\hline
-1& Input image & Image is loaded & User & Image of size 64x64 and format jpg/jpeg is uploaded  \\ \hline
-2& Colourising & GAN colourises the image & GAN & The image is colourised from its black and white format \\ \hline
-3& Upscaling & GAN upscales the image & GAN & The image is upscaled to resolution 768x768 and is not pixelated. \\ \hline
-\end{tabularx}
-\end{center}
-\caption{Use Cases}
-\label{tab:usecase}
-\end{table}
-
+\input{tables/use_case_table.tex}
 
 \subsection{Use Case View}
 Use Case Diagram. Example is given below
@@ -745,6 +728,8 @@ The project is largely inspired by Christian Ledig's SRGAN paper \cite{ledig2017
 	  \label{fig:disc_color-dig}
 	\end{figure}
   \end{center}
+  
+\pagebreak
 
   \subsection{Image Super-resolution}
 \hspace{0.4 in}We use the SRResNet as the generator in the SRGAN model as used by Ledig et. al \cite{ledig2017photorealistic}. It contains both the residual blocks and the skip connections, as seen in Figure \ref{fig:srgan-dig}. Within each residual block, there are two convolution layers followed by a Batch Normalization layer and a parametric ReLU layer. Finally, the image is then upscaled 4 times using two sub-pixel convolution layers \cite{shi2016subpixel}.
