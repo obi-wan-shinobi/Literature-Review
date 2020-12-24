@@ -205,7 +205,7 @@ please enter text here.\\
 \item With the introduction of Generative Adversarial Networks, this particular task can be developed and modified to increase the efficiency and precision for colorizing images instead
 \item Furthermore, image upscaling is another problem that has been under research in the computer vision community. It has been studied and many approached have been developed to accurately predict the missing pixel values while upscaling an image
 \item Application of GANs to this discipline has successfully improved the performance and computers are getting better and better at predicting accurate missing pixel values and upscaling images many folds the original size
-\item All this computation power can be used for astronomical research by processing large data archives 
+\item All this computation power can be used for astronomical research by processing large data archives
 \item A large number of images lie dormant in most of the space survey data archives which never go through any kind of processing and are low resolution and black \& white. These images could be processed automatically by an algorithm that will colorize and super-resolve the images which can make it easier for astronomers to visually inspect the images
 \end{itemize}
 
@@ -279,10 +279,10 @@ Goal and Objectives:
   	\item The models may be combined to form a single model that will take a low resolution, grayscale image as its input and produce a high resolution, colorized image as its output
 \end{itemize}
 
- \subsection{Statement of scope} 
-	\begin{itemize}  
+ \subsection{Statement of scope}
+	\begin{itemize}
 	\item The model will consist of neural networks implemented using deep learning frameworks that will accept images of input format \textit{JPEG}
-	\item The input will be grayscale images of size $64\times 64$ 
+	\item The input will be grayscale images of size $64\times 64$
 	\item Input bounds:
 	\begin{itemize}
 		\item Lower bound: $64\times 64\times 1$
@@ -307,6 +307,8 @@ Goal and Objectives:
 	\end{itemize}
 	\end{itemize}
 
+
+
 \section{Major Constraints}
 \begin{itemize}
 \item The astronomical image data required for training purposes is mostly raw. There exists no structured dataset that is already cleaned. The unavailability of a dataset is a major constraint for the project
@@ -325,7 +327,7 @@ Goal and Objectives:
 	\begin{itemize}
 	\item Data Scraping
 		\begin{itemize}
-		\item Owing to unavailability of a dataset, raw data can be acquired by the means of web scraping 
+		\item Owing to unavailability of a dataset, raw data can be acquired by the means of web scraping
 		\item Images from the snapshots of entire night sky can be obtained in such a way from the Hubble Legacy Archive
 		\end{itemize}
 	\item Data Cleaning
@@ -335,7 +337,7 @@ Goal and Objectives:
 		\item This data needs to be cleaned manually before it can be used for any kind of study
 		\end{itemize}
 	\end{itemize}
-	\item Image colorization 
+	\item Image colorization
 	\begin{itemize}
 		\item The problem of image colorization has been solved using multiple methodologies
 		\item \cite{dahl2016automatic} used convolutional neural networks with residual encoders using the VGG16 architecture
@@ -343,22 +345,22 @@ Goal and Objectives:
 		\begin{equation}
 			L2 loss = \sum_{i=1}^n(y_{true} - y_{predicted})^2
 		\end{equation}
-		\item This is a regression based approach and the pixel-wise L2 loss will impose an averaging effect over all possible candidates and will result in dimmer and patchy colorization 
-		\item Generative Adversarial Networks introduced by \cite{goodfellow2014generative} use a minimax loss which is different than the $L2$ loss as it will choose a color to fill an area rather than averaging. This is similar to a classification based approach 
+		\item This is a regression based approach and the pixel-wise L2 loss will impose an averaging effect over all possible candidates and will result in dimmer and patchy colorization
+		\item Generative Adversarial Networks introduced by \cite{goodfellow2014generative} use a minimax loss which is different than the $L2$ loss as it will choose a color to fill an area rather than averaging. This is similar to a classification based approach
 	\end{itemize}
 	\item Image Upscaling
 	\begin{itemize}
-		\item One of the most popular approach to image upscaling was sparse-coding. This approach assumes that images can be sparsely represented by a dictionary of atoms in some transformed domain \cite{yang2008sparse}. The dictionary is learned during the training process. 
+		\item One of the most popular approach to image upscaling was sparse-coding. This approach assumes that images can be sparsely represented by a dictionary of atoms in some transformed domain \cite{yang2008sparse}. The dictionary is learned during the training process.
 		\item The main drawback for this was that the optimization algorithm was computationally expensive
 		\item Dong et. al explored super-resolution using convolutional neural network and calling it SRCNN \cite{dong2014super}. They explained how CNN had many similarities to the sparse-coding-based super-resolution.
 		\item Kim et. al improved upon SRCNN's results using their very own model inspired from the VGG-net architecture\cite{kim2016super}.
-		\item After the introduction of GANs, Ledig et. al applied them to super-resolution (SRGAN) using a network inspired by the ResNets \cite{ledig2017photorealistic}\cite{he2015deep}. 
-		\item SR-GAN works well with for single image super-resolution as it also uses an intelligent content loss function that uses pre-trained VGG-net layers. However, Ledig et. al noted that further information could be used if this network were to be adapted to a video, such as temporal information. 
+		\item After the introduction of GANs, Ledig et. al applied them to super-resolution (SRGAN) using a network inspired by the ResNets \cite{ledig2017photorealistic}\cite{he2015deep}.
+		\item SR-GAN works well with for single image super-resolution as it also uses an intelligent content loss function that uses pre-trained VGG-net layers. However, Ledig et. al noted that further information could be used if this network were to be adapted to a video, such as temporal information.
 	\end{itemize}
-	\item A generative network, $G$, is meant to learn the underlying distribution of a data set, $Y$. For e.g. we can train a GAN over face images to generate images similar to those faces. With just a generative network however, we must visually assess the quality of network outputs and judge how we can adapt the network to produce more convincing results. 
-	\item With a discriminative network $D$, we can incorporate this tweaking directly into training. The discriminative network takes in both fabricated inputs generated by $G$ and the real inputs from $Y$. It's sole purpose is to classify if the input has come from $G$ or $Y$. 
-	\item The key idea is back propagation of the gradients from the results of $D$'s classification to $G$ so that $G$ gets better at producing images and in turn fooling $D$. 
-	\item For the project, we split the data into two categories: $X$ that serves as the data for the Y, which are its corresponding labels. 
+	\item A generative network, $G$, is meant to learn the underlying distribution of a data set, $Y$. For e.g. we can train a GAN over face images to generate images similar to those faces. With just a generative network however, we must visually assess the quality of network outputs and judge how we can adapt the network to produce more convincing results.
+	\item With a discriminative network $D$, we can incorporate this tweaking directly into training. The discriminative network takes in both fabricated inputs generated by $G$ and the real inputs from $Y$. It's sole purpose is to classify if the input has come from $G$ or $Y$.
+	\item The key idea is back propagation of the gradients from the results of $D$'s classification to $G$ so that $G$ gets better at producing images and in turn fooling $D$.
+	\item For the project, we split the data into two categories: $X$ that serves as the data for the Y, which are its corresponding labels.
 	\item $G_1$ takes in a low resolution $x\in X$ which is black \& white and produces $\hat{y}$, a colorized version of $x$. The descriminator D, in turn takes in a colorized image and outputs the probability that the image comes from $Y$, instead of as outputs from $G$, $G(x)$. As such, if the discriminator is fooled by out generator, it should output a probability greater than 0.5 for the set of inputs coming from $G(x)$ and a probability less than 0.5 for images coming from Y.
 	\item The same is the process for generator $G_2$ with the only difference being that the $X$ is the set of colorized images but having low resolution and $Y$ is the set of high resolution images that serve as the labels for underlying mapping of $X$. $G_2$ takes in the low resolution image $x \in X$ and produces $\hat{y}$ and the discriminator outputs a probability determining whether the image is super-resolved by $G_2$ or the ground truth images from $Y$.
 \end{itemize}
@@ -371,18 +373,42 @@ Goal and Objectives:
 \begin{itemize}
 \item An efficient mathematical model to be created which will describe mappings required to colorize and super-resolve low resolution grayscale images
 \item A brief albeit descriptive study of different approaches towards image colorization and super-resolution
-\item Study presenting the benefits of certain GAN architectures and their edge over other kinds of neural networks in image colorization and super-resolution  
+\item Study presenting the benefits of certain GAN architectures and their edge over other kinds of neural networks in image colorization and super-resolution
 \end{itemize}
 
 \section{Applications}
 \begin{itemize}
-\item 
+\item Currently, given the number of the raw and unprocessed images in Hubble Legacy Archives, much of the images are not workable for scientific evaluation. The main application of building a GAN and automating the upscaling and colorization of these images is to help in visual classification for astronomers. Through a high resolution and colourized image, astronomical objects which would've been imperceptible to the human eye could be now visible for visual inspection. While upscaling is expected to address the poor quality of the original images, colourization will help distinguish astronomical objects and activites from the noise generated by various factors.
 \end{itemize}
 
 \section{Hardware Resources Required}
 \begin{center}
 	\input{tables/hardware_requirements.tex}
 \end{center}
+
+%\section{Hardware Resources Required}
+%The project is based Machine Learning, and the use of Tensorflow-GPU brought forward the need for a very high end hardware. Google Colab (or Colaboratory) is a free Jupyter notebook environment offered by Google which runs notebooks from Python kernels and uses Google Drive for storage.
+%\begin{table}[!htbp]
+%\begin{center}
+%\def\arraystretch{1.5}
+%  \begin{tabular}{| c | c | c | c |}
+%\hline
+%Sr. No. &	Parameter &	Minimum Requirement & Justification \\
+%\hline
+%1 &	CPU Speed &	 Intel(R) Xeon(R) CPU @ 2.20GHz  & Training the model on CPU\\
+%\hline
+%2 &	GPU  &	Nvidia K80-12GB-0.82GHz &  To train model on GPU\\
+%3 &	RAM  &	12GB &  To load the Dataset\\
+% \hline
+
+%  \hline
+%\end{tabular}
+%\caption { Hardware Requirements }
+% \label{tab:hreq}
+%\end{center}
+%\end{table}
+
+\pagebreak
 
 \section{Software Resources Required}
 Platform :
@@ -399,7 +425,7 @@ Platform :
 \chapter{Project Plan}
 
 \section{Project Estimates}
-
+                 Use Waterfall model and associated streams derived from assignments 1,2, 3, 4 and 5( Annex A and B) for estimation.
 \subsection{Reconciled Estimates}
 \subsubsection{Cost Estimate}
 \hspace*{0.25 in}
@@ -438,10 +464,7 @@ Duration of Project D = 6 Months\\
 The approximate duration of the project is 4 months\\
 
 \subsection{Project Resources}
-\begin{itemize}
-  \item Google Collab
-  \item IEEE Access Provided by Institute
-\end{itemize}
+          Project resources  [People, Hardware, Software, Tools and other resources] based on Memory Sharing, IPC, and Concurrency derived using appendices to be referred.
 
 \section{Risk Management }
 This section discusses Project risks and the approach to managing them.
@@ -464,8 +487,8 @@ The risks for the Project can be analyzed within the constraints of time and qua
 \hline
 \multirow{2}{*}{ID} & \multirow{2}{*}{Risk Description}	& \multirow{2}{*}{Probability} & \multicolumn{3}{|c|}{Impact} \\ \cline{4-6}
 	& & &	Schedule	& Quality	& Overall \\ \hline
-1	& Description 1	& Low	& Low	& High	& High \\ \hline
-2	& Description 2	& Low	& Low	& High	& High \\ \hline
+1	& Garbage images in dataset	& Medium	& Low	& High	& High \\ \hline
+2	& Vanishing Gradients 	& Low	& Low	& High	& High \\ \hline
 \end{tabularx}
 \end{center}
 \caption{Risk Table}
@@ -506,9 +529,7 @@ Medium	& $ < 5 \% $ & Schedule impact or Barely noticeable degradation in qualit
 \end{table}
 
 \subsection{Overview of Risk Mitigation, Monitoring, Management}
-
-
-Following are the details for each risk.
+Following are the details for each risk
 \begin{table}[!htbp]
 \begin{center}
 %\def\arraystretch{1.5}
@@ -516,13 +537,13 @@ Following are the details for each risk.
 \begin{tabularx}{\textwidth}{| l | X |}
 \hline
 Risk ID	& 1 \\ \hline
-Risk Description	& Description 1 \\ \hline
-Category	& Development Environment. \\ \hline
+Risk Description	& There are Garbage images in dataset which can lead to improper training of discriminator. It can lead to undesired outputs \\ \hline
+Category	& Pre processing. \\ \hline
 Source	& Software requirement Specification document. \\ \hline
 Probability	& Low \\ \hline
 Impact	& High \\ \hline
 Response	& Mitigate \\ \hline
-Strategy	& Strategy \\ \hline
+Strategy	& To manually remove garbage images from the dataset  \\ \hline
 Risk Status	& Occurred \\ \hline
 \end{tabularx}
 \end{center}
@@ -537,64 +558,46 @@ Risk Status	& Occurred \\ \hline
 \begin{tabularx}{\textwidth}{| l | X |}
 \hline
 Risk ID	& 2 \\ \hline
-Risk Description	& Description 2 \\ \hline
+Risk Description	& If discriminator is too good , then generator training can fail due to Vanishing gradients  \\ \hline
 Category	& Requirements \\ \hline
 Source	& Software Design Specification documentation review. \\ \hline
 Probability	& Low \\ \hline
 Impact	& High \\ \hline
 Response	& Mitigate \\ \hline
-Strategy	& Better testing will resolve this issue.  \\ \hline
+Strategy	& Wasserstein loos and Modifed minimax loss are desigend to prevent vanishing gradients.  \\ \hline
 Risk Status	& Identified \\ \hline
 \end{tabularx}
 \end{center}
 \label{tab:risk2}
 \end{table}
 
-\begin{table}[!htbp]
-\begin{center}
-%\def\arraystretch{1.5}
-\def\arraystretch{1.5}
-\begin{tabularx}{\textwidth}{| l | X |}
-\hline
-Risk ID	& 3 \\ \hline
-Risk Description	& Description 3 \\ \hline
-Category	& Technology \\ \hline
-Source	& This was identified during early development and testing. \\ \hline
-Probability	& Low \\ \hline
-Impact	& Very High \\ \hline
-Response	& Accept \\ \hline
-Strategy	& Example Running Service Registry behind proxy balancer  \\ \hline
-Risk Status	& Identified \\ \hline
-\end{tabularx}
-\end{center}
-\label{tab:risk3}
-\end{table}
-
+\newpage
 \section{Project Schedule}
 \subsection{Project task set}
 Major Tasks in the Project stages are:
 \begin{itemize}
-  \item Task 1:
-  \item Task 2:
-  \item Task 3:
-  \item Task 4:
-  \item Task 5:
+  \item Task 1: Colledting Dataset
+  \item Task 2: Cleaning Dataset
+  \item Task 3: Creating GAN model of image colorization and super-resolution
+  \item Task 4: Training  the GAN model
+  \item Task 5: Fine tuning the GAN model
 \end{itemize}
 
-\subsection{Task network}
-Project tasks and their dependencies are noted in this diagrammatic form.
-\subsection{Timeline Chart}
-A project timeline chart is presented. This may include a time line for the entire project.
-Above points should be covered  in Project Planner as Annex C and you can mention here Please refer Annex C for the planner
-
-
 \section{Team Organization}
-The manner in which staff is organized and the mechanisms for reporting are noted.
+\begin{itemize}
+\item Team of 4 members
+\item 1 Project guide
+\item 1 Project coordinator
+\end{itemize}
 \subsection{Team structure}
-The team structure for the project is identified. Roles are defined.
+Team of 4 members
 
 \subsection{Management reporting and communication}
-Mechanisms for progress reporting and inter/intra team communication are identified as per assessment sheet and lab time table.
+\begin{itemize}
+\item Weekly meeting with guide about the work
+\item Weekly meeting among team for updates and work distribution
+\item Daily updates on work progress
+\end{itemize}
 \chapter{Software requirement specification }
 
 \section{Introduction}
@@ -610,7 +613,7 @@ This section provides various usage scenarios for the system to be developed.
 The profiles of all user categories are described here.(Actors and their Description)
 
 \subsection{Use-cases}
-All use-cases for the software are presented. Description of all main Use cases using use case template is to be provided.
+Following is the use case table.
 
 \begin{table}[!htbp]
 \begin{center}
@@ -620,8 +623,9 @@ All use-cases for the software are presented. Description of all main Use cases 
 \hline
 Sr No.	& Use Case	& Description	& Actors	& Assumptions \\
 \hline
-1& Use Case 1 & Description & Actors & Assumption \\
-\hline
+1& Input image & Image is loaded & User & Image of size 64x64 and format jpg/jpeg is uploaded  \\ \hline
+2& Colourising & GAN colourises the image & GAN & The image is colourised from its black and white format \\ \hline
+3& Upscaling & GAN upscales the image & GAN & The image is upscaled to resolution 768x768 and is not pixelated. \\ \hline
 \end{tabularx}
 \end{center}
 \caption{Use Cases}
@@ -634,7 +638,7 @@ Use Case Diagram. Example is given below
 \begin{center}
 	\begin{figure}[!htbp]
 		\centering
-		\fbox{\includegraphics[width=\textwidth]{use-case.jpg}}
+		\fbox{\includegraphics[width=\textwidth]{figures/use.jpg}}
 	  \caption{Use case diagram}
 	  \label{fig:usecase}
 	\end{figure}
@@ -707,22 +711,22 @@ The requirements for interfaces to other devices/systems/networks/human are stat
 
 \chapter{Detailed Design Document }
  \section{Introduction}
-The project is largely inspired by Christian Ledig's SRGAN paper \cite{ledig2017photorealistic} and Dong et. al \cite{dong2014super} implementation of SRGANs using Tensorflow. Dahl et. al \cite{dahl2016automatic} introduction of residual encoding using VGG architecture and adaptation of GANs as conditional GANs by Mirza et al. \cite{mirza2014conditional} proved to be quite effective for implementing colorization of images. We provide detailed architectural design for each respective GANs and other networks that it will be compared with. 
+The project is largely inspired by Christian Ledig's SRGAN paper \cite{ledig2017photorealistic} and Dong et. al \cite{dong2014super} implementation of SRGANs using Tensorflow. Dahl et. al \cite{dahl2016automatic} introduction of residual encoding using VGG architecture and adaptation of GANs as conditional GANs by Mirza et al. \cite{mirza2014conditional} proved to be quite effective for implementing colorization of images. We provide detailed architectural design for each respective GANs and other networks that it will be compared with.
 \section{Architectural Design}
-	Generative Adversarial Networks (GANs) have two competing neural network models. The generator takes in the input and generates fake images. The discriminator gets the image from both the generator and the label along with the grayscale image and it determines which pair contains the real colored image. During training, the generator and the discriminator are playing a continuous game. At each iteration, generator can produce more realistic photo, while the discriminator is getting better at distinguishing fake photos. Both models are trained together in a minimax fashion and the goal is to train a generator to be indistinguishable from the real data. 
-	\subsection{Image Colorization}	
+	Generative Adversarial Networks (GANs) have two competing neural network models. The generator takes in the input and generates fake images. The discriminator gets the image from both the generator and the label along with the grayscale image and it determines which pair contains the real colored image. During training, the generator and the discriminator are playing a continuous game. At each iteration, generator can produce more realistic photo, while the discriminator is getting better at distinguishing fake photos. Both models are trained together in a minimax fashion and the goal is to train a generator to be indistinguishable from the real data.
+	\subsection{Image Colorization}
 	\hspace{0.4 in}With conditional GAN, both generator and discriminator are conditioning on the input $x$. Let the generator be parameterized by $\theta_g$ and the discriminator be parameterized by $\theta_d$. The minimax objective function can be defined as:
 	\[
 		\min_{\theta_g}\max_{\theta_d}\Big[\mathbb{E}_{x,y\sim p_{data}} \log D_{\theta_d}(x,y) + E_{x\sim p_{data}} \log(1 - D_{\theta_d}(x, G_{\theta_g}(x))\Big]
 	\]
-	
-	Where, $G_{\theta_{g}}$ is the output of the generator and $D_{\theta_d}$ is the output of the discriminator.	
+
+	Where, $G_{\theta_{g}}$ is the output of the generator and $D_{\theta_d}$ is the output of the discriminator.
 	We're currently not introducing any noise in our generator to keep things simple for the time being. Also, we consider $L1$ difference between input $x$ and output $y$ in generator. On each iteration, the discriminator would maximize $\theta_d$ according to the above expression and generator would minimize $\theta_g$ in the following way:
 	\[
 		\min_{\theta_g}\Big[-\log(D_{\theta_d}(x,G_{\theta_g}(x)))+\lambda \Vert G_{\theta_g}(x) - y \Vert_1 \Big]
 	\]
-	
-	With GAN, if the discriminator considers the pair of images generated by the generator to be a fake photo (not well colored), the loss will be back-propagated through discriminator and through generator. Therefore, generator can learn how to color the image correctly. At the final iteration, the parameters $\theta_g$ will be used in our generator to color grayscale images. 
+
+	With GAN, if the discriminator considers the pair of images generated by the generator to be a fake photo (not well colored), the loss will be back-propagated through discriminator and through generator. Therefore, generator can learn how to color the image correctly. At the final iteration, the parameters $\theta_g$ will be used in our generator to color grayscale images.
 
   \begin{center}
 	\begin{figure}[!htbp]
@@ -731,7 +735,7 @@ The project is largely inspired by Christian Ledig's SRGAN paper \cite{ledig2017
 	  \caption{Encoder-Decoder ConvNets in Generator}
 	  \label{fig:gen_color-dig}
 	\end{figure}
-  \end{center}
+\end{center}
 
   \begin{center}
 	\begin{figure}[!htbp]
@@ -741,9 +745,9 @@ The project is largely inspired by Christian Ledig's SRGAN paper \cite{ledig2017
 	  \label{fig:disc_color-dig}
 	\end{figure}
   \end{center}
-  
+
   \subsection{Image Super-resolution}
-\hspace{0.4 in}We use the SRResNet as the generator in the SRGAN model as used by Ledig et. al \cite{ledig2017photorealistic}. It contains both the residual blocks and the skip connections, as seen in Figure \ref{fig:srgan-dig}. Within each residual block, there are two convolution layers followed by a Batch Normalization layer and a parametric ReLU layer. Finally, the image is then upscaled 4 times using two sub-pixel convolution layers \cite{shi2016subpixel}. 
+\hspace{0.4 in}We use the SRResNet as the generator in the SRGAN model as used by Ledig et. al \cite{ledig2017photorealistic}. It contains both the residual blocks and the skip connections, as seen in Figure \ref{fig:srgan-dig}. Within each residual block, there are two convolution layers followed by a Batch Normalization layer and a parametric ReLU layer. Finally, the image is then upscaled 4 times using two sub-pixel convolution layers \cite{shi2016subpixel}.
 	\begin{center}
 	\begin{figure}[!htbp]
 		\centering
@@ -758,7 +762,7 @@ The project is largely inspired by Christian Ledig's SRGAN paper \cite{ledig2017
 		\min_{\theta_g}\max_{\theta_d}\mathbb{E}_{I^{HR}\sim p_{train}(I^{HR})}\big[ \log D_{\theta_d}(I^{HR})\big] + \mathbb{E}_{I^{LR}\sim p_{g}(I^{LR})}\big[\log(1 - D_{\theta_d}(G_{\theta_g}(I^{LR})))\big]
 	\]
 	where, $I^{HR}p_{train}(I^{HR})$ are the high resolution images. $I^{LR}p_g(I^{LR})$ are the input low resolution images, $G_{\theta_g}$ is the output of the generator and $D_{\theta_d}$ is the output of the discriminator. We use the perpetual loss function for VGG based content losses introduced by Ledig et. al \cite{ledig2017photorealistic} which is a weighted sum of a content loss $l^{SR}_X$ and an adversarial loss component $(10^{-3}l^{SR}_{Gen})$.
-	
+
 	For the content loss, we aim to use the VGG loss introduced by Ledig et. al\cite{ledig2017photorealistic} which is the euclidean distance between the feature representations of a reconstructed image $G_{\theta_g}(I^{LR})$ and the reference image $I^{HR}$:
 	$$
 		l^{SR}_{VGG_{i,j}} = \frac{1}{W_{i,j}H_{i,j}} \sum_{x=1}^{W_{i,j}}\sum_{y=1}^{H_{i,j}}\big(\phi_{i,j}(I^{HR})_{x,y}-\phi_{i,j}(G_{\theta_g}(I^{LR}))_{x,y}\big)^2
@@ -767,16 +771,21 @@ The project is largely inspired by Christian Ledig's SRGAN paper \cite{ledig2017
 	$$
 		l^{SR}_{Gen} = \sum_{n=1}^{N} - \log D_{\theta_d}(G_{\theta_g}(I^{LR}))
 	$$
-	
+
 	$D_{\theta_d}(G_{\theta_g}(I^{LR}))$ is the probability that the reconstructed image $G_{\theta_g}(I^{LR}))$ is a natural HR image. For beter gradient behavior, we minimize $-\log D_{\theta_d}(G_{\theta_g}(I^{LR}))$ instead of $\log \big[1-D_{\theta_d}(G_{\theta_g}(I^{LR}))\big]$.
-	
+
  \chapter{Dataset and Experimental setup}
 Initially, we started by scraping the data off Hubble Legacy Archive. Using puppeteer(headless chrome), we scraped off hundreds of thousands of colorized images it has available. The Hubble Legacy archive is slow and produces grainy images with lots of noise and unprocessed images. A filter for M101 (Messier 101) galaxy rendered more than 80 thousand images with a 1 degree difference between consecutive right ascension. The data is large and has no particularly efficient way to clean without human investment. Cleaning tens of thousands of images by handpicking noiseless and well colored images is time consuming. For training the SRGAN, we need high resolution, well colored images. \\ \\
 To that end, we scraped the Hubble Heritage project instead. The Hubble Heritage project releases the highest-quality astronomical images. They are all stitched together, colorized and processed to eliminate noise. Hubble Heritage then selects the best, most striking of these for public release. However, there are only $\sim150$ of these images that are actually useful. To increase the amount of data we had, we scraped images from the main Hubble website as well. This provided an extra approximately $\sim1000$ images.
-Each image is a JPG image with dimensions of $256\times 256$ pixels and contains 3 channels of RGB. 
+Each image is a JPG image with dimensions of $256\times 256$ pixels and contains 3 channels of RGB.
 
  \chapter{Summary and Conclusion}
-Write one page summary and conclusion
+ \section{Summary}
+ Low Resolution and Black and White Images in the Hubble Legacy Archive lie dormant and are needed to be upscaled and colourized for better visual discernment of the astromers. Images are initially scraped from the Hubble Legacy Arhive and the Hubble Legacy Project and a dataset is formed which is cleaned manually and is then fed to two Generative Adversarial Networks consecutively. The images of size ($64\times 64\times 1$) are initially colorized using a first GAN and an output image of size ($64\times 64\times 3$) with three RGB channels is obtained. This is then upscaled to a size of ($(64\cdot n)\times (64\cdot n)\times 3$). The output images are visually superior as well as colorized. These images are expected to be of greater use for astronomers than the older ones.
+
+\section{Conclusion}
+The images are upscaled and colourized using a completely automated algorithm which uses Deep Learning. Generative Adversarial Networks are  successfully used for the implementation and the images obtained are in public forum to be used for research, it is anticipated that this will aid the astronomers vastly in their efforts.
+
 \bibliographystyle{ieeetr}
 \bibliography{biblo}
 
