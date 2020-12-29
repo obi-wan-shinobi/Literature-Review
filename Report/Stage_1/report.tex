@@ -25,8 +25,7 @@
 \usepackage[]{hyperref}
 \usepackage{tikz}
 \usetikzlibrary{arrows,shapes,snakes,automata,backgrounds,petri}
-
-\usepackage{tabularx}
+\usepackage{ltablex}
 
 %\usepackage[nottoc,notlot,notlof,numbib]{tocbibind}
 \usepackage[titletoc]{appendix}
@@ -45,7 +44,6 @@
 \usepackage{amssymb}
 
 \begin{document}
-
 \setlength{\parindent}{0mm}
 \begin{center}
 % \vspace*{1\baselineskip}
@@ -250,6 +248,7 @@ maximum likelihood (ML) estimation approach  and maximum a posterior (MAP) estim
 			\hspace*{0.25 in} The Genrative Adversarial Network \cite{goodfellow2014generative}, has two neural networks, the Generator and the Discriminator. These networks compete with each other in a zero-sum game.
       \cite{ledig2017photorealistic} introduced SRGAN in 2017, which used a SRResNet to upscale images with an upscaling factor of 4x. SRGAN is currently the state of the art on public benchmark datasets.
 
+\input{tables/literature_review.tex}
 
 
 \chapter{Problem Definition and scope}
@@ -279,26 +278,10 @@ Goal and Objectives:
   	\item The models may be combined to form a single model that will take a low resolution, grayscale image as its input and produce a high resolution, colorized image as its output
 \end{itemize}
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 5fbaea2e62e9293a76211fa7b12ca25263940f46
  \subsection{Statement of scope}
 	\begin{itemize}
 	\item The model will consist of neural networks implemented using deep learning frameworks that will accept images of input format \textit{JPEG}
 	\item The input will be grayscale images of size $64\times 64$
-<<<<<<< HEAD
-	\end{itemize}
-
- \subsection{Statement of scope} 
-	\begin{itemize}  
-	\item The model will consist of neural networks implemented using deep learning frameworks that will accept images of input format \textit{JPEG}
-	\item The input will be grayscale images of size $64\times 64$ 
-
-
-
-=======
->>>>>>> 5fbaea2e62e9293a76211fa7b12ca25263940f46
 	\item Input bounds:
 	\begin{itemize}
 		\item Lower bound: $64\times 64\times 1$
@@ -598,6 +581,7 @@ Major Tasks in the Project stages are:
   \item Task 5: Fine tuning the GAN model
 \end{itemize}
 
+
 \section{Team Organization}
 \begin{itemize}
 \item Team of 4 members
@@ -608,20 +592,11 @@ Major Tasks in the Project stages are:
 Team of 4 members
 
 \subsection{Management reporting and communication}
-<<<<<<< HEAD
-
-Mechanisms for progress reporting and inter/intra team communication are identified as per assessment sheet and lab time table.
-
-Mechanisms for progress reporting and inter/intra team communication are identified as per assessment sheet and lab time table.
-
-
-=======
 \begin{itemize}
 \item Weekly meeting with guide about the work
 \item Weekly meeting among team for updates and work distribution
 \item Daily updates on work progress
 \end{itemize}
->>>>>>> 5fbaea2e62e9293a76211fa7b12ca25263940f46
 \chapter{Software requirement specification }
 
 \section{Introduction}
@@ -638,26 +613,6 @@ The profiles of all user categories are described here.(Actors and their Descrip
 
 \subsection{Use-cases}
 Following is the use case table.
-<<<<<<< HEAD
-
-\begin{table}[!htbp]
-\begin{center}
-%\def\arraystretch{1.5}
-\def\arraystretch{1.5}
-\begin{tabularx}{\textwidth}{| c | c | X | c | X |}
-\hline
-Sr No.	& Use Case	& Description	& Actors	& Assumptions \\
-\hline
-1& Input image & Image is loaded & User & Image of size 64x64 and format jpg/jpeg is uploaded  \\ \hline
-2& Colourising & GAN colourises the image & GAN & The image is colourised from its black and white format \\ \hline
-3& Upscaling & GAN upscales the image & GAN & The image is upscaled to resolution 768x768 and is not pixelated. \\ \hline
-\end{tabularx}
-\end{center}
-\caption{Use Cases}
-\label{tab:usecase}
-\end{table}
-=======
->>>>>>> 5fbaea2e62e9293a76211fa7b12ca25263940f46
 
 \input{tables/use_case_table.tex}
 
@@ -666,11 +621,7 @@ Use Case Diagram. Example is given below
 \begin{center}
 	\begin{figure}[!htbp]
 		\centering
-<<<<<<< HEAD
-		\fbox{\includegraphics[width=\textwidth]{use.jpg}}
-=======
 		\fbox{\includegraphics[width=\textwidth]{figures/use.jpg}}
->>>>>>> 5fbaea2e62e9293a76211fa7b12ca25263940f46
 	  \caption{Use case diagram}
 	  \label{fig:usecase}
 	\end{figure}
@@ -777,7 +728,7 @@ The project is largely inspired by Christian Ledig's SRGAN paper \cite{ledig2017
 	  \label{fig:disc_color-dig}
 	\end{figure}
   \end{center}
-  
+
 \pagebreak
 
   \subsection{Image Super-resolution}
