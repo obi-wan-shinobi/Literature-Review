@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex report"] 1609269617 "report.aux" "report.bbl" "report" 1609269635
+["bibtex report"] 1609269617 "report.aux" "report.bbl" "report" 1609270163
   "C:/Users/manap/AppData/Local/Programs/MiKTeX/bibtex/bst/bibtex/ieeetr.bst" 1291864344 18361 1a00e58565e7f19bf2b3e1bfb82254ae ""
   "biblo.bib" 1608467427 10803 8f9d6f59779e0849d2f6033889ade71f ""
-  "report.aux" 1609269632 15735 22264ce0c45d5193de21053c9dcdc3a4 "pdflatex"
+  "report.aux" 1609270161 15735 22264ce0c45d5193de21053c9dcdc3a4 "pdflatex"
   (generated)
   "report.blg"
   "report.bbl"
-["pdflatex"] 1609269618 "report.tex" "report.pdf" "report" 1609269635
+["pdflatex"] 1609270148 "report.tex" "report.pdf" "report" 1609270163
   "C:/Users/manap/AppData/Local/MiKTeX/fonts/tfm/public/rsfs/rsfs10.tfm" 1608230412 688 37338d6ab346c2f1466b29e195316aa4 ""
   "C:/Users/manap/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1606940557 10294360 909b75b58b613a5e08f07c094bf0cee7 ""
   "C:/Users/manap/AppData/Local/MiKTeX/pdftex/config/pdftex.map" 1609067685 82507 a9eef8696c92627b87e9975edea03b2a ""
@@ -226,22 +226,22 @@
   "figures/ledig_srgan_architecture.jpg" 1608467427 88110 4470ded6d42e273a9fffd94943e942f0 ""
   "figures/state_transition_diagram.tikz" 1609264663 825 9e10644bd8ffd0378b9e2314caa0cd1e ""
   "figures/use.jpg" 1608821283 65214 636b7d71e19692e8b0cf8aa154a5f8b9 ""
-  "report.aux" 1609269632 15735 22264ce0c45d5193de21053c9dcdc3a4 "pdflatex"
+  "report.aux" 1609270161 15735 22264ce0c45d5193de21053c9dcdc3a4 "pdflatex"
   "report.bbl" 1609269618 4860 6a6f2065a2d6e1c9b7f84918d366cd40 "bibtex report"
   "report.cls" 1607760596 1876 a904bbbeaf8ca26b0de5ff3d80682309 ""
-  "report.lof" 1609269632 943 07e67b69b59daa848581b47c1834acdc "pdflatex"
-  "report.lot" 1609269632 922 e80b607cf342a1955bd4c341de9fe11d "pdflatex"
-  "report.out" 1609269632 3668 9ae0ee39e84742130d42f06cfb54bfaf "pdflatex"
-  "report.tex" 1609269598 49044 f97fb4e75899e9da671d8896b651fc43 ""
-  "report.toc" 1609269632 5776 687d1e0a7d5cc09111c779d8d90c74aa "pdflatex"
+  "report.lof" 1609270161 943 07e67b69b59daa848581b47c1834acdc "pdflatex"
+  "report.lot" 1609270161 922 e80b607cf342a1955bd4c341de9fe11d "pdflatex"
+  "report.out" 1609270161 3668 9ae0ee39e84742130d42f06cfb54bfaf "pdflatex"
+  "report.tex" 1609270146 49045 bb7d4b058e5642cabaf2183ab8272c39 ""
+  "report.toc" 1609270161 5776 687d1e0a7d5cc09111c779d8d90c74aa "pdflatex"
   "tables/hardware_requirements.tex" 1608467427 407 beff603f9fd2e8f7dd80695202b5f5bb ""
   "tables/literature_review.tex" 1609070734 2083 2a3f738d5671ff830268593978c06a14 ""
   "tables/use_case_table.tex" 1608821283 644 c099e48c591a43907a1bca120a7cc0ee ""
   (generated)
-  "report.lot"
-  "report.lof"
   "report.pdf"
-  "report.out"
   "report.aux"
-  "report.log"
+  "report.lof"
   "report.toc"
+  "report.log"
+  "report.lot"
+  "report.out"
