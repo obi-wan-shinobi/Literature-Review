@@ -42,6 +42,28 @@
 \usepackage[ruled,vlined]{algorithm2e}
 
 \usepackage{amssymb}
+\usepackage{tikz}
+
+\usetikzlibrary{arrows.meta, chains, shapes.geometric}
+
+\tikzset{FlowChart/.style = {% for distinguish from other tikz sets used in your document
+     base/.style = {ellipse, draw,
+                    minimum width=3cm, minimum height=1cm, align=center,
+                    text width =\pgfkeysvalueof{/pgf/minimum width}-2*\pgfkeysvalueof{/pgf/inner xsep},
+                    on chain, join=by arrow},
+startstop/.style = {base, fill=red!30, rounded corners},
+       io/.style = {trapezium, trapezium left angle=70, trapezium right angle=110,
+                    trapezium stretches body,
+                    draw=black, fill=blue!30,
+                    minimum width=1cm, minimum height=1cm, align=center,
+                    on chain, join=by arrow},
+input/.style    =  {coordinate,node distance=2em},
+   process/.style = {base, fill=orange!30},
+  decision/.style = {diamond, aspect=1.2, draw, fill=green!30,
+                     minimum width=3cm, minimum height=1cm, align=center,
+                     on chain, join=by arrow},
+     arrow/.style = {thick,-Stealth}}
+        }
 
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta,chains}
@@ -250,8 +272,6 @@ maximum likelihood (ML) estimation approach  and maximum a posterior (MAP) estim
 
 			\hspace*{0.25 in} The Genrative Adversarial Network \cite{goodfellow2014generative}, has two neural networks, the Generator and the Discriminator. These networks compete with each other in a zero-sum game.
       \cite{ledig2017photorealistic} introduced SRGAN in 2017, which used a SRResNet to upscale images with an upscaling factor of 4x. SRGAN is currently the state of the art on public benchmark datasets.
-
-\input{tables/literature_review.tex}
 
 \chapter{Problem Definition and scope}
 \section{Problem Statement}
@@ -603,19 +623,21 @@ Team of 4 members
 
 \section{Introduction}
 \subsection{Purpose and Scope of Document}
-The purpose of SRS and what it covers is to be stated
+The purpose of this project document is to create a comprehensive documentation about the methodology used in implementing the upscaling and colorization of the HSA images. The document explores the goals, objectives, resources, project plan, SRS and finally the summary and conclusion. It is hoped that this document would be beneficial in answering every query that any individual may have about this research project.
 
-\subsection{Overview of responsibilities of Developer}
-What all activities carried out by developer?
 
-\section{Usage Scenario}
-This section provides various usage scenarios for the system to be developed.
+
  \subsection{User profiles}
-The profiles of all user categories are described here.(Actors and their Description)
+Two actors have been defined in the Use case Diagram:\\
+User: User preprocesses the image with the help of the GAN and facilitates the whole process.\\
+GAN: It takes the input images, colorizes the image and feeds it to another GAN. The second GAN then upscales the image and a final output image is generated.
 
 \subsection{Use-cases}
-Following is the use case table.
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> Shreyas
 \input{tables/use_case_table.tex}
 \pagebreak
 \subsection{Use Case View}
@@ -629,68 +651,28 @@ Use Case Diagram. Example is given below
 	\end{figure}
 \end{center}
 
-\section{Data Model and Description}
-\subsection{Data Description}
-Data objects that will be managed/manipulated by the software are described in this section. The database entities or files or data structures  required to be described. For data objects details can be given as below
-\subsection{Data objects and Relationships}
-  Data objects and their major attributes and relationships among data objects are described using an ERD- like form.
 
-
-
-\section{Functional Model and Description}
-A description of each major software function, along with data flow (structured analysis) or class hierarchy (Analysis Class diagram with class description for object oriented system) is presented.
 \subsection{Data Flow Diagram}
 \subsubsection{Level 0 Data Flow Diagram}
 \subsubsection{Level 1 Data Flow Diagram}
 
-\subsection{Description of functions}
-A description of each software function is presented. A processing narrative for function n is presented.(Steps)/ Activity Diagrams. For Example Refer \ref{fig:act-dig}
-
-
-
-\begin{center}
-	\begin{figure}[!htbp]
-		\centering
-		\fbox{\includegraphics[height=430pt]{activity-dig.jpg}}
-	  \caption{Activity diagram}
-	  \label{fig:act-dig}
-	\end{figure}
-\end{center}
-
-
 
 
 \subsection{Activity Diagram:}
-\begin{itemize}
-	\item	The Activity diagram represents the steps taken.
-\end{itemize}
+\input{figures/activity_diagram.tikz}
 
 \subsection{Non Functional Requirements:}
 \begin{itemize}
-	\item	Interface Requirements
-	\item	Performance Requirements
-    \item	Software quality attributes such as availability [ related to Reliability], modifiability [includes portability, reusability, scalability] ,  		performance, security, testability and usability[includes self 			adaptability and user adaptability]
+  \item Accessibility: The dataset generated would be accessible for everyone to access in open source.
+	\item	Availability: The code would be available on github
+  \item Performance: The performance of all the GANs is recorded.
 \end{itemize}
 
 \subsection{State Diagram:}
   State Transition Diagram\\
-Fig.\ref{fig:state-dig} example shows the state transition diagram of Cloud SDK. The states are
-represented in ovals and state of system gets changed when certain events occur. The transitions from one state to the other are represented by arrows. The Figure    shows important states and events that occur while creating new project.
 
-\begin{center}
-	\begin{figure}[!htbp]
-		\centering
-		\fbox{\includegraphics[width=230pt]{state-dig.jpg}}
-	  \caption{State transition diagram}
-	  \label{fig:state-dig}
-	\end{figure}
-\end{center}
+\input{figures/state_transition_diagram.tikz}
 
- \subsection{Design Constraints}
-Any design constraints that will impact the subsystem are noted.
- \subsection{Software Interface Description}
-The software interface(s)to the outside world is(are) described.
-The requirements for interfaces to other devices/systems/networks/human are stated.
 
 
 
@@ -810,7 +792,7 @@ A convolution is a linear operation that can be viewed as a multiplication or do
     a^{\ell+1}_j = g(\sum_{i \in F_j}(a_i^\ell \times k_{ij}^{\ell+1} + b_j^{\ell+1}))
     \label{Convolution}
 \end{equation}
-where $\ell$ is the layer, g is the activation function ReLU, $F_j$ is the receptive field, k is the convolutional kernel and b is the bias. 
+where $\ell$ is the layer, g is the activation function ReLU, $F_j$ is the receptive field, k is the convolutional kernel and b is the bias.
 
 \section{Residual Networks}
 \begin{figure}
@@ -824,7 +806,7 @@ Figure \ref{fig: residual block} shows a building block of a residual network. T
     a_{\ell+1} = h(a_\ell) + F(a_\ell, W_\ell)
     \label{Residual unit}
 \end{equation}
-where $a_{\ell+1}$ and $a_\ell$ represent the input and output for the $\ell^{th}$ layer and $F$ is the residual function. The $h$ denotes the operation in the identity mapping. The output of the layer is generally processed using an activation function such as ReLU. Let $f$ be the ReLU activation and replacing $F$ with the definition of feed forward activation, the residual block thus can be defined as, 
+where $a_{\ell+1}$ and $a_\ell$ represent the input and output for the $\ell^{th}$ layer and $F$ is the residual function. The $h$ denotes the operation in the identity mapping. The output of the layer is generally processed using an activation function such as ReLU. Let $f$ be the ReLU activation and replacing $F$ with the definition of feed forward activation, the residual block thus can be defined as,
 \begin{equation}
     a_{\ell+1} = f(h(a_\ell) + W_2f(W_1a_\ell))
     \label{Residual unit redefined}
@@ -839,8 +821,8 @@ For the sake of simplicity, we consider no operation being performed in the iden
 A generative network, $G$, is supposed to learn the underlying distribution of a latent space, Y. Instead of visually assessing the quality of network outputs and judge how we can adapt the network to produce convincing results, we incorporate automatic tweaking during training by introducing a discriminative network $D$. The network D takes in both the fabricated outputs generated by G and real inputs from the underlying distribution Y. The network produces a probability of the image belonging to the real or fabricated space.
 
   Let $x \in X$ be a low resolution/grayscale image and $y \in Y$ be it's underlying distribution from the latent space Y. Generator $G$ takes in input $x$ and produces an output $\hat{y}$. We define the mapping $x \rightarrow \hat{y}$ in the following manner:
-  $$G(x) = \hat{y}$$  
-  
+  $$G(x) = \hat{y}$$
+
  The discriminative network D is fed the fabricated mapping $x \rightarrow \hat{y}$ and the underlying distribution of $x$ i.e. $y \in Y$. The network D then produces a result that is a probability distribution of the input space indicating the class of the image that it thinks the input belongs to. We define this as:
  $$D\big(G(x),y\big) = p$$
  where $p \in (0,1)$ is the probability that the image is fabricated or real.
