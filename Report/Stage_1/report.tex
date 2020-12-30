@@ -25,8 +25,7 @@
 \usepackage[]{hyperref}
 \usepackage{tikz}
 \usetikzlibrary{arrows,shapes,snakes,automata,backgrounds,petri}
-
-\usepackage{tabularx}
+\usepackage{ltablex}
 
 %\usepackage[nottoc,notlot,notlof,numbib]{tocbibind}
 \usepackage[titletoc]{appendix}
@@ -43,6 +42,9 @@
 \usepackage[ruled,vlined]{algorithm2e}
 
 \usepackage{amssymb}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,chains}
 
 \begin{document}
 \setlength{\parindent}{0mm}
@@ -249,6 +251,7 @@ maximum likelihood (ML) estimation approach  and maximum a posterior (MAP) estim
 			\hspace*{0.25 in} The Genrative Adversarial Network \cite{goodfellow2014generative}, has two neural networks, the Generator and the Discriminator. These networks compete with each other in a zero-sum game.
       \cite{ledig2017photorealistic} introduced SRGAN in 2017, which used a SRResNet to upscale images with an upscaling factor of 4x. SRGAN is currently the state of the art on public benchmark datasets.
 
+\input{tables/literature_review.tex}
 
 \chapter{Problem Definition and scope}
 \section{Problem Statement}
@@ -580,6 +583,7 @@ Major Tasks in the Project stages are:
   \item Task 5: Fine tuning the GAN model
 \end{itemize}
 
+
 \section{Team Organization}
 \begin{itemize}
 \item Team of 4 members
@@ -612,25 +616,8 @@ The profiles of all user categories are described here.(Actors and their Descrip
 \subsection{Use-cases}
 Following is the use case table.
 
-\begin{table}[!htbp]
-\begin{center}
-%\def\arraystretch{1.5}
-\def\arraystretch{1.5}
-\begin{tabularx}{\textwidth}{| c | c | X | c | X |}
-\hline
-Sr No.	& Use Case	& Description	& Actors	& Assumptions \\
-\hline
-1& Input image & Image is loaded & User & Image of size 64x64 and format jpg/jpeg is uploaded  \\ \hline
-2& Colourising & GAN colourises the image & GAN & The image is colourised from its black and white format \\ \hline
-3& Upscaling & GAN upscales the image & GAN & The image is upscaled to resolution 768x768 and is not pixelated. \\ \hline
-\end{tabularx}
-\end{center}
-\caption{Use Cases}
-\label{tab:usecase}
-\end{table}
-
 \input{tables/use_case_table.tex}
-
+\pagebreak
 \subsection{Use Case View}
 Use Case Diagram. Example is given below
 \begin{center}
@@ -638,7 +625,7 @@ Use Case Diagram. Example is given below
 		\centering
 		\fbox{\includegraphics[width=\textwidth]{figures/use.jpg}}
 	  \caption{Use case diagram}
-	  \label{fig:usecase}
+	  \label{fig:usecase_dig}
 	\end{figure}
 \end{center}
 
@@ -796,9 +783,77 @@ The images are upscaled and colourized using a completely automated algorithm wh
 % \chapter{ALGORITHMIC DESIGN}
 \chapter{Mathematical Model}
 
+\section{Artificial Neural Networks}
+Figure \ref{fig: ANN} shows a schematic of the simplest multi-layer perceptron network, i.e. a feed-forward neural network. The network is composed of an input layer, hidden layers and output layer. Define $a_i^\ell$ as the $i^{th}$ neuron of the $\ell^{th}$ layer and $a_j^{\ell+1}$ as the $j^{th}$ neuron of the $(\ell+1)^{th}$ layer and $w_{ij}^\ell, b_j^\ell$ is the weight and bias connecting the two neurons, then the output of the $\ell^{th}$ layer is given by:
+\begin{equation}
+    a^{\ell+1}_j = g(\sum_{i \in N^\ell}(w_{ij}^{\ell}a_i^{\ell} + b_j^{\ell}))
+    \label{ANN_activation}
+\end{equation}
 
+\begin{figure}
+    \centering
+    \input{figures/ANN}
+    \caption{A feed forward neural network}
+    \label{fig: ANN}
+\end{figure}
 
+The loss is calculated using a loss function such as cross entropy function especially for binary classification.
+\begin{equation}
+    loss(y',y) = -y\log{y'} - (1-y)\log{(1-y')}.
+    \label{ANN_loss}
+\end{equation}
+where $y' \in \{0,1\}, y \in (0,1)$. This objective is to minimize this cross entropy over a batch of all training data. This is done using gradient descent where the parameters viz. weights and biases are updated to reduce the overall cross entropy loss.
 
+\section{Convolutional Neural Networks}
+A convolution is a linear operation that can be viewed as a multiplication or dot product of matrices. The input is a tensor of shape $height$ x $width$ x $channels$ and the convolution operation abstracts the image to a feature map (also called a kernel) of shape $kernel size$ x $kernel size$ x $kernel channels$. The layers can be computed by:
+\begin{equation}
+    a^{\ell+1}_j = g(\sum_{i \in F_j}(a_i^\ell \times k_{ij}^{\ell+1} + b_j^{\ell+1}))
+    \label{Convolution}
+\end{equation}
+where $\ell$ is the layer, g is the activation function ReLU, $F_j$ is the receptive field, k is the convolutional kernel and b is the bias. 
+
+\section{Residual Networks}
+\begin{figure}
+    \centering
+    \input{figures/residual_block}
+    \caption{Residual Block}
+    \label{fig: residual block}
+\end{figure}
+Figure \ref{fig: residual block} shows a building block of a residual network. The residual blocks can be expressed mathematically as follows. Let $h(a)$ be an underlying mapping that is to be fit by a set of layers, where $a$ is the input to these layers. If we hypothesize that multiple non-linear transformations by these layers can approximate the layer functions, then one can also hypothesize that a similar approximation can be made for the residual functions, i.e. $h(a) - a$, which have the same input and output dimensions. So instead of letting the underlying mapping be $h(a)$ we approximate a residual function $F(a) = h(a) - a$. Thus, the actual function becomes $h(a) = F(a) + a$. We can achieve this approximation in a feed forward neural network using a series of skip connections that perform identity mapping and jump over a few layers. Adding the outputs of these two connections gives the final output layer. Thus, the residual unit can be defined as,
+\begin{equation}
+    a_{\ell+1} = h(a_\ell) + F(a_\ell, W_\ell)
+    \label{Residual unit}
+\end{equation}
+where $a_{\ell+1}$ and $a_\ell$ represent the input and output for the $\ell^{th}$ layer and $F$ is the residual function. The $h$ denotes the operation in the identity mapping. The output of the layer is generally processed using an activation function such as ReLU. Let $f$ be the ReLU activation and replacing $F$ with the definition of feed forward activation, the residual block thus can be defined as, 
+\begin{equation}
+    a_{\ell+1} = f(h(a_\ell) + W_2f(W_1a_\ell))
+    \label{Residual unit redefined}
+\end{equation}
+For the sake of simplicity, we consider no operation being performed in the identity mapping. Thus, equation \ref{Residual unit} and equation \ref{Residual unit redefined} become,
+\begin{equation}
+    a_{\ell+1} = f(a_\ell + F(a_\ell, W_\ell))
+    \label{Final Residual notation}
+\end{equation}
+
+\section{Generative Adversarial Networks}
+A generative network, $G$, is supposed to learn the underlying distribution of a latent space, Y. Instead of visually assessing the quality of network outputs and judge how we can adapt the network to produce convincing results, we incorporate automatic tweaking during training by introducing a discriminative network $D$. The network D takes in both the fabricated outputs generated by G and real inputs from the underlying distribution Y. The network produces a probability of the image belonging to the real or fabricated space.
+
+  Let $x \in X$ be a low resolution/grayscale image and $y \in Y$ be it's underlying distribution from the latent space Y. Generator $G$ takes in input $x$ and produces an output $\hat{y}$. We define the mapping $x \rightarrow \hat{y}$ in the following manner:
+  $$G(x) = \hat{y}$$  
+  
+ The discriminative network D is fed the fabricated mapping $x \rightarrow \hat{y}$ and the underlying distribution of $x$ i.e. $y \in Y$. The network D then produces a result that is a probability distribution of the input space indicating the class of the image that it thinks the input belongs to. We define this as:
+ $$D\big(G(x),y\big) = p$$
+ where $p \in (0,1)$ is the probability that the image is fabricated or real.
+With conditional GAN, both generator and discriminator are conditioning on the input $x$. Let the generator be parameterized by $\theta_g$ and the discriminator be parameterized by $\theta_d$. The minimax objective function can be defined as:
+	\[
+		\min_{\theta_g}\max_{\theta_d}\Big[\mathbb{E}_{x,y\sim p_{data}} \log D_{\theta_d}(x,y) + E_{x\sim p_{data}} \log(1 - D_{\theta_d}(x, G_{\theta_g}(x))\Big]
+	\]
+
+	Where, $G_{\theta_{g}}$ is the output of the generator and $D_{\theta_d}$ is the output of the discriminator.
+	We're currently not introducing any noise in our generator to keep things simple for the time being. Also, we consider $L1$ difference between input $x$ and output $y$ in generator. On each iteration, the discriminator would maximize $\theta_d$ according to the above expression and generator would minimize $\theta_g$ in the following way:
+	\[
+		\min_{\theta_g}\Big[-\log(D_{\theta_d}(x,G_{\theta_g}(x)))+\lambda \Vert G_{\theta_g}(x) - y \Vert_1 \Big]
+	\]
 
 
 
