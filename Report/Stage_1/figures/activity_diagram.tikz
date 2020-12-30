@@ -1,0 +1,26 @@
+
+    \begin{figure}
+    \begin{center}
+    \begin{tikzpicture}[FlowChart,
+  node distance = 6mm and 12mm,
+    start chain = going below]
+
+% nodes
+\node (begin)   [coordinate] {dot};
+\node (start)   [startstop] {Get Image};
+\node (proc01)  [process]   {Process Image};
+\node (dec01)   [process]  {Image more than $64 \times 64$ ?};
+\node (proc03)  [process]   {Colorizer};
+\node (proc04)  [process]   {Upscaler};
+\node (end)     [startstop] {Output};
+\node (end2)     [startstop] {End};
+% extra paths
+\path           (dec01) -- node[right] {Yes} (proc03);
+\draw [arrow]   (dec01.east) -- node[above] {No} ++(1cm,0) |- (end2);
+
+    \end{tikzpicture}
+    \caption{Activity Diagram}
+    \label{fig:Activity Diagram}
+
+        \end{center}
+    \end{figure}
