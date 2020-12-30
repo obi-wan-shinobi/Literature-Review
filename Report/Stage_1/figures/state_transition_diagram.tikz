@@ -1,0 +1,25 @@
+
+    \begin{figure}
+    \begin{center}
+    \begin{tikzpicture}[FlowChart,
+  node distance = 6mm and 12mm,
+    start chain = going below]
+
+% nodes
+\node (begin)   [coordinate] {dot};
+\node (start)   [startstop] {Input Images fed to network};
+\node (proc01)  [process]   {Forward Propagation};
+\node (dec01)   [process]  {Calculating Loss function};
+\node (proc03)  [process]   {Back Propagation};
+\node (proc04)  [process]   {Epoch=Epoch+1};
+\node (proc05)  [process]   {Model Accuracy,Error,AUC calculated and displayed};
+\node (end2)  [startstop]   {Save Model};
+% extra paths
+
+\draw [arrow]   (proc04.east) -- node[above] {More Epochs?} ++(0.5cm,1) |- (start);
+
+    \end{tikzpicture}
+    \caption{State Transition Diagram}
+    \label{fig:State Transition Diagram}
+    \end{center}
+    \end{figure}
