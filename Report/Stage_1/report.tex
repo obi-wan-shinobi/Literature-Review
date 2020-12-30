@@ -25,8 +25,7 @@
 \usepackage[]{hyperref}
 \usepackage{tikz}
 \usetikzlibrary{arrows,shapes,snakes,automata,backgrounds,petri}
-
-\usepackage{tabularx}
+\usepackage{ltablex}
 
 %\usepackage[nottoc,notlot,notlof,numbib]{tocbibind}
 \usepackage[titletoc]{appendix}
@@ -65,6 +64,9 @@ input/.style    =  {coordinate,node distance=2em},
                      on chain, join=by arrow},
      arrow/.style = {thick,-Stealth}}
         }
+
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,chains}
 
 \begin{document}
 \setlength{\parindent}{0mm}
@@ -271,6 +273,7 @@ maximum likelihood (ML) estimation approach  and maximum a posterior (MAP) estim
 			\hspace*{0.25 in} The Genrative Adversarial Network \cite{goodfellow2014generative}, has two neural networks, the Generator and the Discriminator. These networks compete with each other in a zero-sum game.
       \cite{ledig2017photorealistic} introduced SRGAN in 2017, which used a SRResNet to upscale images with an upscaling factor of 4x. SRGAN is currently the state of the art on public benchmark datasets.
 
+\input{tables/literature_review.tex}
 
 \chapter{Problem Definition and scope}
 \section{Problem Statement}
@@ -602,6 +605,7 @@ Major Tasks in the Project stages are:
   \item Task 5: Fine tuning the GAN model
 \end{itemize}
 
+
 \section{Team Organization}
 \begin{itemize}
 \item Team of 4 members
@@ -632,7 +636,10 @@ GAN: It takes the input images, colorizes the image and feeds it to another GAN.
 
 \subsection{Use-cases}
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> Shreyas
 \input{tables/use_case_table.tex}
 \pagebreak
 \subsection{Use Case View}
