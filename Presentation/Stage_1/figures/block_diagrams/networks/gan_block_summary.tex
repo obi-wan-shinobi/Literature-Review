@@ -1,0 +1,30 @@
+\documentclass[tikz,border=3mm]{standalone}
+\usetikzlibrary{chains, calc,fit}
+\usepackage{varwidth}
+\begin{document}
+\begin{tikzpicture}[box/.style={draw,thick,minimum width=5em,minimum
+    height=10em},arj/.style={semithick,-latex}]
+  \begin{scope}[start chain=A going right,oc/.style={join=by arj,on chain},
+    font=\sffamily,node distance=1.75em]
+   \node(data)[oc]{Image Tensor};
+   \node(colorization)[box,minimum height=10em,oc][right=4em of data]{
+   \begin{varwidth}{8em}
+    Colorizing GAN
+   \end{varwidth}
+   };
+   \node(upscaling)[box,minimum height=10em,oc]{
+   \begin{varwidth}{8em}
+    SRGAN
+   \end{varwidth}
+   };
+   \node(output)[box,minimum width=5em,minimum height=5em,oc][right=4em of upscaling]{Output};
+   
+   \node[draw, thick, dotted, rounded corners, inner xsep=1.5em, inner ysep=1.5em, fit=(colorization) (upscaling)] (box) {};
+   \node[fill=white] at (box.south) {GAN Block};
+  \end{scope}
+%   \begin{scope}[shift = {{($(input.south)+(0cm, -2cm)$)}}, start chain=A going right, oc/.style={join=by arj, on chain},
+%     font=\sffamily, node distance=1.75em]
+%     \node[box,oc]{something};
+%   \end{scope}
+\end{tikzpicture}
+\end{document}
