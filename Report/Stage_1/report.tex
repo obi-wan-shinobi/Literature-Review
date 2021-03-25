@@ -25,8 +25,7 @@
 \usepackage[]{hyperref}
 \usepackage{tikz}
 \usetikzlibrary{arrows,shapes,snakes,automata,backgrounds,petri}
-
-\usepackage{tabularx}
+\usepackage{ltablex}
 
 %\usepackage[nottoc,notlot,notlof,numbib]{tocbibind}
 \usepackage[titletoc]{appendix}
@@ -43,9 +42,33 @@
 \usepackage[ruled,vlined]{algorithm2e}
 
 \usepackage{amssymb}
+\usepackage{tikz}
+
+\usetikzlibrary{arrows.meta, chains, shapes.geometric}
+
+\tikzset{FlowChart/.style = {% for distinguish from other tikz sets used in your document
+     base/.style = {ellipse, draw,
+                    minimum width=3cm, minimum height=1cm, align=center,
+                    text width =\pgfkeysvalueof{/pgf/minimum width}-2*\pgfkeysvalueof{/pgf/inner xsep},
+                    on chain, join=by arrow},
+startstop/.style = {base, fill=red!30, rounded corners},
+       io/.style = {trapezium, trapezium left angle=70, trapezium right angle=110,
+                    trapezium stretches body,
+                    draw=black, fill=blue!30,
+                    minimum width=1cm, minimum height=1cm, align=center,
+                    on chain, join=by arrow},
+input/.style    =  {coordinate,node distance=2em},
+   process/.style = {base, fill=orange!30},
+  decision/.style = {diamond, aspect=1.2, draw, fill=green!30,
+                     minimum width=3cm, minimum height=1cm, align=center,
+                     on chain, join=by arrow},
+     arrow/.style = {thick,-Stealth}}
+        }
+
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,chains}
 
 \begin{document}
-
 \setlength{\parindent}{0mm}
 \begin{center}
 % \vspace*{1\baselineskip}
@@ -147,7 +170,13 @@ Department of Computer Engineering  &	\hspace{25 mm}Department of Computer Engin
 {  \newpage {\bfseries \fontsize{14}{12} \selectfont \centerline{Acknowledgments}
 \vspace*{2\baselineskip}} \setlength{\parindent}{11mm} }
 { \setlength{\parindent}{0mm} }
-please enter text here.\\
+\hspace{0.25 in}It gives us great pleasure in presenting the preliminary project report on \textbf{\textit{Astronomical Image colorization and super-resolution using Generative Adversarial Networks}}.
+We would like to take this opportunity to thank our internal guide Prof. Dr. S. M. Kamalapur for giving us all the help and guidance we needed. We are really grateful to her for her kind support. 
+
+\hspace{0.25 in}We are also grateful to Prof. Dr. S.S. Sane, Head of Computer Engineering Department,
+K.K.Wagh Institute Of Engineering Education And Research, Nashik, 
+for his indispensable support.
+We are grateful to Gao Xian Peh and Kai Marshland whose report on the topic inspired us with the idea of using Generative Adversarial Networks in this particular domain.\\
 \vspace*{3\baselineskip} \\
 \begin{tabular}{p{8.2cm}c}
 &Shreyas Kalvankar\\
@@ -206,7 +235,7 @@ please enter text here.\\
 \item Furthermore, image upscaling is another problem that has been under research in the computer vision community. It has been studied and many approached have been developed to accurately predict the missing pixel values while upscaling an image
 \item Application of GANs to this discipline has successfully improved the performance and computers are getting better and better at predicting accurate missing pixel values and upscaling images many folds the original size
 \item All this computation power can be used for astronomical research by processing large data archives
-\item A large number of images lie dormant in most of the space survey data archives which never go through any kind of processing and are low resolution and black \& white. These images could be processed automatically by an algorithm that will colorize and super-resolve the images which can make it easier for astronomers to visually inspect the images.
+\item A large number of images lie dormant in most of the space survey data archives which never go through any kind of processing and are low resolution and black \& white. These images could be processed automatically by an algorithm that will colorize and super-resolve the images which can make it easier for astronomers to visually inspect the images
 \end{itemize}
 
 \section{Literature Survey}
@@ -249,8 +278,6 @@ maximum likelihood (ML) estimation approach  and maximum a posterior (MAP) estim
 
 			\hspace*{0.25 in} The Genrative Adversarial Network \cite{goodfellow2014generative}, has two neural networks, the Generator and the Discriminator. These networks compete with each other in a zero-sum game.
       \cite{ledig2017photorealistic} introduced SRGAN in 2017, which used a SRResNet to upscale images with an upscaling factor of 4x. SRGAN is currently the state of the art on public benchmark datasets.
-
-
 
 \chapter{Problem Definition and scope}
 \section{Problem Statement}
@@ -378,31 +405,36 @@ Goal and Objectives:
 
 \section{Applications}
 \begin{itemize}
-\item Applications of Project
-          Currently, given the number of the raw and unprocessed images in Hubble Legacy Archives, much of the images are not workable for scientific evaluation. The main application of building a GAN and automating the upscaling and colorization of these images is to help in visual classification for astronomers. Through a high resolution and colourized image, astronomical objects which would've been imperceptible to the human eye could be now visible for visual inspection. While upscaling is expected to address the poor quality of the original images, colourization will help distinguish astronomical objects and activites from the noise generated by various factors.
+\item Currently, given the number of the raw and unprocessed images in Hubble Legacy Archives, much of the images are not workable for scientific evaluation. The main application of building a GAN and automating the upscaling and colorization of these images is to help in visual classification for astronomers. Through a high resolution and colourized image, astronomical objects which would've been imperceptible to the human eye could be now visible for visual inspection. While upscaling is expected to address the poor quality of the original images, colourization will help distinguish astronomical objects and activites from the noise generated by various factors.
 \end{itemize}
 
 \section{Hardware Resources Required}
 The project is based Machine Learning, and the use of Tensorflow-GPU brought forward the need for a very high end hardware. Google Colab (or Colaboratory) is a free Jupyter notebook environment offered by Google which runs notebooks from Python kernels and uses Google Drive for storage.
-\begin{table}[!htbp]
-\begin{center}
-\def\arraystretch{1.5}
-  \begin{tabular}{| c | c | c | c |}
-\hline
-Sr. No. &	Parameter &	Minimum Requirement & Justification \\
-\hline
-1 &	CPU Speed &	 Intel(R) Xeon(R) CPU @ 2.20GHz  & Training the model on CPU\\
-\hline
-2 &	GPU  &	Nvidia K80-12GB-0.82GHz &  To train model on GPU\\
-3 &	RAM  &	12GB &  To load the Dataset\\
- \hline
+\input{tables/hardware_requirements.tex}
 
-  \hline
-\end{tabular}
- \caption { Hardware Requirements }
- \label{tab:hreq}
-\end{center}
-\end{table}
+%\section{Hardware Resources Required}
+%The project is based Machine Learning, and the use of Tensorflow-GPU brought forward the need for a very high end hardware. Google Colab (or Colaboratory) is a free Jupyter notebook environment offered by Google which runs notebooks from Python kernels and uses Google Drive for storage.
+%\begin{table}[!htbp]
+%\begin{center}
+%\def\arraystretch{1.5}
+%  \begin{tabular}{| c | c | c | c |}
+%\hline
+%Sr. No. &	Parameter &	Minimum Requirement & Justification \\
+%\hline
+%1 &	CPU Speed &	 Intel(R) Xeon(R) CPU @ 2.20GHz  & Training the model on CPU\\
+%\hline
+%2 &	GPU  &	Nvidia K80-12GB-0.82GHz &  To train model on GPU\\
+%3 &	RAM  &	12GB &  To load the Dataset\\
+% \hline
+
+%  \hline
+%\end{tabular}
+%\caption { Hardware Requirements }
+% \label{tab:hreq}
+%\end{center}
+%\end{table}
+
+\pagebreak
 
 \section{Software Resources Required}
 Platform :
@@ -577,6 +609,7 @@ Major Tasks in the Project stages are:
   \item Task 5: Fine tuning the GAN model
 \end{itemize}
 
+
 \section{Team Organization}
 \begin{itemize}
 \item Team of 4 members
@@ -596,37 +629,23 @@ Team of 4 members
 
 \section{Introduction}
 \subsection{Purpose and Scope of Document}
-The purpose of SRS and what it covers is to be stated
+The purpose of this project document is to create a comprehensive documentation about the methodology used in implementing the upscaling and colorization of the HSA images. The document explores the goals, objectives, resources, project plan, SRS and finally the summary and conclusion. It is hoped that this document would be beneficial in answering every query that any individual may have about this research project.
 
-\subsection{Overview of responsibilities of Developer}
-What all activities carried out by developer?
 
-\section{Usage Scenario}
-This section provides various usage scenarios for the system to be developed.
+
  \subsection{User profiles}
-The profiles of all user categories are described here.(Actors and their Description)
+Two actors have been defined in the Use case Diagram:\\
+User: User preprocesses the image with the help of the GAN and facilitates the whole process.\\
+GAN: It takes the input images, colorizes the image and feeds it to another GAN. The second GAN then upscales the image and a final output image is generated.
 
 \subsection{Use-cases}
-Following is the use case table.
 
-\begin{table}[!htbp]
-\begin{center}
-%\def\arraystretch{1.5}
-\def\arraystretch{1.5}
-\begin{tabularx}{\textwidth}{| c | c | X | c | X |}
-\hline
-Sr No.	& Use Case	& Description	& Actors	& Assumptions \\
-\hline
-1& Input image & Image is loaded & User & Image of size 64x64 and format jpg/jpeg is uploaded  \\ \hline
-2& Colourising & GAN colourises the image & GAN & The image is colourised from its black and white format \\ \hline
-3& Upscaling & GAN upscales the image & GAN & The image is upscaled to resolution 768x768 and is not pixelated. \\ \hline
-\end{tabularx}
-\end{center}
-\caption{Use Cases}
-\label{tab:usecase}
-\end{table}
+<<<<<<< HEAD
+=======
 
-
+>>>>>>> Shreyas
+\input{tables/use_case_table.tex}
+\pagebreak
 \subsection{Use Case View}
 Use Case Diagram. Example is given below
 \begin{center}
@@ -634,72 +653,32 @@ Use Case Diagram. Example is given below
 		\centering
 		\fbox{\includegraphics[width=\textwidth]{figures/use.jpg}}
 	  \caption{Use case diagram}
-	  \label{fig:usecase}
+	  \label{fig:usecase_dig}
 	\end{figure}
 \end{center}
 
-\section{Data Model and Description}
-\subsection{Data Description}
-Data objects that will be managed/manipulated by the software are described in this section. The database entities or files or data structures  required to be described. For data objects details can be given as below
-\subsection{Data objects and Relationships}
-  Data objects and their major attributes and relationships among data objects are described using an ERD- like form.
 
-
-
-\section{Functional Model and Description}
-A description of each major software function, along with data flow (structured analysis) or class hierarchy (Analysis Class diagram with class description for object oriented system) is presented.
 \subsection{Data Flow Diagram}
 \subsubsection{Level 0 Data Flow Diagram}
 \subsubsection{Level 1 Data Flow Diagram}
 
-\subsection{Description of functions}
-A description of each software function is presented. A processing narrative for function n is presented.(Steps)/ Activity Diagrams. For Example Refer \ref{fig:act-dig}
-
-
-
-\begin{center}
-	\begin{figure}[!htbp]
-		\centering
-		\fbox{\includegraphics[height=430pt]{activity-dig.jpg}}
-	  \caption{Activity diagram}
-	  \label{fig:act-dig}
-	\end{figure}
-\end{center}
-
-
 
 
 \subsection{Activity Diagram:}
-\begin{itemize}
-	\item	The Activity diagram represents the steps taken.
-\end{itemize}
+\input{figures/activity_diagram.tikz}
 
 \subsection{Non Functional Requirements:}
 \begin{itemize}
-	\item	Interface Requirements
-	\item	Performance Requirements
-    \item	Software quality attributes such as availability [ related to Reliability], modifiability [includes portability, reusability, scalability] ,  		performance, security, testability and usability[includes self 			adaptability and user adaptability]
+  \item Accessibility: The dataset generated would be accessible for everyone to access in open source.
+	\item	Availability: The code would be available on github
+  \item Performance: The performance of all the GANs is recorded.
 \end{itemize}
 
 \subsection{State Diagram:}
   State Transition Diagram\\
-Fig.\ref{fig:state-dig} example shows the state transition diagram of Cloud SDK. The states are
-represented in ovals and state of system gets changed when certain events occur. The transitions from one state to the other are represented by arrows. The Figure    shows important states and events that occur while creating new project.
 
-\begin{center}
-	\begin{figure}[!htbp]
-		\centering
-		\fbox{\includegraphics[width=230pt]{state-dig.jpg}}
-	  \caption{State transition diagram}
-	  \label{fig:state-dig}
-	\end{figure}
-\end{center}
+\input{figures/state_transition_diagram.tikz}
 
- \subsection{Design Constraints}
-Any design constraints that will impact the subsystem are noted.
- \subsection{Software Interface Description}
-The software interface(s)to the outside world is(are) described.
-The requirements for interfaces to other devices/systems/networks/human are stated.
 
 
 
@@ -740,6 +719,8 @@ The project is largely inspired by Christian Ledig's SRGAN paper \cite{ledig2017
 	\end{figure}
   \end{center}
 
+\pagebreak
+
   \subsection{Image Super-resolution}
 \hspace{0.4 in}We use the SRResNet as the generator in the SRGAN model as used by Ledig et. al \cite{ledig2017photorealistic}. It contains both the residual blocks and the skip connections, as seen in Figure \ref{fig:srgan-dig}. Within each residual block, there are two convolution layers followed by a Batch Normalization layer and a parametric ReLU layer. Finally, the image is then upscaled 4 times using two sub-pixel convolution layers \cite{shi2016subpixel}.
 	\begin{center}
@@ -773,9 +754,6 @@ Initially, we started by scraping the data off Hubble Legacy Archive. Using pupp
 To that end, we scraped the Hubble Heritage project instead. The Hubble Heritage project releases the highest-quality astronomical images. They are all stitched together, colorized and processed to eliminate noise. Hubble Heritage then selects the best, most striking of these for public release. However, there are only $\sim150$ of these images that are actually useful. To increase the amount of data we had, we scraped images from the main Hubble website as well. This provided an extra approximately $\sim1000$ images.
 Each image is a JPG image with dimensions of $256\times 256$ pixels and contains 3 channels of RGB.
 
-
-
-
  \chapter{Summary and Conclusion}
  \section{Summary}
  Low Resolution and Black and White Images in the Hubble Legacy Archive lie dormant and are needed to be upscaled and colourized for better visual discernment of the astromers. Images are initially scraped from the Hubble Legacy Arhive and the Hubble Legacy Project and a dataset is formed which is cleaned manually and is then fed to two Generative Adversarial Networks consecutively. The images of size ($64\times 64\times 1$) are initially colorized using a first GAN and an output image of size ($64\times 64\times 3$) with three RGB channels is obtained. This is then upscaled to a size of ($(64\cdot n)\times (64\cdot n)\times 3$). The output images are visually superior as well as colorized. These images are expected to be of greater use for astronomers than the older ones.
@@ -793,9 +771,77 @@ The images are upscaled and colourized using a completely automated algorithm wh
 % \chapter{ALGORITHMIC DESIGN}
 \chapter{Mathematical Model}
 
+\section{Artificial Neural Networks}
+Figure \ref{fig: ANN} shows a schematic of the simplest multi-layer perceptron network, i.e. a feed-forward neural network. The network is composed of an input layer, hidden layers and output layer. Define $a_i^\ell$ as the $i^{th}$ neuron of the $\ell^{th}$ layer and $a_j^{\ell+1}$ as the $j^{th}$ neuron of the $(\ell+1)^{th}$ layer and $w_{ij}^\ell, b_j^\ell$ is the weight and bias connecting the two neurons, then the output of the $\ell^{th}$ layer is given by:
+\begin{equation}
+    a^{\ell+1}_j = g(\sum_{i \in N^\ell}(w_{ij}^{\ell}a_i^{\ell} + b_j^{\ell}))
+    \label{ANN_activation}
+\end{equation}
 
+\begin{figure}
+    \centering
+    \input{figures/ANN}
+    \caption{A feed forward neural network}
+    \label{fig: ANN}
+\end{figure}
 
+The loss is calculated using a loss function such as cross entropy function especially for binary classification.
+\begin{equation}
+    loss(y',y) = -y\log{y'} - (1-y)\log{(1-y')}.
+    \label{ANN_loss}
+\end{equation}
+where $y' \in \{0,1\}, y \in (0,1)$. This objective is to minimize this cross entropy over a batch of all training data. This is done using gradient descent where the parameters viz. weights and biases are updated to reduce the overall cross entropy loss.
 
+\section{Convolutional Neural Networks}
+A convolution is a linear operation that can be viewed as a multiplication or dot product of matrices. The input is a tensor of shape $height$ x $width$ x $channels$ and the convolution operation abstracts the image to a feature map (also called a kernel) of shape $kernel size$ x $kernel size$ x $kernel channels$. The layers can be computed by:
+\begin{equation}
+    a^{\ell+1}_j = g(\sum_{i \in F_j}(a_i^\ell \times k_{ij}^{\ell+1} + b_j^{\ell+1}))
+    \label{Convolution}
+\end{equation}
+where $\ell$ is the layer, g is the activation function ReLU, $F_j$ is the receptive field, k is the convolutional kernel and b is the bias.
+
+\section{Residual Networks}
+\begin{figure}
+    \centering
+    \input{figures/residual_block}
+    \caption{Residual Block}
+    \label{fig: residual block}
+\end{figure}
+Figure \ref{fig: residual block} shows a building block of a residual network. The residual blocks can be expressed mathematically as follows. Let $h(a)$ be an underlying mapping that is to be fit by a set of layers, where $a$ is the input to these layers. If we hypothesize that multiple non-linear transformations by these layers can approximate the layer functions, then one can also hypothesize that a similar approximation can be made for the residual functions, i.e. $h(a) - a$, which have the same input and output dimensions. So instead of letting the underlying mapping be $h(a)$ we approximate a residual function $F(a) = h(a) - a$. Thus, the actual function becomes $h(a) = F(a) + a$. We can achieve this approximation in a feed forward neural network using a series of skip connections that perform identity mapping and jump over a few layers. Adding the outputs of these two connections gives the final output layer. Thus, the residual unit can be defined as,
+\begin{equation}
+    a_{\ell+1} = h(a_\ell) + F(a_\ell, W_\ell)
+    \label{Residual unit}
+\end{equation}
+where $a_{\ell+1}$ and $a_\ell$ represent the input and output for the $\ell^{th}$ layer and $F$ is the residual function. The $h$ denotes the operation in the identity mapping. The output of the layer is generally processed using an activation function such as ReLU. Let $f$ be the ReLU activation and replacing $F$ with the definition of feed forward activation, the residual block thus can be defined as,
+\begin{equation}
+    a_{\ell+1} = f(h(a_\ell) + W_2f(W_1a_\ell))
+    \label{Residual unit redefined}
+\end{equation}
+For the sake of simplicity, we consider no operation being performed in the identity mapping. Thus, equation \ref{Residual unit} and equation \ref{Residual unit redefined} become,
+\begin{equation}
+    a_{\ell+1} = f(a_\ell + F(a_\ell, W_\ell))
+    \label{Final Residual notation}
+\end{equation}
+
+\section{Generative Adversarial Networks}
+A generative network, $G$, is supposed to learn the underlying distribution of a latent space, Y. Instead of visually assessing the quality of network outputs and judge how we can adapt the network to produce convincing results, we incorporate automatic tweaking during training by introducing a discriminative network $D$. The network D takes in both the fabricated outputs generated by G and real inputs from the underlying distribution Y. The network produces a probability of the image belonging to the real or fabricated space.
+
+  Let $x \in X$ be a low resolution/grayscale image and $y \in Y$ be it's underlying distribution from the latent space Y. Generator $G$ takes in input $x$ and produces an output $\hat{y}$. We define the mapping $x \rightarrow \hat{y}$ in the following manner:
+  $$G(x) = \hat{y}$$
+
+ The discriminative network D is fed the fabricated mapping $x \rightarrow \hat{y}$ and the underlying distribution of $x$ i.e. $y \in Y$. The network D then produces a result that is a probability distribution of the input space indicating the class of the image that it thinks the input belongs to. We define this as:
+ $$D\big(G(x),y\big) = p$$
+ where $p \in (0,1)$ is the probability that the image is fabricated or real.
+With conditional GAN, both generator and discriminator are conditioning on the input $x$. Let the generator be parameterized by $\theta_g$ and the discriminator be parameterized by $\theta_d$. The minimax objective function can be defined as:
+	\[
+		\min_{\theta_g}\max_{\theta_d}\Big[\mathbb{E}_{x,y\sim p_{data}} \log D_{\theta_d}(x,y) + E_{x\sim p_{data}} \log(1 - D_{\theta_d}(x, G_{\theta_g}(x))\Big]
+	\]
+
+	Where, $G_{\theta_{g}}$ is the output of the generator and $D_{\theta_d}$ is the output of the discriminator.
+	We're currently not introducing any noise in our generator to keep things simple for the time being. Also, we consider $L1$ difference between input $x$ and output $y$ in generator. On each iteration, the discriminator would maximize $\theta_d$ according to the above expression and generator would minimize $\theta_g$ in the following way:
+	\[
+		\min_{\theta_g}\Big[-\log(D_{\theta_d}(x,G_{\theta_g}(x)))+\lambda \Vert G_{\theta_g}(x) - y \Vert_1 \Big]
+	\]
 
 
 
