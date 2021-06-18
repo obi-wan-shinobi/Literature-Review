@@ -1,0 +1,985 @@
+%This is a very basic  BE PROJECT PRELIMINARY template.
+
+%#############################################
+%#########Author :  PROJECT###########
+%#########COMPUTER ENGINEERING############
+
+
+\documentclass[oneside,a4paper,12pt]{report}
+%\usepackage{showframe}
+%\hoffset = 8.9436619718309859154929577464789pt
+%\voffset = 13.028169014084507042253521126761pt
+
+\fancypagestyle{plain}{%
+  \fancyhf{}
+  \fancyfoot[CE]{College_Name, Department of Computer Engineering 2015}
+  \fancyfoot[RE]{\thepage}
+}
+\pagestyle{fancy}
+\fancyhead{}
+\renewcommand{\headrulewidth}{0pt}
+\footskip = 0.625in
+\cfoot{}
+\rfoot{}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,snakes,automata,backgrounds,petri}
+\usepackage{ltablex}
+
+%\usepackage[nottoc,notlot,notlof,numbib]{tocbibind}
+\usepackage[titletoc]{appendix}
+\usepackage{titletoc}
+\renewcommand{\appendixname}{Annexure}
+\renewcommand{\bibname}{References}
+
+\setcounter{secnumdepth}{5}
+
+\usepackage{float}
+\usepackage{subcaption}
+\usepackage{multirow}
+
+\usepackage[ruled,vlined]{algorithm2e}
+
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{pdfpages}
+
+\usepackage{caption}
+\usepackage{subcaption}
+
+\usepackage[authoryear]{natbib}
+
+\usepackage[colorlinks=true, linkcolor=black, citecolor=blue]{hyperref}
+
+\usetikzlibrary{arrows.meta, chains, shapes.geometric}
+
+\tikzset{FlowChart/.style = {% for distinguish from other tikz sets used in your document
+     base/.style = {ellipse, draw,
+                    minimum width=3cm, minimum height=1cm, align=center,
+                    text width =\pgfkeysvalueof{/pgf/minimum width}-2*\pgfkeysvalueof{/pgf/inner xsep},
+                    on chain, join=by arrow},
+startstop/.style = {base, fill=red!30, rounded corners},
+       io/.style = {trapezium, trapezium left angle=70, trapezium right angle=110,
+                    trapezium stretches body,
+                    draw=black, fill=blue!30,
+                    minimum width=1cm, minimum height=1cm, align=center,
+                    on chain, join=by arrow},
+input/.style    =  {coordinate,node distance=2em},
+   process/.style = {base, fill=orange!30},
+  decision/.style = {diamond, aspect=1.2, draw, fill=green!30,
+                     minimum width=3cm, minimum height=1cm, align=center,
+                     on chain, join=by arrow},
+     arrow/.style = {thick,-Stealth}}
+        }
+
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,chains}
+
+\begin{document}
+\setlength{\parindent}{0mm}
+\begin{center}
+% \vspace*{1\baselineskip}
+{\bfseries A  PROJECT REPORT ON \\}
+ \vspace*{2\baselineskip}
+{\bfseries \fontsize{16}{12} \selectfont Astronomical Image colorization and super-resolution using GANs \\ \vspace*{2\baselineskip}}
+{\fontsize{12}{12} \selectfont SUBMITTED TOWARDS THE
+ \\PARTIAL FULFILMENT OF THE REQUIREMENTS OF \\
+
+\vspace*{2\baselineskip}}
+{\bfseries \fontsize{14}{12} \selectfont BACHELOR OF ENGINEERING (Computer
+Engineering) \\
+\vspace*{1\baselineskip}}
+{\bfseries \fontsize{14}{12} \selectfont BY \\
+\vspace*{1\baselineskip}}
+Shreyas Kalvankar  \hspace{25 mm} Exam No: B150134261 \\
+Hrushikesh Pandit \hspace{25 mm} Exam No: B150134296  \\
+Pranav Parwate \hspace{30 mm} Exam No: B150134299 \\
+Atharva Patil \hspace{34 mm} Exam No: B150134303\\
+\vspace*{2\baselineskip}
+{\bfseries \fontsize{14}{12} \selectfont Under The Guidance of \\
+\vspace*{2\baselineskip}}
+Prof. Dr. S.M. Kamalapur\\
+\includegraphics[width=100pt]{collegelogo.png} \\
+{\bfseries \fontsize{14}{12} \selectfont Department of Computer Engineering \\
+K. K. Wagh Institute of Engineering Education \& Research \\
+Hirabai Haridas Vidyanagari, Amrutdham, Panchavati, Nashik-422003 \\
+Savitribai Phule Pune University\\
+A. Y. 2020-21 Sem I
+}
+\end{center}
+
+\newpage
+
+
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=100pt]{collegelogo.png}
+\end{figure}
+
+
+{\bfseries \fontsize{14}{12} \selectfont \centerline{K. K. Wagh Institute of Engineering Education and Research}
+\centerline{Department of Computer Engineering}
+\vspace*{3\baselineskip}}
+
+
+{\bfseries \fontsize{16}{12} \selectfont \centerline{CERTIFICATE}
+\vspace*{3\baselineskip}}
+
+\centerline{This is to certify that the Project Titled}
+\vspace*{1\baselineskip}
+
+
+{\bfseries \fontsize{14}{12} \selectfont \centerline{Astronomical Image colorization and super-resolution using GANs}
+\vspace*{1\baselineskip}}
+
+\centerline{Submitted by}
+\vspace*{1\baselineskip}
+\centerline{Shreyas Kalvankar  \hspace{25 mm} Exam No: B150134261}
+\centerline{Hrushikesh Pandit \hspace{25 mm} Exam No: B150134296 }
+\centerline{Pranav Parwate \hspace{30 mm} Exam No: B150134299}
+\centerline{Atharva Patil \hspace{34 mm} Exam No: B150134303}
+\vspace*{1\baselineskip}
+is a bonafide work carried out by Students under the supervision of Prof. Dr. S.M. Kamalapur and it
+is submitted towards the partial fulfilment of the requirement of Bachelor of Engineering (Computer Engineering) Project during academic year 2020-21.\\\\\\
+
+\bgroup
+\def\arraystretch{0.7}
+\begin{tabular}{c c }
+Prof. Dr. S.M. Kamalapur &  \hspace{25 mm} Prof. Dr. S. S. Sane \\
+Internal Guide   &  \hspace{25 mm} Head \\
+Department of Computer Engineering  &	\hspace{25 mm}Department of Computer Engineering  \\
+\end{tabular}
+%}
+
+
+
+\newpage
+
+%\pictcertificate{TITLE OF BE PROJECT}{Student Name}{Exam Seat No}{Guide Name}
+\setcounter{page}{0}
+\frontmatter
+\cfoot {
+\color{gray}
+\scriptsize KKWIEER, Department of Computer Engineering 2019}
+\rfoot{\thepage}
+\pagenumbering{Roman}
+%\pictack{BE PROJECT TITLE}{Guide Name}
+
+
+{  \newpage {\bfseries \fontsize{14}{12} \selectfont \centerline{Abstract}
+\vspace*{2\baselineskip}} \setlength{\parindent}{11mm} }
+{ \setlength{\parindent}{0mm} }
+\hspace*{0.25 in}Automated colorization of gray scale images has been subjected to much research within the computer vision and machine learning communities. Beyond simply being fascinating from an aesthetic and artificial intelligence perspective, such capability has broad practical applications. It is an area of research that possesses great potentials in applications: from black and white photo reconstruction, image augmentation, video restoration to image enhancement for improved interpretability.\\
+\hspace*{0.25 in}Image downscaling is an innately lossy process. The principal objective of super resolution imaging is to reconstruct a low resolution image into a high resolution one based on a set of low-resolution images to rectify the limitations that existed while the procurement of the original low-resolution images. This is to insure better visualization and recognition for either scientific or non-scientific purposes. Even if an upscaling algorithm is particularly good, there will always be some amount of high frequency data lost from a downscale-upscale function performed on the image. Ultimately, even the best upscaling algorithms are unable to effectively reconstruct data that does not exist. Traditional methods for image upsampling rely on low-information, smooth interpolation between known pixels. Such methods can be treated as a convolution with a kernel encoding no information about the original image. A solution to the problem is by using Generative Adversarial Networks (GANs) to hallucinate high frequency data in a super scaled image that does not exist in the smaller image. Even though they increase the resolution of an image, they fail to produce the clarity desired in the super-resolution task. By using the above mentioned method, not a perfect reconstruction can be obtained albeit instead a rather plausible guess can be made at what the lost data might be, constrained to reality by a loss function penalizing deviations from the ground truth image.\\
+\hspace*{0.25 in}A huge number of raw images are present unprocessed and unnoticed in the Hubble Legacy Archives. These raw images are typically black and white, low-resolution and unfit to be shared with the world. It takes huge amounts of hours to process them. This processing is necessary because it's difficult for astronomers to distinguish objects from the raw images. Random and synthetic noise from the sensors in the telescope, changing optical characteristics in the system and noise from other bodies in the universe all make the processing further necessary. Furthermore, for the process of highlighting small features that ordinarily wouldn't be able to be picked out against noise of the image, we need colorization. The processing of the images is so time consuming that the images are rarely seen by human eyes. The problem is only likely to get worse. Not only is new data being continuously produced by Hubble Telescope, but new telescopes are soon to come online. A simplification of image processing by using artificial image colorization and super-resolution can be done in an automated fashion to make it easier for astronomers to visually identify and analyze objects in Hubble dataset.
+
+{  \newpage {\bfseries \fontsize{14}{12} \selectfont \centerline{Acknowledgments}
+\vspace*{2\baselineskip}} \setlength{\parindent}{11mm} }
+{ \setlength{\parindent}{0mm} }
+\hspace{0.25 in}It gives us great pleasure in presenting the preliminary project report on \textbf{\textit{Astronomical Image colorization and super-resolution using Generative Adversarial Networks}}.
+We would like to take this opportunity to thank our internal guide Prof. Dr. S. M. Kamalapur for giving us all the help and guidance we needed. We are really grateful to her for her kind support. We would like to thank Prof. N. M. Shahane for providing us with his valuable guidance throughout.
+
+\hspace{0.25 in}We are also grateful to Prof. Dr. S.S. Sane, Head of Computer Engineering Department,
+K.K.Wagh Institute Of Engineering Education And Research, Nashik,
+for his indispensable support. We thank Prof. Dr. K.N. Nandurkar, Principal, K.K. Wagh Institute of Engineering Education and Research, Nashik, for his unwavering support.
+We are grateful to Gao Xian Peh and Kai Marshland whose report on the topic inspired us with the idea of using Generative Adversarial Networks in this particular domain.\\
+\vspace*{3\baselineskip} \\
+\begin{tabular}{p{8.2cm}c}
+&Shreyas Kalvankar\\
+&Hrushikesh Pandit\\
+&Pranav Parwate\\
+&Atharva Patil\\
+&(B.E. Computer Engg.)
+%}
+\end{tabular}
+
+
+% \maketitle
+\tableofcontents
+\listoffigures
+\listoftables
+
+
+
+\mainmatter
+
+
+
+  \titleformat{\chapter}[display]
+{\fontsize{16}{15}\filcenter}
+{\vspace*{\fill}
+ \bfseries\LARGE\MakeUppercase{\chaptertitlename}~\thechapter}
+{1pc}
+{\bfseries\LARGE\MakeUppercase}
+[\thispagestyle{empty}\vspace*{\fill}\newpage]
+
+
+
+
+
+
+
+\setlength{\parindent}{11mm}
+
+
+
+
+
+\chapter{Introduction}
+\section{Project Idea}
+
+\hspace*{0.25 in}The idea of the project is to create a efficient mathematical model for image colorization and super resolution using Generative Adversarial Networks (GANs).\\
+\hspace*{0.25 in}Having two networks compete will stimulate greater performance by the virtue of minimization of loss functions that traditional Convolutional Neural Network cant do
+
+
+\section{Motivation of the Project}
+\hspace*{0.25 in}This section summarizes different aspects of evolving technologies and drawbacks that served as a motivation.
+\begin{itemize}
+\item Image colorization seems to be evolving as computers get better and better at predicting missing variables. Different methods and techniques have been applied for colorizing images that have shown promising results
+\item Introduction of convolutional neural networks has made this task even more precise and accurate. Convoluting grayscale images to RGB provides unprecedented results with reference to visual inspection
+\item With the introduction of Generative Adversarial Networks, this particular task can be developed and modified to increase the efficiency and precision for colorizing images instead
+\item Furthermore, image upscaling is another problem that has been under research in the computer vision community. It has been studied and many approached have been developed to accurately predict the missing pixel values while upscaling an image
+\item Application of GANs to this discipline has successfully improved the performance and computers are getting better and better at predicting accurate missing pixel values and upscaling images many folds the original size
+\item All this computation power can be used for astronomical research by processing large data archives
+\item A large number of images lie dormant in most of the space survey data archives which never go through any kind of processing and are low resolution and black \& white. These images could be processed automatically by an algorithm that will colorize and super-resolve the images which can make it easier for astronomers to visually inspect the images
+\end{itemize}
+
+\chapter{Problem Definition and scope}
+\section{Problem Statement}
+\hspace*{0.25 in}The problem can be subdivided based on the model approach. We aim to create an efficient model to colorize grayscale images that will transform the input tensor into an RGB colored output tensor. In the next part, we also aim to super-scale the tensor obtained. Thus, the next part can be summarized as making a model that will obtain a colorized image and upscale it $n$ times the original size.
+
+
+\subsection{Goals and objectives}
+\hspace*{0.25 in}It is observed from the statement that the problem consists of multiple sub-problems. After careful reviewing, the problem can be divided into two sub-problems:
+\begin{itemize}
+	\item Create an efficient model to colorize grayscale images
+	\item Take a colorized image and upscale it $n$ times the original size
+\end{itemize}
+\hspace*{0.25 in}According to the decomposed problem, we formulate the following goals and objectives.
+\begin{itemize}
+\item Auto-Colorization:
+	\begin{itemize}
+		\item The first model will be given input a grayscale, low resolution image of dimensions ($64\times 64\times 1$)
+  		\item The model will perform a series of mathematical operations that will increase the channel width of the image from 1 (single channel grayscale image) to 3 (RGB)
+  		\item The output of the model will be a colorized version of the input image with dimensions ($64\times 64\times 3$)
+	\end{itemize}
+\item Upscaling/super-resolution:
+  	\begin{itemize}
+  		\item The input to the model will be a colorized image of shape ($64\times 64\times 3$)
+  		\item The model will increase the dimensions of the image from ($64\times 64$) to ($(64\cdot n)\times (64\cdot n)$) by performing a series of upscaling operations and predicting information that may be lost while downscaling
+  		\item The output of the model will be an upscaled RGB image with dimensions ($(64\cdot n)\times (64\cdot n)\times 3$)
+  	\end{itemize}
+  	\item The models may be combined to form a single model that will take a low resolution, grayscale image as its input and produce a high resolution, colorized image as its output
+\end{itemize}
+
+ \subsection{Statement of scope}
+ \hspace*{0.25 in}According to the mentioned goals and objectives, the scope of the proposed solution is summarized as follows:
+	\begin{itemize}
+	\item The model will consist of neural networks implemented using deep learning frameworks that will accept images of input format \textit{JPEG}
+	\item The input will be grayscale images of size $64\times 64$
+	\item Input bounds:
+	\begin{itemize}
+		\item Lower bound: $64\times 64\times 1$
+		\item Upper bound: no limit
+	\end{itemize}
+	\item The output will be produced in two phases:
+	\begin{itemize}
+		\item A colorized output of model 1 with shape $64\times 64\times 3$
+		\item A upscaled output of model 2 from the colorized output of model 1 with shape $(64\cdot n)\times (64\cdot n)\times 3$
+	\end{itemize}
+	\item The model will:
+	\begin{itemize}
+		\item take input black \& white images
+		\item produce colorized images of the same size
+		\item produce upscaled images of size $n$ times the input size (currently 64)
+	\end{itemize}
+	\item The model will \textbf{not}:
+	\begin{itemize}
+		\item take a colorized image as an input
+		\item take an image of size less than $(64 \times 64)$ in size
+		\item produce accurate upscaling or coloring albeit merely make a guess at what the lost values might be
+	\end{itemize}
+	\end{itemize}
+
+
+
+\section{Major Constraints}
+\hspace*{0.25 in}The problem statement is well defined to build a workable solution. However, the model proposed has several constraints. The major constraints are discussed in the following section:
+\begin{itemize}
+\item The astronomical image data required for training purposes is mostly raw. There exists no structured dataset that is already cleaned. The unavailability of a dataset is a major constraint for the project
+\item Scraped data from the archives is noisy and requires heavy processing and cleaning in order to be usable by the model
+\item The images available for download are of low resolution, which sets an upper bound on the maximal upscale factor
+\item The image data is large and needs high computation power to process
+\item The data needs to be cleaned manually as there exist no methods to automatically do this particular task
+\item The model involves neural networks which heavily rely on computation power for its training. The hardware required for training is not readily available because of absence of a workstation supporting heavy computations
+\item The training part requires large amount of memory
+\item Absence of an NVIDIA workstation GPU will slow down the training further
+\end{itemize}
+
+\section{Methodologies of Problem solving and efficiency issues}
+\hspace*{0.25 in}The proposed methodology can be segregated into several sub-categories. The details of each sub-category are discussed in the following section:
+\begin{itemize}
+	\item Data gathering and processing
+	\begin{itemize}
+	\item Data Scraping
+		\begin{itemize}
+		\item Owing to unavailability of a dataset, raw data can be acquired by the means of web scraping
+		\item Images from the snapshots of entire night sky can be obtained in such a way from the Hubble Legacy Archive
+		\end{itemize}
+	\item Data Cleaning
+		\begin{itemize}
+		\item The scraped data consists of snapshots of the entire night sky with 1 degree deviation of the telescope
+		\item This results in large amount of noisy, overexposed, irregular data images
+		\item This data needs to be cleaned manually before it can be used for any kind of study
+		\end{itemize}
+	\end{itemize}
+	\item Image colorization
+	\begin{itemize}
+		\item The problem of image colorization has been solved using multiple methodologies
+		\item \cite{dahl2016automatic} used convolutional neural networks with residual encoders using the VGG16 architecture
+		\item Though the system performs extremely well in realistically colorizing various images, it consisted of $L2$ loss which was a function of the Euclidean distance between the pixel's blurred color channel value in the target and predicted image
+		\begin{equation}
+			L2 loss = \sum_{i=1}^n(y_{true} - y_{predicted})^2
+		\end{equation}
+		\item This is a regression based approach and the pixel-wise L2 loss will impose an averaging effect over all possible candidates and will result in dimmer and patchy colorization
+		\item Generative Adversarial Networks introduced by \cite{goodfellow2014generative} use a minimax loss which is different than the $L2$ loss as it will choose a color to fill an area rather than averaging. This is similar to a classification based approach
+	\end{itemize}
+	\item Image Upscaling
+	\begin{itemize}
+		\item One of the most popular approach to image upscaling was sparse-coding. This approach assumes that images can be sparsely represented by a dictionary of atoms in some transformed domain \citep{yang2008sparse}. The dictionary is learned during the training process.
+		\item The main drawback for this was that the optimization algorithm was computationally expensive
+		\item Dong et. al explored super-resolution using convolutional neural network and calling it SRCNN \citep{dong2014super}. They explained how CNN had many similarities to the sparse-coding-based super-resolution.
+		\item Kim et. al improved upon SRCNN's results using their very own model inspired from the VGG-net architecture\citep{kim2016super}.
+		\item After the introduction of GANs, Ledig et. al applied them to super-resolution (SRGAN) using a network inspired by the ResNets \citep{ledig2017photorealistic,he2015deep}.
+		\item SR-GAN works well with for single image super-resolution as it also uses an intelligent content loss function that uses pre-trained VGG-net layers. However, Ledig et. al noted that further information could be used if this network were to be adapted to a video, such as temporal information.
+	\end{itemize}
+	\item A generative network, $G$, is meant to learn the underlying distribution of a data set, $Y$. For e.g. we can train a GAN over face images to generate images similar to those faces. With just a generative network however, we must visually assess the quality of network outputs and judge how we can adapt the network to produce more convincing results.
+	\item With a discriminative network $D$, we can incorporate this tweaking directly into training. The discriminative network takes in both fabricated inputs generated by $G$ and the real inputs from $Y$. It's sole purpose is to classify if the input has come from $G$ or $Y$.
+	\item The key idea is back propagation of the gradients from the results of $D$'s classification to $G$ so that $G$ gets better at producing images and in turn fooling $D$.
+	\item For the project, we split the data into two categories: $X$ that serves as the data for the Y, which are its corresponding labels.
+	\item $G_1$ takes in a low resolution $x\in X$ which is black \& white and produces $\hat{y}$, a colorized version of $x$. The descriminator D, in turn takes in a colorized image and outputs the probability that the image comes from $Y$, instead of as outputs from $G$, $G(x)$. As such, if the discriminator is fooled by out generator, it should output a probability greater than 0.5 for the set of inputs coming from $G(x)$ and a probability less than 0.5 for images coming from Y.
+	\item The same is the process for generator $G_2$ with the only difference being that the $X$ is the set of colorized images but having low resolution and $Y$ is the set of high resolution images that serve as the labels for underlying mapping of $X$. $G_2$ takes in the low resolution image $x \in X$ and produces $\hat{y}$ and the discriminator outputs a probability determining whether the image is super-resolved by $G_2$ or the ground truth images from $Y$.
+\end{itemize}
+
+\section{Scenario in which multi-core, Embedded and Distributed Computing used}
+\hspace*{0.25 in}A deep learning algorithm is a software construct that has certain steps that may be hardware intensive. Generative Adversarial Networks require huge amount of computing prowess to complete multiple passes of forward and backward propagation in order to train themselves. A network may consist of millions and billions of parameters which are associated with hundreds of thousands of graph nodes. To actually be able to train a network with more than a billion parameters, we need appropriately large amount of memory. Furthermore, the operations of forward and backward propagation are mathematical operations that adjust the parameters based on the gradient of the cost function to minimize the cost. This calculation, although heavy, is independent of each node and can be performed in a parallel framework. NVIDIA CuDA enabled GPUs have a CuDNN (CuDA Deep Neural Network) library that hooks the training algorithm onto the GPU memory for processing, deploying thousands and hundreds of thousand parallel threads to perform independent calculations of optimizing gradients. Such an infrastructure is expensive and requires a dedicated set up for running deep learning algorithms. For normal use cases, one can run into the problems of memory overflows while allocating tensors in the process of creation of graphs. In such cases, it is costly to buy more GPUs. One can make use of cloud services provided by Google Colab, AWS, Azure and more. These services can host runtimes that will allow users to run their deep learning algorithms over their hardware which will ensure fast and efficient training.
+
+
+\section{Outcome}
+\hspace*{0.25 in}The expected outcomes of the proposed methodology are as follows:
+\begin{itemize}
+\item An efficient mathematical model to be created which will describe mappings required to colorize and super-resolve low resolution grayscale images
+\item A brief albeit descriptive study of different approaches towards image colorization and super-resolution
+\item Study presenting the benefits of certain GAN architectures and their edge over other kinds of neural networks in image colorization and super-resolution
+\end{itemize}
+
+\section{Applications}
+\hspace*{0.25 in}Currently, given the number of the raw and unprocessed images in Hubble Legacy Archives, much of the images are not workable for scientific evaluation. The main application of building a GAN and automating the upscaling and colorization of these images is to help in visual classification for astronomers. Through a high resolution and colourized image, astronomical objects which would've been imperceptible to the human eye could be now visible for visual inspection. While upscaling is expected to address the poor quality of the original images, colourization will help distinguish astronomical objects and activites from the noise generated by various factors.
+
+\section{Hardware Resources Required}
+\hspace*{0.25 in}The project is based Machine Learning, and the use of Tensorflow-GPU brought forward the need for a very high end hardware. Google Colab (or Colaboratory) is a free Jupyter notebook environment offered by Google which runs notebooks from Python kernels and uses Google Drive for storage.
+\input{tables/hardware_requirements.tex}
+
+%\section{Hardware Resources Required}
+%The project is based Machine Learning, and the use of Tensorflow-GPU brought forward the need for a very high end hardware. Google Colab (or Colaboratory) is a free Jupyter notebook environment offered by Google which runs notebooks from Python kernels and uses Google Drive for storage.
+%\begin{table}[!htbp]
+%\begin{center}
+%\def\arraystretch{1.5}
+%  \begin{tabular}{| c | c | c | c |}
+%\hline
+%Sr. No. &	Parameter &	Minimum Requirement & Justification \\
+%\hline
+%1 &	CPU Speed &	 Intel(R) Xeon(R) CPU @ 2.20GHz  & Training the model on CPU\\
+%\hline
+%2 &	GPU  &	Nvidia K80-12GB-0.82GHz &  To train model on GPU\\
+%3 &	RAM  &	12GB &  To load the Dataset\\
+% \hline
+
+%  \hline
+%\end{tabular}
+%\caption { Hardware Requirements }
+% \label{tab:hreq}
+%\end{center}
+%\end{table}
+
+\pagebreak
+
+\section{Software Resources Required}
+Platform :
+\begin{enumerate}
+\item Operating System: Windows/Linus
+\item IDE: Jupyter Notebook
+\item Programming Language: python3, javascript
+\item Frameworks: Node.js, Tensorflow, plotting libraries, openCV
+\end{enumerate}
+
+\chapter{Literature Survey}
+\section{Image Colorization}
+\subsection{Hint Based Colorization}
+\hspace*{0.25 in}\citet{levin2004colorization} proposed using colorization hints from the user in a quadratic cost function which imposed that neighboring pixels in space-time with similar intensities should have similar colours. This was a simple but effective method but only had hints which were provided in form of imprecise colored scribbles on the grayscale input image. But with no additional information about the image, the method was able to efficiently generate high quality colorizations. \cite{huang2005edge} addressed the color bleeding issue faced in this approach and solved it using adaptive edge detection. \cite{yatziv2006chrominance} used luminescence based weighting for hints to boost efficiency. \cite{qu2006manga} extended the original cost function to apply color continuity over similar textures along with intensities.\\
+		\hspace*{0.25 in}\cite{welsh2002color} had proposed another approach that reduced the burden on the user by only requiring a full color example of an image with similar composition. It matched the texture and luminescence between the example and the target grayscale image and received realistic results as long as the example image was sufficiently similar.\\
+		\hspace*{0.25 in}Regardless of the scribble based or example based approach, the algorithms still needed sufficient human assistance in form of hand drawn or colorized images.
+\subsection{Deep Colorization}
+\hspace*{0.25 in}Owing to recent advances, the Convolutional Neural Networks are a de facto standard for solving image classification problems and their popularity continues to rise with continual improvements. CNNs are peculiar in their ability to learn and differentiate colors, patterns and shapes within an image and their ability to associate them with different classes.\\
+		\hspace*{0.25 in}\cite{cheng2016deep} proposed a per pixel training for neural networks using DAISY \citep{tola2008descriptor}, and semantic \citep{long2015semantic} features to predict the chrominance value for each pixel, that used bilateral filtering to smooth out accidental image artifacts. With a large enough dataset, this method proved to be superior to the example based techniques even with a simple Euclidean loss function against the ground truth values.\\
+		\hspace*{0.25 in}Finally, \cite{dahl2016automatic} successfully implemented a system to automatically colorize black \& white images using several ImageNet-trained layers from VGG-16 \citep{simonyan2015deep} and integrating them with auto-encoders that contained residual connections. These residual connections merged the outputs produced by the encoding VGG16 layers and the decoding portion of the network in the later stages. \cite{he2015deep} showed that deeper neural networks can be trained by reformulating layers to learn residual function with reference to layer inputs. Using this \textit{Residual Connections}, \cite{he2015deep} created the \textit{ResNets} that went as deep as 152 layers and won the 2015 ImageNet Challenge.
+\subsection{Generative Adversarial Networks}
+\hspace*{0.25 in}\cite{goodfellow2014generative} introduced the adversarial framework that provides an approach to training a neural network which uses the generative distribution of $p_g(x)$ over the input data $x$.\\
+		\hspace*{0.25 in}Since it's inception in 2015, many extended works of GAN have been proposed over years including DCGAN \citep{radford2016unsupervised}, Conditional-GAN \citep{mirza2014conditional}, iGAN \citep{zhu2018generative}, Pix2Pix \citep{isola2018imagetoimage}.\\
+		\hspace*{0.25 in}\cite{radford2016unsupervised} applied the adversarial framework for training convolutional neural networks as generative models for images, demonstrating the viability of \textit{deep convolutional generative adversarial networks}.\\
+		\hspace*{0.25 in}DCGAN is the standard architecture to generate images from random noise. Instead of generating images from random noise, Conditional-GAN \citep{mirza2014conditional} uses a condition to generate output image. For e.g. a grayscale image is the condition for colorization of image. Pix2Pix \citep{isola2018imagetoimage} is a Conditional-GAN with images as the conditions. The network can learn a mapping from input image to output image and also learn a separate loss function to train this mapping. Pix2Pix is considered to be the state of the art architecture for image-image translation problems like colorization.
+\section{Image Upscaling}
+\subsection{Frequency-domain-based SR image approach}
+\hspace*{0.25 in} \cite{tsai1984multiframe} proposed the frequency domain SR method, where SR computation was considered for the noise free low resolution images. They transformed the low resolution images into Discrete Fourier transform (DFT) and further combined it as per the relationship between the aliased DFT coefficient of the observed low resolution image and that of unknown high resolution image. Then the output is transformed back into the spatial domain where a higher resolution is now achieved.\\
+        \hspace*{0.25 in} While Frequency-domain-based SR extrapolates high frequeny information from the low resolution images and is thus useful, however they fall short in real world applications.
+
+\subsection{The interpolation based SR image approach}
+\hspace*{0.25 in} The interpolation-based SR approach constructs a high resolution image by casting all the low resolution images to the reference image and then combining all the information available from every image available.
+			The method consists of the following three stages
+			(i) the registration stage for aligning the low-resolution input images,
+	    (ii) the interpolation stage for producing a higher-resolution image, and
+			(iii) the deblurring stage which enhances the
+       reconstructed high-resolution image produced in the step ii).
+
+
+			However, as each low resolution image adds a few new details before finally deblurring them, this method cannot be used if only a single reference image is available.
+
+\subsection{Regularization-based SR image approach}
+\hspace*{0.25 in} Most known Bayesian-based SR approaches are maximum likelihood (ML) estimation approach  and maximum a posterior (MAP) estimation approach.\\
+    \hspace*{0.25 in}  While \cite{Brian1996ML} proposed the first ML estimation based SR approach with the aim to find the ML estimation of high resolution image, some proposed a MAP estimation approach. MAP SR tries to takes into consideration the prior image model to reflect the expectation of the unknown high resolution image.
+
+\subsection{Super Resolution - Generative Adversarial Networks (SR-GAN)}
+\hspace*{0.25 in} The Genrative Adversarial Network \citep{goodfellow2014generative}, has two neural networks, the Generator and the Discriminator. These networks compete with each other in a zero-sum game.
+      \cite{ledig2017photorealistic} introduced SRGAN in 2017, which used a SRResNet to upscale images with an upscaling factor of 4x. SRGAN is currently the state of the art on public benchmark datasets.
+
+
+\chapter{Project Plan}
+
+\section{Project Estimates}
+                 Use Waterfall model and associated streams derived from assignments 1,2, 3, 4 and 5( Annex A and B) for estimation.
+\subsection{Reconciled Estimates}
+\subsubsection{Cost Estimate}
+\hspace*{0.25 in}
+The model followed is the Constructive Cost Model (COCOMO) for estimating the
+efforts required in the completion of the porject. Like all estimation models, the
+COCOMO model requires sizing information. This information can be specified in
+the form of:
+\begin{itemize}
+  \item Object Point
+  \item Function Point(FP)
+  \item Lines of Source Code(KLOC)
+\end{itemize}
+For our project, sizing information in the form of Lines of Source Code is used. The
+total lines of code,\\
+KLOC = 750\\
+Equations: The initial effort(Ei) in man-months is calculated using equations:\\
+
+\[E=ax(KLOC)^b\]
+\hspace*{0.25 in}where, a = 3.0, b = 1.12, for a semi-detached project
+E = Efforts in person-hours\\
+E = 4.5 PM\\
+\[D=ax(E)^b\]
+Where, a = 2.5,\\
+b = 0.35, for a semi-detached project\\
+D = Duration of Project in months\\
+D = 4 Months\\
+
+\subsubsection{Time Estimates}
+\[C=D*Cp*hrs\]
+Where, C = Cost of project\\
+D = Duration in Hours\\
+Cp = Cost incurred per person-hour\\
+hrs = hours\\
+Total of 4.5 person-months are required to complete the project successfully.\\
+Duration of Project D = 6 Months\\
+The approximate duration of the project is 4 months\\
+
+\subsection{Project Resources}
+          Project resources  [People, Hardware, Software, Tools and other resources] based on Memory Sharing, IPC, and Concurrency derived using appendices to be referred.
+
+\section{Risk Management }
+This section discusses Project risks and the approach to managing them.
+\subsection{Risk Identification}
+\begin{enumerate}
+  \item Dataset needs to be processed in order to get clean data
+  \item Vanishing Gradients
+  \item Mode Collapse
+  \item Failure to Converge
+\end{enumerate}
+
+\subsection{Risk Analysis}
+The risks for the Project can be analyzed within the constraints of time and quality
+
+\begin{table}[!htbp]
+\begin{center}
+%\def\arraystretch{1.5}
+\def\arraystretch{1.5}
+\begin{tabularx}{\textwidth}{| c | X | c | c | c | c |}
+\hline
+\multirow{2}{*}{ID} & \multirow{2}{*}{Risk Description}	& \multirow{2}{*}{Probability} & \multicolumn{3}{|c|}{Impact} \\ \cline{4-6}
+	& & &	Schedule	& Quality	& Overall \\ \hline
+1	& Garbage images in dataset	& Medium	& Low	& High	& High \\ \hline
+2	& Vanishing Gradients 	& Low	& Low	& High	& High \\ \hline
+\end{tabularx}
+\end{center}
+\caption{Risk Table}
+\label{tab:risk}
+\end{table}
+
+
+\begin{table}[!htbp]
+\begin{center}
+%\def\arraystretch{1.5}
+\def\arraystretch{1.5}
+\begin{tabular}{| c | c | c |}
+\hline
+Probability & Value &	Description \\ \hline
+High &	Probability of occurrence is &  $ > 75 \% $ \\ \hline
+Medium &	Probability of occurrence is  & $26-75 \% $ \\ \hline
+Low	& Probability of occurrence is & $ < 25 \% $ \\ \hline
+\end{tabular}
+\end{center}
+\caption{Risk Probability definitions \citep{bookPressman}}
+\label{tab:riskdef}
+\end{table}
+
+\begin{table}[!htbp]
+\begin{center}
+%\def\arraystretch{1.5}
+\def\arraystretch{1.5}
+\begin{tabularx}{\textwidth}{| c | c | X |}
+\hline
+Impact & Value	& Description \\ \hline
+Very high &	$> 10 \%$ & Schedule impact or Unacceptable quality \\ \hline
+High &	$5-10 \%$ & Schedule impact or Some parts of the project have low quality \\ \hline
+Medium	& $ < 5 \% $ & Schedule impact or Barely noticeable degradation in quality Low	Impact on schedule or Quality can be incorporated \\ \hline
+\end{tabularx}
+\end{center}
+\caption{Risk Impact definitions \citep{bookPressman}}
+\label{tab:riskImpactDef}
+\end{table}
+
+\subsection{Overview of Risk Mitigation, Monitoring, Management}
+Following are the details for each risk
+\begin{table}[!htbp]
+\begin{center}
+%\def\arraystretch{1.5}
+\def\arraystretch{1.5}
+\begin{tabularx}{\textwidth}{| l | X |}
+\hline
+Risk ID	& 1 \\ \hline
+Risk Description	& There are Garbage images in dataset which can lead to improper training of discriminator. It can lead to undesired outputs \\ \hline
+Category	& Pre processing. \\ \hline
+Source	& Software requirement Specification document. \\ \hline
+Probability	& Low \\ \hline
+Impact	& High \\ \hline
+Response	& Mitigate \\ \hline
+Strategy	& To manually remove garbage images from the dataset  \\ \hline
+Risk Status	& Occurred \\ \hline
+\end{tabularx}
+\end{center}
+%\caption{Risk Impact definitions \cite{bookPressman}}
+\label{tab:risk1}
+\end{table}
+
+\begin{table}[!htbp]
+\begin{center}
+%\def\arraystretch{1.5}
+\def\arraystretch{1.5}
+\begin{tabularx}{\textwidth}{| l | X |}
+\hline
+Risk ID	& 2 \\ \hline
+Risk Description	& If discriminator is too good , then generator training can fail due to Vanishing gradients  \\ \hline
+Category	& Requirements \\ \hline
+Source	& Software Design Specification documentation review. \\ \hline
+Probability	& Low \\ \hline
+Impact	& High \\ \hline
+Response	& Mitigate \\ \hline
+Strategy	& Wasserstein loos and Modifed minimax loss are desigend to prevent vanishing gradients.  \\ \hline
+Risk Status	& Identified \\ \hline
+\end{tabularx}
+\end{center}
+\label{tab:risk2}
+\end{table}
+
+\newpage
+\section{Project Schedule}
+\subsection{Project task set}
+Major Tasks in the Project stages are:
+\begin{itemize}
+  \item Task 1: Colledting Dataset
+  \item Task 2: Cleaning Dataset
+  \item Task 3: Creating GAN model of image colorization and super-resolution
+  \item Task 4: Training  the GAN model
+  \item Task 5: Fine tuning the GAN model
+\end{itemize}
+
+
+\section{Team Organization}
+\begin{itemize}
+\item Team of 4 members
+\item 1 Project guide
+\item 1 Project coordinator
+\end{itemize}
+\subsection{Team structure}
+Team of 4 members
+
+\subsection{Management reporting and communication}
+\begin{itemize}
+\item Weekly meeting with guide about the work
+\item Weekly meeting among team for updates and work distribution
+\item Daily updates on work progress
+\end{itemize}
+\chapter{Software requirement specification }
+
+\section{Introduction}
+\subsection{Purpose and Scope of Document}
+The purpose of this project document is to create a comprehensive documentation about the methodology used in implementing the upscaling and colorization of the HSA images. The document explores the goals, objectives, resources, project plan, SRS and finally the summary and conclusion. It is hoped that this document would be beneficial in answering every query that any individual may have about this research project.
+
+
+
+ \subsection{User profiles}
+Two actors have been defined in the Use case Diagram:\\
+User: User preprocesses the image with the help of the GAN and facilitates the whole process.\\
+GAN: It takes the input images, colorizes the image and feeds it to another GAN. The second GAN then upscales the image and a final output image is generated.
+
+\subsection{Use-cases}
+
+
+\input{tables/use_case_table.tex}
+\pagebreak
+\subsection{Use Case View}
+Use Case Diagram. Example is given below
+\begin{center}
+	\begin{figure}[!htbp]
+		\centering
+		\fbox{\includegraphics[width=\textwidth]{figures/use.jpg}}
+	  \caption{Use case diagram}
+	  \label{fig:usecase_dig}
+	\end{figure}
+\end{center}
+
+
+\subsection{Data Flow Diagram}
+\subsubsection{Level 0 Data Flow Diagram}
+\subsubsection{Level 1 Data Flow Diagram}
+
+
+
+\subsection{Activity Diagram:}
+\input{figures/activity_diagram.tikz}
+
+\subsection{Non Functional Requirements:}
+\begin{itemize}
+  \item Accessibility: The dataset generated would be accessible for everyone to access in open source.
+	\item	Availability: The code would be available on github
+  \item Performance: The performance of all the GANs is recorded.
+\end{itemize}
+
+\subsection{State Diagram:}
+  State Transition Diagram\\
+
+\input{figures/state_transition_diagram.tikz}
+
+
+
+
+\chapter{Detailed Design Document }
+ \section{Introduction}
+\hspace*{0.25 in}The project is largely inspired by Christian Ledig's SRGAN paper \citep{ledig2017photorealistic} and \citet{dong2014super}'s implementation of SRGANs using Tensorflow. \citet{dahl2016automatic}'s introduction of residual encoding using VGG architecture and adaptation of GANs as conditional GANs by \citet{mirza2014conditional} proved to be quite effective for implementing colorization of images. We provide detailed architectural design for each respective GANs and other networks that it will be compared with.
+\section{Architectural Design}
+\hspace*{0.25 in}Generative Adversarial Networks (GANs) have two competing neural network models. The generator takes in the input and generates fake images. The discriminator gets the image from both the generator and the label along with the grayscale image and it determines which pair contains the real colored image. During training, the generator and the discriminator are playing a continuous game. At each iteration, generator produces a more realistic photo, while the discriminator gets better at distinguishing the fake photos. Trained in a minimax fashion, the goal is to train a generator that produces data that is indistinguishable from the real data.
+	\subsection{Image Colorization}
+	\hspace{0.4 in}Both the generator and discriminator are conditioned on the input $x$ with conditional GAN. Let the generator be parameterized by $\theta_g$ and the discriminator be parameterized by $\theta_d$. The minimax objective function can be defined as:
+	\[
+		\min_{\theta_g}\max_{\theta_d}\Big[\mathbb{E}_{x,y\sim p_{data}} \log D_{\theta_d}(x,y) + E_{x\sim p_{data}} \log(1 - D_{\theta_d}(x, G_{\theta_g}(x))\Big]
+	\]
+
+	Where, $G_{\theta_{g}}$ is the output of the generator and $D_{\theta_d}$ is the output of the discriminator.
+	We're currently not introducing any noise in our generator to keep things simple for the time being. Also, we consider $L1$ difference between input $x$ and output $y$ in generator. On each iteration, the discriminator would maximize $\theta_d$ according to the above expression and generator would minimize $\theta_g$ in the following way:
+	\[
+		\min_{\theta_g}\Big[-\log(D_{\theta_d}(x,G_{\theta_g}(x)))+\lambda \Vert G_{\theta_g}(x) - y \Vert_1 \Big]
+	\]
+
+	With GAN, if the discriminator considers the pair of images generated by the generator to be a fake photo (not well colored), the loss will be back-propagated through discriminator and through generator. Therefore, generator can learn how to color the image correctly. At the final iteration, the parameters $\theta_g$ will be used in our generator to color grayscale images.
+
+  \begin{center}
+	\begin{figure}[!htbp]
+		\centering
+		\fbox{\includegraphics[width=\textwidth]{figures/encoder_decoder_generator_color.jpg}}
+	  \caption{Encoder-Decoder ConvNets in Generator}
+	  \label{fig:gen_color-dig}
+	\end{figure}
+\end{center}
+
+  \begin{center}
+	\begin{figure}[!htbp]
+		\centering
+		\fbox{\includegraphics[width=\textwidth]{figures/discriminator_color.jpg}}
+	  \caption{Discriminator}
+	  \label{fig:disc_color-dig}
+	\end{figure}
+  \end{center}
+
+\pagebreak
+
+  \subsection{Image Super-resolution}
+\hspace{0.4 in}We use the SRResNet as the generator in the SRGAN model as used by \citet{ledig2017photorealistic}. It contains both the residual blocks and the skip connections, as seen in Figure \ref{fig:srgan-dig}. Within each residual block, there are two convolution layers followed by a Batch Normalization layer and a parametric ReLU layer. Finally, the image is then upscaled 4 times using two sub-pixel convolution layers \citep{shi2016subpixel}.
+	\begin{center}
+	\begin{figure}[!htbp]
+		\centering
+		\fbox{\includegraphics[width=\textwidth]{figures/ledig_srgan_architecture.jpg}}
+	  \caption{SRGAN model: SRResNet generator and discriminator}
+	  \label{fig:srgan-dig}
+	\end{figure}
+  \end{center}
+\hspace*{0.25 in}The goal of the generator is to produce high resolution images that will fool the discriminator of the GAN into thinking that it is receiving real instead of fake images. On the other hand the discriminator's goal is to classify the images it has received as either real images or generated images from the generator. The GANs objective function is a minimax game as mentioned in the previous section. We define the minimax function for this task with trivial changes in notation and express it as:
+
+\[
+		\min_{\theta_g}\max_{\theta_d}\mathbb{E}_{I^{HR}\sim p_{train}(I^{HR})}\big[ \log D_{\theta_d}(I^{HR})\big] + \mathbb{E}_{I^{LR}\sim p_{g}(I^{LR})}\big[\log(1 - D_{\theta_d}(G_{\theta_g}(I^{LR})))\big]
+	\]
+	where, $I^{HR}p_{train}(I^{HR})$ are the high resolution images. $I^{LR}p_g(I^{LR})$ are the input low resolution images, $G_{\theta_g}$ is the output of the generator and $D_{\theta_d}$ is the output of the discriminator. We use the perpetual loss function for VGG based content losses introduced by \citet{ledig2017photorealistic} which is a weighted sum of a content loss $l^{SR}_X$ and an adversarial loss component $(10^{-3}l^{SR}_{Gen})$.
+
+	For the content loss, we aim to use the VGG loss introduced by \citet{ledig2017photorealistic} which is the euclidean distance between the feature representations of a reconstructed image $G_{\theta_g}(I^{LR})$ and the reference image $I^{HR}$:
+	$$
+		l^{SR}_{VGG_{i,j}} = \frac{1}{W_{i,j}H_{i,j}} \sum_{x=1}^{W_{i,j}}\sum_{y=1}^{H_{i,j}}\big(\phi_{i,j}(I^{HR})_{x,y}-\phi_{i,j}(G_{\theta_g}(I^{LR}))_{x,y}\big)^2
+	$$
+	where $W_{i,j}$ and $H_{i,j}$ represent the dimensions of the respective feature maps within VGG19 network. The adversarial generative loss $l^{SR}_{Gen}$ is defined on the probabilities of the discriminator $D_{\theta_d}(G_{\theta_g}(I^{LR}))$ over all the training samples as:
+	$$
+		l^{SR}_{Gen} = \sum_{n=1}^{N} - \log D_{\theta_d}(G_{\theta_g}(I^{LR}))
+	$$
+
+	$D_{\theta_d}(G_{\theta_g}(I^{LR}))$ is the probability that the reconstructed image $G_{\theta_g}(I^{LR}))$ is a natural HR image. For beter gradient behavior, we minimize $-\log D_{\theta_d}(G_{\theta_g}(I^{LR}))$ instead of $\log \big[1-D_{\theta_d}(G_{\theta_g}(I^{LR}))\big]$.
+
+ \chapter{Dataset and Experimental setup}
+\hspace*{0.25 in}Initially, we started by scraping the data off Hubble Legacy Archive. Using puppeteer(headless chrome), we scraped off hundreds of thousands of colorized images it has available. The Hubble Legacy archive is slow and produces grainy images with lots of noise and unprocessed images. A filter for M101 (Messier 101) galaxy rendered more than 80 thousand images with a 1 degree difference between consecutive right ascension. The data is large and has no particularly efficient way to clean without human investment. Cleaning tens of thousands of images by handpicking noiseless and well colored images is time consuming. For training the SRGAN, we need high resolution, well colored images. \\ \\
+\hspace*{0.25 in}Consequently, we scraped the Hubble Heritage project instead. The Hubble Heritage project releases the highest-quality astronomical images. They are all stitched together, colorized and processed to eliminate noise. Hubble Heritage then selects the best, most striking of these for public release. However, there are only $\sim150$ of these images that are actually useful. We scraped images from the main Hubble website as well so as to increase the amount of data we had. This provided an extra approximately $\sim1000$ images.
+Each image is a JPG image with dimensions of $256\times 256$ pixels and contains 3 channels of RGB.
+
+ \chapter{Summary and Conclusion}
+ \section{Summary}
+\hspace*{0.25 in}Low Resolution and Black and White Images in the Hubble Legacy Archive lie dormant and are needed to be upscaled and colourized for better visual discernment of the astromers. Images are initially scraped from the Hubble Legacy Arhive and the Hubble Legacy Project and a dataset is formed which is cleaned manually and is then fed to two Generative Adversarial Networks consecutively. The images of size ($64\times 64\times 1$) are initially colorized using a first GAN and an output image of size ($64\times 64\times 3$) with three RGB channels is obtained. This is then upscaled to a size of ($(64\cdot n)\times (64\cdot n)\times 3$). The output images are visually superior as well as colorized. These images are expected to be of greater use for astronomers than the older ones.
+
+\section{Conclusion}
+\hspace*{0.25 in}The images are upscaled and colourized using a completely automated algorithm which uses Deep Learning. Generative Adversarial Networks are  successfully used for the implementation and the images obtained are in public forum to be used for research, it is anticipated that this will aid the astronomers vastly in their efforts.
+
+\bibliographystyle{dcu}
+\bibliography{biblo}
+
+
+\begin{appendices}
+
+
+% \chapter{ALGORITHMIC DESIGN}
+\chapter{Mathematical Model}
+
+\section{Artificial Neural Networks}
+\hspace{0.25 in}Figure \ref{fig: ANN} shows a schematic of the simplest multi-layer perceptron network, i.e. a feed-forward neural network. The network is composed of an input layer, hidden layers and output layer. Define $a_i^\ell$ as the $i^{th}$ neuron of the $\ell^{th}$ layer and $a_j^{\ell+1}$ as the $j^{th}$ neuron of the $(\ell+1)^{th}$ layer and $w_{ij}^\ell, b_j^\ell$ is the weight and bias connecting the two neurons, then the output of the $\ell^{th}$ layer is given by:
+\begin{equation}
+    a^{\ell+1}_j = g(\sum_{i \in N^\ell}(w_{ij}^{\ell}a_i^{\ell} + b_j^{\ell}))
+    \label{ANN_activation}
+\end{equation}
+
+\begin{figure}
+    \centering
+    \input{figures/ANN}
+    \caption{A feed forward neural network}
+    \label{fig: ANN}
+\end{figure}
+
+The loss is calculated using a loss function such as cross entropy function especially for binary classification.
+\begin{equation}
+    loss(y',y) = -y\log{y'} - (1-y)\log{(1-y')}.
+    \label{ANN_loss}
+\end{equation}
+where $y' \in \{0,1\}, y \in (0,1)$. This objective is to minimize this cross entropy over a batch of all training data. This is done using gradient descent where the parameters viz. weights and biases are updated to reduce the overall cross entropy loss.
+
+\section{Convolutional Neural Networks}
+\hspace*{0.25 in}A convolution is a linear operation that can be viewed as a multiplication or dot product of matrices. The input is a tensor of shape $height$ x $width$ x $channels$ and the convolution operation abstracts the image to a feature map (also called a kernel) of shape $kernel size$ x $kernel size$ x $kernel channels$. The layers can be computed by:
+\begin{equation}
+    a^{\ell+1}_j = g(\sum_{i \in F_j}(a_i^\ell \times k_{ij}^{\ell+1} + b_j^{\ell+1}))
+    \label{Convolution}
+\end{equation}
+where $\ell$ is the layer, g is the activation function ReLU, $F_j$ is the receptive field, k is the convolutional kernel and b is the bias.
+
+\section{Residual Networks}
+\begin{figure}
+    \centering
+    \input{figures/residual_block}
+    \caption{Residual Block}
+    \label{fig: residual block}
+\end{figure}
+\hspace*{0.25 in}Figure \ref{fig: residual block} shows a building block of a residual network. The residual blocks can be expressed mathematically as follows. Let $h(a)$ be an underlying mapping that is to be fit by a set of layers, where $a$ is the input to these layers. If we hypothesize that multiple non-linear transformations by these layers can approximate the layer functions, then one can also hypothesize that a similar approximation can be made for the residual functions, i.e. $h(a) - a$, which have the same input and output dimensions. So instead of letting the underlying mapping be $h(a)$ we approximate a residual function $F(a) = h(a) - a$. Thus, the actual function becomes $h(a) = F(a) + a$. We can achieve this approximation in a feed forward neural network using a series of skip connections that perform identity mapping and jump over a few layers. Adding the outputs of these two connections gives the final output layer. Thus, the residual unit can be defined as,
+\begin{equation}
+    a_{\ell+1} = h(a_\ell) + F(a_\ell, W_\ell)
+    \label{Residual unit}
+\end{equation}
+where $a_{\ell+1}$ and $a_\ell$ represent the input and output for the $\ell^{th}$ layer and $F$ is the residual function. The $h$ denotes the operation in the identity mapping. The output of the layer is generally processed using an activation function such as ReLU. Let $f$ be the ReLU activation and replacing $F$ with the definition of feed forward activation, the residual block thus can be defined as,
+\begin{equation}
+    a_{\ell+1} = f(h(a_\ell) + W_2f(W_1a_\ell))
+    \label{Residual unit redefined}
+\end{equation}
+\hspace*{0.25 in}For the sake of simplicity, we consider no operation being performed in the identity mapping. Thus, equation \ref{Residual unit} and equation \ref{Residual unit redefined} become,
+\begin{equation}
+    a_{\ell+1} = f(a_\ell + F(a_\ell, W_\ell))
+    \label{Final Residual notation}
+\end{equation}
+
+\section{Generative Adversarial Networks}
+\hspace*{0.25 in}A generative network, $G$, is supposed to learn the underlying distribution of a latent space, Y. Instead of visually assessing the quality of network outputs and judge how we can adapt the network to produce convincing results, we incorporate automatic tweaking during training by introducing a discriminative network $D$. The network D takes in both the fabricated outputs generated by G and real inputs from the underlying distribution Y. The network produces a probability of the image belonging to the real or fabricated space.
+
+  Let $x \in X$ be a low resolution/grayscale image and $y \in Y$ be it's underlying distribution from the latent space Y. Generator $G$ takes in input $x$ and produces an output $\hat{y}$. We define the mapping $x \rightarrow \hat{y}$ in the following manner:
+  $$G(x) = \hat{y}$$
+
+ The discriminative network D is fed the fabricated mapping $x \rightarrow \hat{y}$ and the underlying distribution of $x$ i.e. $y \in Y$. The network D then produces a result that is a probability distribution of the input space indicating the class of the image that it thinks the input belongs to. We define this as:
+ $$D\big(G(x),y\big) = p$$
+ where $p \in (0,1)$ is the probability that the image is fabricated or real.
+With conditional GAN, both generator and discriminator are conditioning on the input $x$. Let the generator be parameterized by $\theta_g$ and the discriminator be parameterized by $\theta_d$. The minimax objective function can be defined as:
+	\[
+		\min_{\theta_g}\max_{\theta_d}\Big[\mathbb{E}_{x,y\sim p_{data}} \log D_{\theta_d}(x,y) + E_{x\sim p_{data}} \log(1 - D_{\theta_d}(x, G_{\theta_g}(x))\Big]
+	\]
+
+	Where, $G_{\theta_{g}}$ is the output of the generator and $D_{\theta_d}$ is the output of the discriminator.
+	We're currently not introducing any noise in our generator to keep things simple for the time being. Also, we consider $L1$ difference between input $x$ and output $y$ in generator. On each iteration, the discriminator would maximize $\theta_d$ according to the above expression and generator would minimize $\theta_g$ in the following way:
+	\[
+		\min_{\theta_g}\Big[-\log(D_{\theta_d}(x,G_{\theta_g}(x)))+\lambda \Vert G_{\theta_g}(x) - y \Vert_1 \Big]
+	\]
+
+
+
+
+
+
+
+\chapter{Plagiarism Report }
+
+
+\begin{figure}
+	\centering
+    \includegraphics[scale=0.7]{plagiarism/abstract.pdf}
+    \caption{Plagiarism report for Abstract}
+    \label{PlagiarismAbstract}
+\end{figure}
+
+\begin{figure}
+	\begin{subfigure}[H]{\textwidth}
+		\centering
+    	\includegraphics[scale=0.7, page=1]{plagiarism/literature_survey.pdf}
+    \end{subfigure}
+ \caption{Plagiarism report for Literature Review}
+    \label{PlagiarismLitSurvey1}
+\end{figure}
+\begin{figure}\ContinuedFloat
+    \begin{subfigure}[H]{\textwidth}
+    	\centering
+    	\includegraphics[scale=0.7, page=2]{plagiarism/literature_survey.pdf}
+    \end{subfigure}
+    \caption{Plagiarism report for Literature Review (contd.)}
+    \label{PlagiarismLitSurvey2}
+\end{figure}
+
+\begin{figure}
+	\begin{subfigure}[H]{\textwidth}
+		\centering
+    	\includegraphics[scale=0.7, page=1]{plagiarism/problem_definition&scope_1.pdf}
+    \end{subfigure}
+ \caption{Plagiarism report for Problem Definition and Scope (Part 1)}
+    \label{PlagiarismPDS1}
+\end{figure}
+\begin{figure}\ContinuedFloat
+    \begin{subfigure}[H]{\textwidth}
+    	\centering
+    	\includegraphics[scale=0.7, page=2]{plagiarism/problem_definition&scope_1.pdf}
+    \end{subfigure}
+    \caption{Plagiarism report for Problem Definition and Scope (Part 1) (contd.)}
+    \label{PlagiarismPDS1_2}
+\end{figure}
+
+\begin{figure}
+	\begin{subfigure}[H]{\textwidth}
+		\centering
+    	\includegraphics[scale=0.7, page=1]{plagiarism/problem_definition&scope_2.pdf}
+    \end{subfigure}
+ \caption{Plagiarism report for Problem Definition and Scope (Part 2)}
+    \label{PlagiarismPDS2}
+\end{figure}
+\begin{figure}\ContinuedFloat
+    \begin{subfigure}[H]{\textwidth}
+    	\centering
+    	\includegraphics[scale=0.7, page=2]{plagiarism/problem_definition&scope_2.pdf}
+    \end{subfigure}
+    \caption{Plagiarism report for Problem Definition and Scope (Part 2) (contd.)}
+    \label{PlagiarismPDS2_2}
+\end{figure}
+
+\begin{figure}
+	\begin{subfigure}[H]{\textwidth}
+		\centering
+    	\includegraphics[scale=0.7, page=1]{plagiarism/problem_definition&scope_3.pdf}
+    \end{subfigure}
+ \caption{Plagiarism report for Problem Definition and Scope (Part 3)}
+    \label{PlagiarismPDS3}
+\end{figure}
+
+\begin{figure}
+	\centering
+    \includegraphics[width=\textwidth, height=\textheight]{plagiarism/software_requirement_specification.pdf}
+    \caption{Plagiarism report for Software Requirement Specifications}
+    \label{PlagiarismSRS}
+\end{figure}
+
+\begin{figure}
+	\begin{subfigure}[H]{\textwidth}
+		\centering
+    	\includegraphics[scale=0.7, page=1]{plagiarism/detailed_design_documentation.pdf}
+    \end{subfigure}
+ \caption{Plagiarism report for Detailed Design Document}
+    \label{PlagiarismDesign}
+\end{figure}
+\begin{figure}\ContinuedFloat
+    \begin{subfigure}[H]{\textwidth}
+    	\centering
+    	\includegraphics[scale=0.7, page=2]{plagiarism/problem_definition&scope_2.pdf}
+    \end{subfigure}
+    \caption{Plagiarism report for Detailed Design Document (contd.)}
+    \label{PlagiarismDesign_2}
+\end{figure}
+
+\begin{figure}
+	\centering
+    \includegraphics[width=\textwidth, height=\textheight]{plagiarism/dataset_experimental_setup.pdf}
+    \caption{Plagiarism report for Experimental Setup}
+    \label{PlagiarismExperiment}
+\end{figure}
+
+\begin{figure}
+	\centering
+    \includegraphics[width=\textwidth, height=\textheight]{plagiarism/summary_conclusion.pdf}
+    \caption{Plagiarism report for Summary and conclusion}
+    \label{PlagiarismSummary}
+\end{figure}
+
+\begin{figure}
+	\begin{subfigure}[H]{\textwidth}
+		\centering
+    	\includegraphics[scale=0.7, page=1]{plagiarism/mathematical_model.pdf}
+    \end{subfigure}
+ \caption{Plagiarism report for Mathematical Model}
+    \label{PlagiarismMath}
+\end{figure}
+\begin{figure}\ContinuedFloat
+    \begin{subfigure}[H]{\textwidth}
+    	\centering
+    	\includegraphics[scale=0.7, page=2]{plagiarism/mathematical_model.pdf}
+    \end{subfigure}
+    \caption{Plagiarism report for Mathematical Model (contd.)}
+    \label{PlagiarismMath_1}
+\end{figure}
+
+
+
+\end{appendices}
+
+
+\end{document}
