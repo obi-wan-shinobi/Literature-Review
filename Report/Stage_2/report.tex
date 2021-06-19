@@ -919,6 +919,135 @@ $$
 \hspace*{0.25 in}Finally, we use the trained generator and trained discriminator and fine-tune it to fit it on our data which is rather small in size compared to the previous datasets. We train these networks in an adversarial fashion using the conditional GAN objective function \citep{isola2018imagetoimage} and couple it with some noise introduced as the L1 norm of generated image tensor to the target image tensor. The reason behind this is to train the generator using an adversarial component while trying to minimize the Manhattan distance between the generator output and target vector space.
 
 \chapter{Software Testing}
+\section{Types of testing}
+\hspace{0.25 in}We test the modules of our entire setup to ensure that the modules are performing as they're intended to. 
+We perform a kind of unit testing to evaluate the output of every function in the code. 
+\section{Test Cases and Test Results}
+\subsection{Data Gathering and Pre-processing}
+\begin{itemize}
+	\item Test Case 1: Image Scraping test
+	\begin{itemize}
+		\item Test Case Description:\\
+			The module function should scan through the legacy archive only in the described co-ordinates and scrape images that are RGB and of dimensions $256 \times 256$
+		\item Status: \textbf{Pass}
+	\end{itemize}
+	\item Image Colorization:
+	\begin{itemize}
+		\item Test Case 2: Pre-processing System: Grayscale Images (Input distribution)
+	\begin{itemize}
+		\item Test Case Description:\\
+			The pre-processing function takes in a stream of raw data and converts the images into a numpy array with dimensions $n \times 64 \times 64 \times 1$ where $n$ is the batch size. The output image vector should contain black \& white images
+		\item Status: \textbf{Pass}
+	\end{itemize}
+	\item Test Case 3: Pre-processing System: Color Images (Target distribution)
+	\begin{itemize}
+		\item Test Case Description:\\
+			The target distribution should contain color counter-parts of the respective input data. The function should output a numpy array with dimensions $n \times 64 \times 64 \times 3$ where $n$ is the batch size.
+		\item Status: \textbf{Pass}
+	\end{itemize}
+	\end{itemize}
+	\item Image Super-resolution:
+	\begin{itemize}
+		\item Test Case 4: Pre-processing System: Low Resolution Images (Input distribution)
+		\begin{itemize}
+			\item Test Case Description:\\
+			The pre-processing function takes in the raw data and produces low resolution $64 \times 64 \times 3$ images. The output should be a numpy vector of $n$ dimensions representing the mini-batch size
+			\item Status: \textbf{Pass}
+		\end{itemize}
+		\item Test Case 5: Pre-processing System: High Resolution Images (Target distribution)
+		\begin{itemize}
+			\item Test Case Description:\\
+			The target distribution contains the labelled data that is a high resolution image of dimensions $256 \times 256 \times 3$. The function produces a numpy vector of size $n$ where $n$ is the size of mini-batch
+			\item Status: \textbf{Pass}
+		\end{itemize}
+	\end{itemize}
+\end{itemize}
+
+\subsection{Model Implementation}
+\begin{itemize}
+	\item Image Colorization Model
+	\begin{itemize}
+		\item Test Case 1: Generator network
+		\begin{itemize}
+			\item Test Case Description:\\
+			The generator network is a tensor graph implemented in tensorflow. The computation graph should have an input layer of dimensions $n \times 64 \times 64 \times 1$ which is propagated through till the final layer. The final layer output should be a tensor of dimensions $n \times 64 \times 64 \times 3$ where $n$ is the mini-batch size
+			\item Status: \textbf{Pass}
+		\end{itemize}
+		\item Test Case 2: Discriminator network
+		\begin{itemize}
+			\item Test Case Description:\\
+			The discriminator network is a tensor graph implemented in tensorflow. The computation graph should have an input layer of dimensions $n \times 64 \times 64 \times 3$ which is propagated through till the final layer. The final layer output should be a tensor of dimensions $n \times 30 \times 30 \times 1$ where $n$ is the mini-batch size
+			\item Status: \textbf{Pass}
+		\end{itemize}
+	\end{itemize}
+	\item Image Super-resolution Model
+	\begin{itemize}
+		\item Test Case 1: Generator network
+		\begin{itemize}
+			\item Test Case Description:\\
+			The generator network is a tensor graph. The computation graph should have an input layer of dimensions $n \times 64 \times 64 \times 3$. The final layer output should be a tensor of dimensions $n \times 256 \times 256 \times 3$ where $n$ is the mini-batch size
+			\item Status: \textbf{Pass}
+		\end{itemize}
+		\item Test Case 2: Discriminator network
+		\begin{itemize}
+			\item Test Case Description:\\
+			The discriminator network is a tensor graph. The computation graph should have an input layer of dimensions $n \times 256 \times 256 \times 3$. The final layer output should be a tensor of dimensions $n \times 1$ where $n$ is the mini-batch size
+			\item Status: \textbf{Pass}
+		\end{itemize}
+	\end{itemize}
+\end{itemize}
+
+\subsection{Training Loop}
+\begin{itemize}
+	\item Test Case 1: Forward propagation
+	\begin{itemize}
+		\item Test Case Description:\\
+		The forward propagation function should run the computation graph over all the training samples and calculate losses of the generator and discriminator. The loss should be calculated according to the GAN objective function and final output should be the cost of the entire training epoch.
+		\item Status: \textbf{Pass}
+	\end{itemize}
+	\item Test Case 2: Backward propagation
+	\begin{itemize}
+		\item Test Case Description:\\
+		The backward propagation should calculate gradients of the objective function based on the cost calculated during the forward propagation. The gradients should be used to update the trainable variables of the network using gradient descent with momentum and weighted average sum, i.e. Adam.
+		\item Status: \textbf{Pass}
+	\end{itemize}
+	\item Test Case 3: Callbacks and intermediate results logging
+	\begin{itemize}
+		\item Test Case Description:\\
+		While training the model, the callback functionality should keep track of the intermediate training results. It should perform the following:\\
+		$\bullet$ A csv file containing history of the entire training session\\
+		$\bullet$ Save the model weights on a best performance basis by keeping track of the earlier losses\\
+		$\bullet$ Keep track of the convergence and stop the model training if the model converges early
+		
+		\item Status: \textbf{Pass}
+	\end{itemize}
+\end{itemize}
+
+\subsection{Evaluation system}
+\begin{itemize}
+	\item Model performance evaluation
+	\begin{itemize}
+		\item Test Case 1: Model history plotting
+		\begin{itemize}
+			\item Test Case Description:\\
+			The function should plot the model losses throughout the training loop and present a graph of the said plot
+			\item Status: \textbf{Pass}
+		\end{itemize}
+		\item Test Case 2: Output plotting
+		\begin{itemize}
+			\item Test Case Description:\\
+			The function should take in the predictions by the model and save the images with their respective ground truth images for evaluation
+			\item Status: \textbf{Pass}
+		\end{itemize}
+		\item Test Case 3: Model evaluation (L1 norm)
+		\begin{itemize}
+			\item Test Case Description:\\
+			The function should take in two numpy vectors consisting of predicted values and ground truths respectively. The function output should be a single number consisting of the L1 norm (Manhattan distance) between the target and predictions
+			\item Status: \textbf{Pass}
+		\end{itemize}
+	\end{itemize}
+\end{itemize}
+
 
 \chapter{Results}
 \section{Dataset and Experimental setup}
