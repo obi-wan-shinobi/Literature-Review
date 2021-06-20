@@ -46,6 +46,8 @@
 
 \usepackage{caption}
 \usepackage{subcaption}
+\usepackage{multirow}
+\usepackage{multicolumn}
 
 \usepackage[authoryear]{natbib}
 
@@ -367,7 +369,7 @@ We are grateful to Gao Xian Peh and Kai Marshland whose report on the topic insp
 \hspace*{0.25 in}A deep learning algorithm is a software construct that has certain steps that may be hardware intensive. Generative Adversarial Networks require huge amount of computing prowess to complete multiple passes of forward and backward propagation in order to train themselves. A network may consist of millions and billions of parameters which are associated with hundreds of thousands of graph nodes. To actually be able to train a network with more than a billion parameters, we need appropriately large amount of memory. Furthermore, the operations of forward and backward propagation are mathematical operations that adjust the parameters based on the gradient of the cost function to minimize the cost. This calculation, although heavy, is independent of each node and can be performed in a parallel framework. NVIDIA CuDA enabled GPUs have a CuDNN (CuDA Deep Neural Network) library that hooks the training algorithm onto the GPU memory for processing, deploying thousands and hundreds of thousand parallel threads to perform independent calculations of optimizing gradients. Such an infrastructure is expensive and requires a dedicated set up for running deep learning algorithms. For normal use cases, one can run into the problems of memory overflows while allocating tensors in the process of creation of graphs. In such cases, it is costly to buy more GPUs. One can make use of cloud services provided by Google Colab, AWS, Azure and more. These services can host runtimes that will allow users to run their deep learning algorithms over their hardware which will ensure fast and efficient training.
 
 
-\section{Outcome}
+\section{Expected Outcome}
 \hspace*{0.25 in}The expected outcomes of the proposed methodology are as follows:
 \begin{itemize}
 \item An efficient mathematical model to be created which will describe mappings required to colorize and super-resolve low resolution grayscale images
@@ -842,6 +844,7 @@ With conditional GAN, both generator and discriminator are conditioning on the i
 		\item The images, being too large to be loaded into the memory simultaneously, had to be loaded through a data generator
 		\item We implement an instance of \texttt{Keras Image Data Generator} to convert the raw data into training data
 		\item We create two \textit{data generators}, one for generating gray scale images and the other for generating subsequent RGB image
+		\item We create another data pre-processor that converts the given RGB image into L*a*b color space
 		\item The images are then resized to a dimension of $64 \times 64$ 
 		\item We get a vector of image batches which will be the input to the training pipeline
 	\end{itemize}
@@ -913,6 +916,31 @@ $$
 $$
 
 \section{Methodology}
+\subsection{Image Color space}
+\hspace*{0.25 in}An RGB image is essentially a rank 3 tensor of height, width and color where the last axis contains the color data of our image. The data is represented in RGB color space and there are 3 numbers for each pixel indicating how much \textit{Red, Green, and Blue} the pixel is. Figure \ref{rgb_colorspace} shows that in the left part of the “main image” (the leftmost image) we have blue color so in the blue channel of the image, that part has higher values and has turned dark.\\
+\begin{figure}[!htb]
+\begin{center}
+	\includegraphics[width=\textwidth]{figures/rgb_colorspace}
+	\caption{Reg, Green and Blue channels of an image}
+	\label{rgb_colorspace}
+\end{center}
+\end{figure}
+
+In \textbf{L*a*b} color space, we have three numbers for each pixel but these numbers have different meanings. The first number (channel), L, encodes the \textbf{Lightness} of each pixel and when we visualize this channel (the second image in the row below) it appears as a black and white image. The \textbf{*a and *b} channels encode how much \textbf{green-red} and \textbf{yellow-blue} each pixel is, respectively. In the following image you can see each channel of L*a*b color space separately.
+
+\begin{figure}[!htb]
+\begin{center}
+	\includegraphics[width=\textwidth]{figures/Lab_colorspace}
+	\caption{Lightness, *a and *b channels of the L*a*b colorspace}
+	\label{lab_colorspace}
+\end{center}
+\end{figure}
+
+In most of the papers listed in the Literature Survey, the L*a*b color space is widely used instead of RGB to train the models. Intuitively, to the train a model for colorization, we should give it a grayscale image and we hope that it colors it. In the L*a*b colorspace, the model is fed the L channel, which is essentially a grayscale image, and we perform computations to predict the other two channels (*a and *b). After the predictions, we concatenate the channels and get a colorful image. In case of RGB, there is a need to explicitly convert the three channels down to 1 to make it a grayscale image and then feed it to the network hoping that it predicts three numbers per pixel. This is an unstable task due to sheer increase in volume of combinations from two numbers to three.
+
+We train models using both color spaces and empirically show the significance of the L*a*b colorspace.
+
+\subsection{Transferred learning and model tweaking}
 \hspace*{0.25 in}\cite{isola2018imagetoimage} proposed a general solution to many image-to-image translation tasks. We propose a similar methodology as proposed in the paper with a few minor tweaks, so as to significantly reduce the amount of training data needed and minimize the training time to achieve similar results. Initially, we use a U-net for the generator. The \textit{encoder} of our U-net is a pre-trained ResNet-18 network with half of it's layers clipped off so as to get feature abstractions of the middle layers. \cite{ledig2017photorealistic} showed that training the generator separately in a supervised, deterministic manner helps it generalize the mapping from the input space to outputs. The idea solves the problem of \textit{"The blind leading the blind"} that is persistent in most image-to-image translation tasks to date. \\
 \hspace*{0.25 in}We decide to use the Common Objects in Context (COCO) dataset to pre-train our generator independently using the imagenet weights. This training will be supervised and the loss function used is \textit{mean absolute error} or the \textit{L1 Norm} from the target image. Even though trained deterministically,the problem of rectifying incorrect predictions still persists due to constraints over the convergence of loss metric. To combat this, we use this trained generator and train it once again in an adversarial fashion to generalize it further. We hypothesize that re-training with an adversarial will further rectify the subtle color differences that \textit{mae} couldn't solve.\\
 \hspace*{0.25 in}We use a pre-trained ResNet-50 with imagenet weights as our discriminator with last few layers clipped off. The discriminative network used is something called a "Patch Discriminator" proposed by \cite{isola2018imagetoimage}. In a \textit{vanilla} discriminator proposed by \cite{goodfellow2014generative}, the network produces a scalar output, representing the probability that the data $x$ belongs to the input distribution and not the generator distribution $p_g$. \cite{isola2018imagetoimage} proposed a modification to the discriminative network so as to produce, instead of a single scalar, a vector of probabilities representing different localities of the input distribution (image) $x$. For instance, a discriminator producing a $30 \times 30$ vector represents the probabilities every receptive field that is covered by the output vector. Thus, we can localize the corrections in the image that the generator should make.\\
@@ -933,17 +961,37 @@ We perform a kind of unit testing to evaluate the output of every function in th
 	\end{itemize}
 	\item Image Colorization:
 	\begin{itemize}
+	\item RGB Color Space:
+	\begin{itemize}
 		\item Test Case 2: Pre-processing System: Grayscale Images (Input distribution)
 	\begin{itemize}
 		\item Test Case Description:\\
 			The pre-processing function takes in a stream of raw data and converts the images into a numpy array with dimensions $n \times 64 \times 64 \times 1$ where $n$ is the batch size. The output image vector should contain black \& white images
 		\item Status: \textbf{Pass}
 	\end{itemize}
-	\item Test Case 3: Pre-processing System: Color Images (Target distribution)
+		\item Test Case 3: Pre-processing System: Color Images (Target distribution)
 	\begin{itemize}
 		\item Test Case Description:\\
 			The target distribution should contain color counter-parts of the respective input data. The function should output a numpy array with dimensions $n \times 64 \times 64 \times 3$ where $n$ is the batch size.
 		\item Status: \textbf{Pass}
+
+	\end{itemize}
+	\end{itemize}
+	\item L*a*b Color Space:
+	\begin{itemize}
+		\item Test Case 2: Pre-processing System: RGB to L*a*b conversion
+	\begin{itemize}
+		\item Test Case Description:\\
+			The pre-processing function takes in a stream of raw data and converts the images into a numpy array with dimensions $n \times 64 \times 64 \times 3$ where $n$ is the batch size. The output is an image tensor in L*a*b color space. The L channel is provided for the grayscale input 
+		\item Status: \textbf{Pass}
+	\end{itemize}
+		\item Test Case 3: Pre-processing System: L*a*b to RGB conversion
+	\begin{itemize}
+		\item Test Case Description:\\
+			The function takes in its input as an image tensor in L*a*b colorspace. The function should output a numpy array with dimensions $n \times 64 \times 64 \times 3$ where $n$ is the batch size and the image output is converted back to the RGB space
+		\item Status: \textbf{Pass}
+
+	\end{itemize}
 	\end{itemize}
 	\end{itemize}
 	\item Image Super-resolution:
@@ -1054,7 +1102,10 @@ We perform a kind of unit testing to evaluate the output of every function in th
 \hspace*{0.25 in}Initially, we started by scraping the data off Hubble Legacy Archive. Using puppeteer(headless chrome), we scraped off hundreds of thousands of colorized images it has available. The Hubble Legacy archive is slow and produces grainy images with lots of noise and unprocessed images. A filter for M101 (Messier 101) galaxy rendered more than 80 thousand images with a 1 degree difference between consecutive right ascension. The data is large and has no particularly efficient way to clean without human investment. Cleaning tens of thousands of images by handpicking noiseless and well colored images is time consuming. For training the SRGAN, we need high resolution, well colored images. \\
 \hspace*{0.25 in}Consequently, we scraped the Hubble Heritage project instead. The Hubble Heritage project releases the highest-quality astronomical images. They are all stitched together, colorized and processed to eliminate noise. Hubble Heritage then selects the best, most striking of these for public release. However, there are only $\sim150$ of these images that are actually useful. We scraped images from the main Hubble website as well so as to increase the amount of data we had. This provided an extra approximately $\sim1000$ images.
 Each image is a JPG image with dimensions of $256\times 256$ pixels and contains 3 channels of RGB.\\
-\hspace*{0.25 in}We use a mini-batch gradient descent with a batch size of 10, 16 and 32 for different iterations. We use Adam optimizer with $\beta_1 = 0.5$ and $\beta_2 = 0.999$. The generator and discriminator has a learning rate of $2e-4$ which remains constant throughout the training. We train the model over 50 epochs, saving the best model weights determined by L1 norm between the output of the generator and the target image. We use early stopping with a patience value of 10. The image size is $64\times64$. Our implementation is using Python, numpy, Tensorflow and tf-keras. It takes about 24 hours to complete training over the COCO dataset and about 12 to 13 hours to fit the model on given astronomical data on a NVIDIA Tesla K80 GPU.
+\hspace*{0.25 in}We use a mini-batch gradient descent with a batch size of 10, 16 and 32 for different iterations. We use Adam optimizer with $\beta_1 = 0.5$ and $\beta_2 = 0.999$. The generator and discriminator has a learning rate of $2e-4$ which remains constant throughout the training. We train the model with different epochs ranging between 20,50 and 100, saving the best model weights determined by L1 norm between the output of the generator and the target image. We use early stopping with a patience value of 10. The image size is $64\times64$. Our implementation is using Python, numpy, Tensorflow and tf-keras. It takes about 24 hours to complete training over the COCO dataset and about 12 to 13 hours to fit the model on given astronomical data on a NVIDIA Tesla K80 GPU.
+\pagebreak
+\section{Results and Discussions}
+\subsection{Training Loss}
 
 
 \chapter{Summary and Conclusion}
