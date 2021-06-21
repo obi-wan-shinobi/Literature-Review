@@ -487,6 +487,12 @@ Platform :
 \item Frameworks: Node.js, Tensorflow, plotting libraries, openCV
 \end{enumerate}
 
+\subsection{Functional Requirements:}
+\begin{itemize}
+	\item Data Scraping and Processing: The data pipeline should output a usable image which is RGB and has a minimum dimension of $256 \times 256$
+	\item Colorization: The system should output a colorized version of the given grayscale input image
+	\item Super-Resolution: The system should output a 4 times upscaled image of the input
+\end{itemize}
 
 \subsection{Non Functional Requirements:}
 \begin{itemize}
@@ -652,7 +658,7 @@ Risk Status	& Identified \\ \hline
 \subsection{Project task set}
 Major Tasks in the Project stages are:
 \begin{itemize}
-  \item Task 1: Colledting Dataset
+  \item Task 1: Collecting Dataset
   \item Task 2: Cleaning Dataset
   \item Task 3: Creating GAN model of image colorization and super-resolution
   \item Task 4: Training  the GAN model
@@ -917,7 +923,7 @@ $$
 
 \section{Methodology}
 \subsection{Image Color space}
-\hspace*{0.25 in}An RGB image is essentially a rank 3 tensor of height, width and color where the last axis contains the color data of our image. The data is represented in RGB color space and there are 3 numbers for each pixel indicating how much \textit{Red, Green, and Blue} the pixel is. Figure \ref{rgb_colorspace} shows that in the left part of the “main image” (the leftmost image) we have blue color so in the blue channel of the image, that part has higher values and has turned dark.\\
+\hspace*{0.25 in}An RGB image is essentially a rank 3 tensor of height, width and color where the last axis contains the color data of our image. The data is represented in RGB color space which has 3 numbers for every pixel indicating the amount of \textit{Red, Green, and Blue} values the pixel has. Figure \ref{rgb_colorspace} shows that in the left part of the “main image” has blue color so the blue channel of the image has higher values and turns dark.\\
 \begin{figure}[!htb]
 \begin{center}
 	\includegraphics[width=\textwidth]{figures/rgb_colorspace}
@@ -926,7 +932,7 @@ $$
 \end{center}
 \end{figure}
 
-In \textbf{L*a*b} color space, we have three numbers for each pixel but these numbers have different meanings. The first number (channel), L, encodes the \textbf{Lightness} of each pixel and when we visualize this channel (the second image in the row below) it appears as a black and white image. The \textbf{*a and *b} channels encode how much \textbf{green-red} and \textbf{yellow-blue} each pixel is, respectively. In the following image you can see each channel of L*a*b color space separately.
+In \textbf{L*a*b} color space, we have three numbers for each pixel but these numbers have different meanings. The first channel, L, encodes the \textbf{Lightness} of each pixel and when we visualize this channel it appears as a black and white image. The \textbf{*a and *b} channels encode how much \textbf{green-red} and \textbf{yellow-blue} each pixel is, respectively. In the following image you can see each channel of L*a*b color space separately.
 
 \begin{figure}[!htb]
 \begin{center}
@@ -1292,11 +1298,17 @@ As opposed to colorization, super-resolution needs a quantitative estimation to 
 Table \ref{tab:Super-resolution_results} shows the L1 and L2 distances of predicted results by each model with the ground truth image. It is observed that Ledig's SRGAN, after a bit of fine-tuning performs really well in comparison to the the pre-trained version. To further improve this, \cite{lim2017enhanced} proposed an optimized version of SRGAN by removing the unnecessary modules in the conventional resnets and showed that Enhanced Deep Residual Networks performed better at upscaling task. When trained in an adversarial manner, the ED-SRGAN performs better than the traditional SRGAN. \cite{yu2018wide} further improved the idea by increasing the widening factor ($\times 2$ and $\times 4$) to ($\times 6$ and $\times 9$). This Wide Activation Deep Super Resolution network further improved the performance for single image super-resolution. When we implement this in an adversarial manner, we achieve excellent results. It is evident from the results that the best performing network is the WDSR.
 
 \chapter{Summary and Conclusion}
-\section{Summary}
-\hspace*{0.25 in}Low Resolution and Black and White Images in the Hubble Legacy Archive lie dormant and are needed to be upscaled and colourized for better visual discernment of the astromers. Images are initially scraped from the Hubble Legacy Arhive and the Hubble Legacy Project and a dataset is formed which is cleaned manually and is then fed to two Generative Adversarial Networks consecutively. The images of size ($64\times 64\times 1$) are initially colorized using a first GAN and an output image of size ($64\times 64\times 3$) with three RGB channels is obtained. This is then upscaled to a size of ($(64\cdot n)\times (64\cdot n)\times 3$). The output images are visually superior as well as colorized. These images are expected to be of greater use for astronomers than the older ones. 
+\section{Summary and Conclusion}
+\hspace*{0.25 in}The project mainly tackles the problem of colorizing astronomical images and super-resolving them for astronomical inspection. We explore various methodologies proposed till date that efficient colorize and super-scale images with results that are significantly closer to the ground truth distribution. We scrape the data from Hubble Legacy Archive, Hubble Main website and Hubble Heritage project and created a filtered and clean dataset of 4700 images. We split the data and use 500 images, roughly 10\% of the data for testing purposes. To compensate for the lack of data, we implement several pre-trained architectures and fine-tune their abstractions over our dataset to find the most effective solution.\\
+\hspace*{0.25 in}For the colorizing model, we explore usage of U-net architectures starting from a basic U-net model and experiment with different color spaces and empirically confirm the superiority of L*a*b color space in image colorization problem. We use the state of the art ResNet-18 to provide as a backbone of the encoder and build a U-net around it. The pre-trained network over COCO dataset in RGB colorspace produces significantly weaker results as compared to the subsequent network in L*a*b colorspace. The best performing model turns out to be the ResNet18 U-net which is fine-tuned over our particular dataset to produce appealing and similar results to the ground truth.\\
+\hspace*{0.25 in}The Super-resolution model is based largely on the SRGAN proposed by \cite{ledig2017photorealistic}. We use the generator weights and sample results from the training set to inspect the results. It is found that the model performs really well on the pre-trained weights and we decide to fine-tune it to our application. After fine-tuning the model, we train other state of the art single image super-resolution models such as EDSR \citep{lim2017enhanced} and WDSR \citep{yu2018wide}. These provide further insights into the problem and simultaneously, improve the results.\\
+\hspace*{0.25 in}While studying and improving the performance of these models, we explore performance metrics of GANs and evaluation methodologies implemented to test out conditional GANs. It is evident that the loss curves of generator and discriminator do not provide us with any intuition about the model performance. We also discover that standard distance metrics cannot be used to evaluate GANs and quantitative methods that exist to evaluate GANs are unreliable. We prove so by contradiction of qualitative samples and quantitative measurements of the best performing architecture for colorization models. However, we observe that quantitative estimation is quite reliable for the problem of single image super-resolution and can be helped to determine which model is better suited for the task.
 
-\section{Conclusion}
-\hspace*{0.25 in}The images are upscaled and colourized using a completely automated algorithm which uses Deep Learning. Generative Adversarial Networks are  successfully used for the implementation and the images obtained are in public forum to be used for research, it is anticipated that this will aid the astronomers vastly in their efforts.
+\section{Future Scope}
+\hspace*{0.25 in}Though we obtain moderately good results, a vast amount of algorithms still remain unscratched. A more powerful model such as SN-ResNext, EfficientNet and more state-of-the-art models can be implemented and trained over millions of images from the Imagenet. With even more hardware resources and availability of data, we can explore computationally heavy models for a better approximation. An image stitching algorithm can be applied on the produced images to generate large scale astronomical images for scientific study. Colorization can be improved by the virtue of exploring different loss functions using weighted losses to reduce loss problem for low saturation regions. We can introduce a gradient penalty for the SRGAN architecture and include the WGAN \citep{arjovsky2017wasserstein} which will stabilize the discriminator to stay within the space of 1-Lipschitz function. Progressively growing GANs \citep{karras2018progressive} can be applied so that the dimensions can be further improved with more stability and greater sharpness.
+
+\section{Applications}
+\hspace*{0.25 in}The images are upscaled and colourized using a completely automated algorithm which uses Deep Learning. Generative Adversarial Networks are  successfully used for the implementation. The algorithm can directly be applied for creating images that can be studied by astronomers. It is anticipated that this will aid the astronomers vastly in their efforts.
 
 \bibliographystyle{dcu}
 \bibliography{biblo}
@@ -1399,20 +1411,6 @@ Table \ref{tab:Super-resolution_results} shows the L1 and L2 distances of predic
 \end{figure}
 
 \begin{figure}
-	\centering
-    \includegraphics[width=\textwidth, height=\textheight]{plagiarism/dataset_experimental_setup.pdf}
-    \caption{Plagiarism report for Experimental Setup}
-    \label{PlagiarismExperiment}
-\end{figure}
-
-\begin{figure}
-	\centering
-    \includegraphics[width=\textwidth, height=\textheight]{plagiarism/summary_conclusion.pdf}
-    \caption{Plagiarism report for Summary and conclusion}
-    \label{PlagiarismSummary}
-\end{figure}
-
-\begin{figure}
 	\begin{subfigure}[H]{\textwidth}
 		\centering
     	\includegraphics[scale=0.7, page=1]{plagiarism/mathematical_model.pdf}
@@ -1429,7 +1427,129 @@ Table \ref{tab:Super-resolution_results} shows the L1 and L2 distances of predic
     \label{PlagiarismMath_1}
 \end{figure}
 
+\begin{figure}
+	\begin{subfigure}[H]{\textwidth}
+		\centering
+    	\includegraphics[scale=0.7, page=1]{plagiarism/project_implementation.pdf}
+    \end{subfigure}
+ \caption{Plagiarism report Project Implementation}
+    \label{PlagiarismImplementation}
+\end{figure}
+\begin{figure}\ContinuedFloat
+    \begin{subfigure}[H]{\textwidth}
+    	\centering
+    	\includegraphics[scale=0.7, page=2]{plagiarism/project_implementation.pdf}
+    \end{subfigure}
+    \caption{Plagiarism report for Project Implementation (contd.)}
+    \label{PlagiarismImplementation_1}
+\end{figure}
 
+\begin{figure}
+	\centering
+    \includegraphics[scale=0.7]{plagiarism/algorithm_details.pdf}
+    \caption{Plagiarism report for Algorithm Details}
+    \label{PlagiarismAlgorithms}
+\end{figure}
+
+\begin{figure}
+	\begin{subfigure}[H]{\textwidth}
+		\centering
+    	\includegraphics[scale=0.7, page=1]{plagiarism/methodology.pdf}
+    \end{subfigure}
+ \caption{Plagiarism report Methodology}
+    \label{PlagiarismMethodology}
+\end{figure}
+\begin{figure}\ContinuedFloat
+    \begin{subfigure}[H]{\textwidth}
+    	\centering
+    	\includegraphics[scale=0.7, page=2]{plagiarism/methodology.pdf}
+    \end{subfigure}
+    \caption{Plagiarism report for Methodology (contd.)}
+    \label{PlagiarismMethodology_1}
+\end{figure}
+
+\begin{figure}
+	\begin{subfigure}[H]{\textwidth}
+		\centering
+    	\includegraphics[scale=0.7, page=1]{plagiarism/software_testing.pdf}
+    \end{subfigure}
+ \caption{Plagiarism report Software Testing}
+    \label{PlagiarismSoftwareTesting}
+\end{figure}
+\begin{figure}\ContinuedFloat
+    \begin{subfigure}[H]{\textwidth}
+    	\centering
+    	\includegraphics[scale=0.7, page=2]{plagiarism/software_testing.pdf}
+    \end{subfigure}
+    \caption{Plagiarism report for Software Testing (contd.)}
+    \label{PlagiarismSoftwareTesting_1}
+\end{figure}
+\begin{figure}\ContinuedFloat
+    \begin{subfigure}[H]{\textwidth}
+    	\centering
+    	\includegraphics[scale=0.7, page=3]{plagiarism/software_testing.pdf}
+    \end{subfigure}
+    \caption{Plagiarism report for Software Testing (contd.)}
+    \label{PlagiarismSoftwareTesting_2}
+\end{figure}
+
+
+\begin{figure}
+	\centering
+    \includegraphics[width=\textwidth, height=\textheight]{plagiarism/dataset_experimental_setup.pdf}
+    \caption{Plagiarism report for Experimental Setup}
+    \label{PlagiarismExperiment}
+\end{figure}
+
+\begin{figure}
+	\begin{subfigure}[H]{\textwidth}
+		\centering
+    	\includegraphics[scale=0.7, page=1]{plagiarism/results_1.pdf}
+    \end{subfigure}
+ \caption{Plagiarism report Results}
+    \label{PlagiarismResults}
+\end{figure}
+\begin{figure}\ContinuedFloat
+    \begin{subfigure}[H]{\textwidth}
+    	\centering
+    	\includegraphics[scale=0.7, page=2]{plagiarism/results_1.pdf}
+    \end{subfigure}
+    \caption{Plagiarism report for Results (contd.)}
+    \label{PlagiarismResults_1}
+\end{figure}
+\begin{figure}\ContinuedFloat
+    \begin{subfigure}[H]{\textwidth}
+    	\centering
+    	\includegraphics[scale=0.7, page=1]{plagiarism/results_2.pdf}
+    \end{subfigure}
+    \caption{Plagiarism report for Results (contd.)}
+    \label{PlagiarismResults_2}
+\end{figure}
+\begin{figure}\ContinuedFloat
+    \begin{subfigure}[H]{\textwidth}
+    	\centering
+    	\includegraphics[scale=0.7, page=2]{plagiarism/results_2.pdf}
+    \end{subfigure}
+    \caption{Plagiarism report for Results (contd.)}
+    \label{PlagiarismResults_3}
+\end{figure}
+
+\begin{figure}
+	\begin{subfigure}[H]{\textwidth}
+		\centering
+    	\includegraphics[scale=0.7, page=1]{plagiarism/summary_conclusion.pdf}
+    \end{subfigure}
+ \caption{Plagiarism report Summary and Conclusion}
+    \label{PlagiarismSummary}
+\end{figure}
+\begin{figure}\ContinuedFloat
+    \begin{subfigure}[H]{\textwidth}
+    	\centering
+    	\includegraphics[scale=0.7, page=2]{plagiarism/summary_conclusion.pdf}
+    \end{subfigure}
+    \caption{Plagiarism report for Summary and Conclusion (contd.)}
+    \label{PlagiarismSummary_1}
+\end{figure}
 
 \end{appendices}
 
