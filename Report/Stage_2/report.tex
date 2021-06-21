@@ -49,6 +49,13 @@
 \usepackage{multirow}
 \usepackage{multicol}
 
+
+\usepackage{xcolor}
+
+%\definecolor{offwhite}{RGB}{255,255,243}
+%\pagecolor{offwhite}
+
+
 \usepackage[authoryear]{natbib}
 
 \usepackage[colorlinks=true, linkcolor=black, citecolor=blue]{hyperref}
@@ -522,7 +529,7 @@ the form of:
 \end{itemize}
 For our project, sizing information in the form of Lines of Source Code is used. The
 total lines of code,\\
-KLOC = 750\\
+KLOC = 1000\\
 Equations: The initial effort(Ei) in man-months is calculated using equations:\\
 
 \[E=ax(KLOC)^b\]
@@ -533,7 +540,7 @@ E = 4.5 PM\\
 Where, a = 2.5,\\
 b = 0.35, for a semi-detached project\\
 D = Duration of Project in months\\
-D = 4 Months\\
+D = 12 Months\\
 
 \subsubsection{Time Estimates}
 \[C=D*Cp*hrs\]
@@ -542,8 +549,8 @@ D = Duration in Hours\\
 Cp = Cost incurred per person-hour\\
 hrs = hours\\
 Total of 4.5 person-months are required to complete the project successfully.\\
-Duration of Project D = 6 Months\\
-The approximate duration of the project is 4 months\\
+Duration of Project D = 12 Months\\
+The approximate duration of the project is 12 months\\
 
 \subsection{Project Resources}
           Project resources  [People, Hardware, Software, Tools and other resources] based on Memory Sharing, IPC, and Concurrency derived using appendices to be referred.
@@ -1305,7 +1312,7 @@ Table \ref{tab:Super-resolution_results} shows the L1 and L2 distances of predic
 \hspace*{0.25 in}While studying and improving the performance of these models, we explore performance metrics of GANs and evaluation methodologies implemented to test out conditional GANs. It is evident that the loss curves of generator and discriminator do not provide us with any intuition about the model performance. We also discover that standard distance metrics cannot be used to evaluate GANs and quantitative methods that exist to evaluate GANs are unreliable. We prove so by contradiction of qualitative samples and quantitative measurements of the best performing architecture for colorization models. However, we observe that quantitative estimation is quite reliable for the problem of single image super-resolution and can be helped to determine which model is better suited for the task.
 
 \section{Future Scope}
-\hspace*{0.25 in}Though we obtain moderately good results, a vast amount of algorithms still remain unscratched. A more powerful model such as SN-ResNext, EfficientNet and more state-of-the-art models can be implemented and trained over millions of images from the Imagenet. With even more hardware resources and availability of data, we can explore computationally heavy models for a better approximation. An image stitching algorithm can be applied on the produced images to generate large scale astronomical images for scientific study. Colorization can be improved by the virtue of exploring different loss functions using weighted losses to reduce loss problem for low saturation regions. We can introduce a gradient penalty for the SRGAN architecture and include the WGAN \citep{arjovsky2017wasserstein} which will stabilize the discriminator to stay within the space of 1-Lipschitz function. Progressively growing GANs \citep{karras2018progressive} can be applied so that the dimensions can be further improved with more stability and greater sharpness.
+\hspace*{0.25 in}Though we obtain moderately good results, a vast amount of algorithms still remain unscratched. A more powerful model such as SE-ResNext, EfficientNet and more state-of-the-art models can be implemented and trained over millions of images from the Imagenet. With even more hardware resources and availability of data, we can explore computationally heavy models for a better approximation. An image stitching algorithm can be applied on the produced images to generate large scale astronomical images for scientific study. Colorization can be improved by the virtue of exploring different loss functions using weighted losses to reduce loss problem for low saturation regions. We can introduce a gradient penalty for the SRGAN architecture and include the WGAN \citep{arjovsky2017wasserstein} which will stabilize the discriminator to stay within the space of 1-Lipschitz function. Progressively growing GANs \citep{karras2018progressive} can be applied so that the dimensions can be further improved with more stability and greater sharpness.
 
 \section{Applications}
 \hspace*{0.25 in}The images are upscaled and colourized using a completely automated algorithm which uses Deep Learning. Generative Adversarial Networks are  successfully used for the implementation. The algorithm can directly be applied for creating images that can be studied by astronomers. It is anticipated that this will aid the astronomers vastly in their efforts.
