@@ -6,3 +6,4 @@ The documents can be found in:
 
 - [Literature Review](Literature%20Review/Review.pdf)
 - [Project Stage 1 report](Report/Stage_1/report.pdf)
+- [Project Final Report](Report/Stage_2/report.pdf)
