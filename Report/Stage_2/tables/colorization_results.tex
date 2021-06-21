@@ -1,7 +1,8 @@
-\begin{table}
+\begin{table}[!htb]
 \centering
-\small
-    \begin{tabular}{c | c | c | c}
+\setlength{\tabcolsep}{10pt} % Default value: 6pt
+\renewcommand{\arraystretch}{1.5} % Default value: 1
+\begin{tabular}{c | c | c | c}
         \hline
         \textbf{Model} & \textbf{Color Space} & \textbf{
         L1 Distance} & \textbf{L2 Distance}\\
@@ -12,6 +13,6 @@
         U-net & RGB & 77.3273 & 3.986\\
         \hline
     \end{tabular}
-\caption{Colorization: Average L1 \& L2 distance between generated images and ground truth, ch: channel, pix: pixel}
+\caption{Colorization: Average per-pixel L1 \& L2 distance between generated images and ground truth}
 \label{tab:colorization_results}
 \end{table}
