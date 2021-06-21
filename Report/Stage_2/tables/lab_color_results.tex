@@ -1,0 +1,18 @@
+\begin{table}[!htb]
+\centering
+\setlength{\tabcolsep}{10pt} % Default value: 6pt
+\renewcommand{\arraystretch}{1.5} % Default value: 1
+    \begin{tabular}{c | c c | c c}
+        \hline
+        \hline
+        \multirow{2}{*}{Model} & 
+            \multicolumn{2}{c|}{L1 Distance} & \multicolumn{2}{c}{L2 Distance}\\
+            & a & b & a & b\\
+        \hline
+        ResNet-18 (Pre-trained)  & 0.00588 &  0.00501 & 0.01565 & 0.03208\\
+        ResNet-18 (Fine-tuned) & 0.00257 & 0.00727 & 0.01721 & 0.03316\\
+        \hline
+    \end{tabular}
+\caption{L1 \& L2 channel wise distances in L*a*b colorspace}
+\label{tab:lab_color_results}
+\end{table}

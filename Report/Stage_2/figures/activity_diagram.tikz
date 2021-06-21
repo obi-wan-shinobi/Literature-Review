@@ -1,5 +1,5 @@
 
-    \begin{figure}
+    \begin{figure}[!htb]
     \begin{center}
     \begin{tikzpicture}[FlowChart,
   node distance = 6mm and 12mm,

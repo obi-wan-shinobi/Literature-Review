@@ -1,0 +1,18 @@
+\begin{table}[!htb]
+\centering
+\setlength{\tabcolsep}{10pt} % Default value: 6pt
+\renewcommand{\arraystretch}{1.5} % Default value: 1
+    \begin{tabular}{c | c | c }
+        \hline
+        \textbf{Model} & \textbf{
+        L1 Distance} & \textbf{L2 Distance}\\
+        \hline
+        Ledig SRGAN (Fine-tuned) & 87.1090 & 3.754\\
+        Ledig SRGAN (Pre-trained) & 114.8043 & 5.953\\
+        ED-SRGAN & 80.9414 & 3.684\\
+        WD-SRGAN & 79.7262 & 3.627\\
+        \hline
+    \end{tabular}
+\caption{Super-Resolution: Per-pixel Average L1 \& L2 distance between generated images and ground truth}
+\label{tab:Super-resolution_results}
+\end{table}

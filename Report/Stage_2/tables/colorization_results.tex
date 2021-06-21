@@ -1,0 +1,18 @@
+\begin{table}[!htb]
+\centering
+\setlength{\tabcolsep}{10pt} % Default value: 6pt
+\renewcommand{\arraystretch}{1.5} % Default value: 1
+\begin{tabular}{c | c | c | c}
+        \hline
+        \textbf{Model} & \textbf{Color Space} & \textbf{
+        L1 Distance} & \textbf{L2 Distance}\\
+        \hline
+        ResNet-18 (Pre-trained) & L*a*b & 64.5409 & 2.77\\
+        ResNet-18 (Fine-tuned) & L*a*b & 65.1119 & 2.62\\
+        ResNet-18 (Pre-trained) & RGB & 125.5554 & 9.04\\
+        U-net & RGB & 77.3273 & 3.986\\
+        \hline
+    \end{tabular}
+\caption{Colorization: Average per-pixel L1 \& L2 distance between generated images and ground truth}
+\label{tab:colorization_results}
+\end{table}

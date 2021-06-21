@@ -38,7 +38,7 @@
 \usepackage{subcaption}
 \usepackage{multirow}
 
-\usepackage[ruled,vlined]{algorithm2e}
+\usepackage[ruled]{algorithm2e}
 
 \usepackage{amssymb}
 \usepackage{tikz}
@@ -46,10 +46,20 @@
 
 \usepackage{caption}
 \usepackage{subcaption}
+\usepackage{multirow}
+\usepackage{multicol}
+
+
+\usepackage{xcolor}
+
+%\definecolor{offwhite}{RGB}{255,255,243}
+%\pagecolor{offwhite}
+
 
 \usepackage[authoryear]{natbib}
 
 \usepackage[colorlinks=true, linkcolor=black, citecolor=blue]{hyperref}
+\usepackage{listings}
 
 \usetikzlibrary{arrows.meta, chains, shapes.geometric}
 
@@ -245,12 +255,12 @@ We are grateful to Gao Xian Peh and Kai Marshland whose report on the topic insp
 \item A large number of images lie dormant in most of the space survey data archives which never go through any kind of processing and are low resolution and black \& white. These images could be processed automatically by an algorithm that will colorize and super-resolve the images which can make it easier for astronomers to visually inspect the images
 \end{itemize}
 
-\chapter{Problem Definition and scope}
-\section{Problem Statement}
+\section{Problem Definition and scope}
+\subsection{Problem Statement}
 \hspace*{0.25 in}The problem can be subdivided based on the model approach. We aim to create an efficient model to colorize grayscale images that will transform the input tensor into an RGB colored output tensor. In the next part, we also aim to super-scale the tensor obtained. Thus, the next part can be summarized as making a model that will obtain a colorized image and upscale it $n$ times the original size.
 
 
-\subsection{Goals and objectives}
+\subsubsection{Goals and objectives}
 \hspace*{0.25 in}It is observed from the statement that the problem consists of multiple sub-problems. After careful reviewing, the problem can be divided into two sub-problems:
 \begin{itemize}
 	\item Create an efficient model to colorize grayscale images
@@ -304,7 +314,7 @@ We are grateful to Gao Xian Peh and Kai Marshland whose report on the topic insp
 
 
 
-\section{Major Constraints}
+\subsection{Major Constraints}
 \hspace*{0.25 in}The problem statement is well defined to build a workable solution. However, the model proposed has several constraints. The major constraints are discussed in the following section:
 \begin{itemize}
 \item The astronomical image data required for training purposes is mostly raw. There exists no structured dataset that is already cleaned. The unavailability of a dataset is a major constraint for the project
@@ -366,7 +376,7 @@ We are grateful to Gao Xian Peh and Kai Marshland whose report on the topic insp
 \hspace*{0.25 in}A deep learning algorithm is a software construct that has certain steps that may be hardware intensive. Generative Adversarial Networks require huge amount of computing prowess to complete multiple passes of forward and backward propagation in order to train themselves. A network may consist of millions and billions of parameters which are associated with hundreds of thousands of graph nodes. To actually be able to train a network with more than a billion parameters, we need appropriately large amount of memory. Furthermore, the operations of forward and backward propagation are mathematical operations that adjust the parameters based on the gradient of the cost function to minimize the cost. This calculation, although heavy, is independent of each node and can be performed in a parallel framework. NVIDIA CuDA enabled GPUs have a CuDNN (CuDA Deep Neural Network) library that hooks the training algorithm onto the GPU memory for processing, deploying thousands and hundreds of thousand parallel threads to perform independent calculations of optimizing gradients. Such an infrastructure is expensive and requires a dedicated set up for running deep learning algorithms. For normal use cases, one can run into the problems of memory overflows while allocating tensors in the process of creation of graphs. In such cases, it is costly to buy more GPUs. One can make use of cloud services provided by Google Colab, AWS, Azure and more. These services can host runtimes that will allow users to run their deep learning algorithms over their hardware which will ensure fast and efficient training.
 
 
-\section{Outcome}
+\section{Expected Outcome}
 \hspace*{0.25 in}The expected outcomes of the proposed methodology are as follows:
 \begin{itemize}
 \item An efficient mathematical model to be created which will describe mappings required to colorize and super-resolve low resolution grayscale images
@@ -376,43 +386,6 @@ We are grateful to Gao Xian Peh and Kai Marshland whose report on the topic insp
 
 \section{Applications}
 \hspace*{0.25 in}Currently, given the number of the raw and unprocessed images in Hubble Legacy Archives, much of the images are not workable for scientific evaluation. The main application of building a GAN and automating the upscaling and colorization of these images is to help in visual classification for astronomers. Through a high resolution and colourized image, astronomical objects which would've been imperceptible to the human eye could be now visible for visual inspection. While upscaling is expected to address the poor quality of the original images, colourization will help distinguish astronomical objects and activites from the noise generated by various factors.
-
-\section{Hardware Resources Required}
-\hspace*{0.25 in}The project is based Machine Learning, and the use of Tensorflow-GPU brought forward the need for a very high end hardware. Google Colab (or Colaboratory) is a free Jupyter notebook environment offered by Google which runs notebooks from Python kernels and uses Google Drive for storage.
-\input{tables/hardware_requirements.tex}
-
-%\section{Hardware Resources Required}
-%The project is based Machine Learning, and the use of Tensorflow-GPU brought forward the need for a very high end hardware. Google Colab (or Colaboratory) is a free Jupyter notebook environment offered by Google which runs notebooks from Python kernels and uses Google Drive for storage.
-%\begin{table}[!htbp]
-%\begin{center}
-%\def\arraystretch{1.5}
-%  \begin{tabular}{| c | c | c | c |}
-%\hline
-%Sr. No. &	Parameter &	Minimum Requirement & Justification \\
-%\hline
-%1 &	CPU Speed &	 Intel(R) Xeon(R) CPU @ 2.20GHz  & Training the model on CPU\\
-%\hline
-%2 &	GPU  &	Nvidia K80-12GB-0.82GHz &  To train model on GPU\\
-%3 &	RAM  &	12GB &  To load the Dataset\\
-% \hline
-
-%  \hline
-%\end{tabular}
-%\caption { Hardware Requirements }
-% \label{tab:hreq}
-%\end{center}
-%\end{table}
-
-\pagebreak
-
-\section{Software Resources Required}
-Platform :
-\begin{enumerate}
-\item Operating System: Windows/Linus
-\item IDE: Jupyter Notebook
-\item Programming Language: python3, javascript
-\item Frameworks: Node.js, Tensorflow, plotting libraries, openCV
-\end{enumerate}
 
 \chapter{Literature Survey}
 \section{Image Colorization}
@@ -454,6 +427,90 @@ Platform :
       \cite{ledig2017photorealistic} introduced SRGAN in 2017, which used a SRResNet to upscale images with an upscaling factor of 4x. SRGAN is currently the state of the art on public benchmark datasets.
 
 
+\chapter{Software requirement specification }
+
+\section{Introduction}
+\subsection{Purpose and Scope of Document}
+The purpose of this project document is to create a comprehensive documentation about the methodology used in implementing the upscaling and colorization of the HSA images. The document explores the goals, objectives, resources, project plan, SRS and finally the summary and conclusion. It is hoped that this document would be beneficial in answering every query that any individual may have about this research project.
+
+
+
+ \subsection{User profiles}
+Two actors have been defined in the Use case Diagram:\\
+User: User preprocesses the image with the help of the GAN and facilitates the whole process.\\
+GAN: It takes the input images, colorizes the image and feeds it to another GAN. The second GAN then upscales the image and a final output image is generated.
+
+\subsection{Use-cases}
+
+
+\input{tables/use_case_table.tex}
+\pagebreak
+\subsection{Use Case View}
+Use Case Diagram. Example is given below
+\begin{center}
+	\begin{figure}[!htbp]
+		\centering
+		\fbox{\includegraphics[width=\textwidth]{figures/use.jpg}}
+	  \caption{Use case diagram}
+	  \label{fig:usecase_dig}
+	\end{figure}
+\end{center}
+
+\section{System Requirements}
+\subsection{Hardware Resources Required}
+\hspace*{0.25 in}The project is based Machine Learning, and the use of Tensorflow-GPU brought forward the need for a very high end hardware. Google Colab (or Colaboratory) is a free Jupyter notebook environment offered by Google which runs notebooks from Python kernels and uses Google Drive for storage.
+\input{tables/hardware_requirements.tex}
+
+%\section{Hardware Resources Required}
+%The project is based Machine Learning, and the use of Tensorflow-GPU brought forward the need for a very high end hardware. Google Colab (or Colaboratory) is a free Jupyter notebook environment offered by Google which runs notebooks from Python kernels and uses Google Drive for storage.
+%\begin{table}[!htbp]
+%\begin{center}
+%\def\arraystretch{1.5}
+%  \begin{tabular}{| c | c | c | c |}
+%\hline
+%Sr. No. &	Parameter &	Minimum Requirement & Justification \\
+%\hline
+%1 &	CPU Speed &	 Intel(R) Xeon(R) CPU @ 2.20GHz  & Training the model on CPU\\
+%\hline
+%2 &	GPU  &	Nvidia K80-12GB-0.82GHz &  To train model on GPU\\
+%3 &	RAM  &	12GB &  To load the Dataset\\
+% \hline
+
+%  \hline
+%\end{tabular}
+%\caption { Hardware Requirements }
+% \label{tab:hreq}
+%\end{center}
+%\end{table}
+
+\pagebreak
+
+\subsection{Software Resources Required}
+Platform :
+\begin{enumerate}
+\item Operating System: Windows/Linus
+\item IDE: Jupyter Notebook
+\item Programming Language: python3, javascript
+\item Frameworks: Node.js, Tensorflow, plotting libraries, openCV
+\end{enumerate}
+
+\subsection{Functional Requirements:}
+\begin{itemize}
+	\item Data Scraping and Processing: The data pipeline should output a usable image which is RGB and has a minimum dimension of $256 \times 256$
+	\item Colorization: The system should output a colorized version of the given grayscale input image
+	\item Super-Resolution: The system should output a 4 times upscaled image of the input
+\end{itemize}
+
+\subsection{Non Functional Requirements:}
+\begin{itemize}
+  \item Accessibility: The dataset generated would be accessible for everyone to access in open source.
+	\item	Availability: The code would be available on github
+  \item Performance: The performance of all the GANs is recorded.
+\end{itemize}
+
+\clearpage
+
+
 \chapter{Project Plan}
 
 \section{Project Estimates}
@@ -472,7 +529,7 @@ the form of:
 \end{itemize}
 For our project, sizing information in the form of Lines of Source Code is used. The
 total lines of code,\\
-KLOC = 750\\
+KLOC = 1000\\
 Equations: The initial effort(Ei) in man-months is calculated using equations:\\
 
 \[E=ax(KLOC)^b\]
@@ -483,7 +540,7 @@ E = 4.5 PM\\
 Where, a = 2.5,\\
 b = 0.35, for a semi-detached project\\
 D = Duration of Project in months\\
-D = 4 Months\\
+D = 12 Months\\
 
 \subsubsection{Time Estimates}
 \[C=D*Cp*hrs\]
@@ -492,8 +549,8 @@ D = Duration in Hours\\
 Cp = Cost incurred per person-hour\\
 hrs = hours\\
 Total of 4.5 person-months are required to complete the project successfully.\\
-Duration of Project D = 6 Months\\
-The approximate duration of the project is 4 months\\
+Duration of Project D = 12 Months\\
+The approximate duration of the project is 12 months\\
 
 \subsection{Project Resources}
           Project resources  [People, Hardware, Software, Tools and other resources] based on Memory Sharing, IPC, and Concurrency derived using appendices to be referred.
@@ -608,7 +665,7 @@ Risk Status	& Identified \\ \hline
 \subsection{Project task set}
 Major Tasks in the Project stages are:
 \begin{itemize}
-  \item Task 1: Colledting Dataset
+  \item Task 1: Collecting Dataset
   \item Task 2: Cleaning Dataset
   \item Task 3: Creating GAN model of image colorization and super-resolution
   \item Task 4: Training  the GAN model
@@ -631,61 +688,9 @@ Team of 4 members
 \item Weekly meeting among team for updates and work distribution
 \item Daily updates on work progress
 \end{itemize}
-\chapter{Software requirement specification }
-
-\section{Introduction}
-\subsection{Purpose and Scope of Document}
-The purpose of this project document is to create a comprehensive documentation about the methodology used in implementing the upscaling and colorization of the HSA images. The document explores the goals, objectives, resources, project plan, SRS and finally the summary and conclusion. It is hoped that this document would be beneficial in answering every query that any individual may have about this research project.
 
 
-
- \subsection{User profiles}
-Two actors have been defined in the Use case Diagram:\\
-User: User preprocesses the image with the help of the GAN and facilitates the whole process.\\
-GAN: It takes the input images, colorizes the image and feeds it to another GAN. The second GAN then upscales the image and a final output image is generated.
-
-\subsection{Use-cases}
-
-
-\input{tables/use_case_table.tex}
-\pagebreak
-\subsection{Use Case View}
-Use Case Diagram. Example is given below
-\begin{center}
-	\begin{figure}[!htbp]
-		\centering
-		\fbox{\includegraphics[width=\textwidth]{figures/use.jpg}}
-	  \caption{Use case diagram}
-	  \label{fig:usecase_dig}
-	\end{figure}
-\end{center}
-
-
-\subsection{Data Flow Diagram}
-\subsubsection{Level 0 Data Flow Diagram}
-\subsubsection{Level 1 Data Flow Diagram}
-
-
-
-\subsection{Activity Diagram:}
-\input{figures/activity_diagram.tikz}
-
-\subsection{Non Functional Requirements:}
-\begin{itemize}
-  \item Accessibility: The dataset generated would be accessible for everyone to access in open source.
-	\item	Availability: The code would be available on github
-  \item Performance: The performance of all the GANs is recorded.
-\end{itemize}
-
-\subsection{State Diagram:}
-  State Transition Diagram\\
-
-\input{figures/state_transition_diagram.tikz}
-
-
-
-
-\chapter{Detailed Design Document }
+\chapter{System Design}
  \section{Introduction}
 \hspace*{0.25 in}The project is largely inspired by Christian Ledig's SRGAN paper \citep{ledig2017photorealistic} and \citet{dong2014super}'s implementation of SRGANs using Tensorflow. \citet{dahl2016automatic}'s introduction of residual encoding using VGG architecture and adaptation of GANs as conditional GANs by \citet{mirza2014conditional} proved to be quite effective for implementing colorization of images. We provide detailed architectural design for each respective GANs and other networks that it will be compared with.
 \section{Architectural Design}
@@ -751,37 +756,19 @@ Use Case Diagram. Example is given below
 	$$
 
 	$D_{\theta_d}(G_{\theta_g}(I^{LR}))$ is the probability that the reconstructed image $G_{\theta_g}(I^{LR}))$ is a natural HR image. For beter gradient behavior, we minimize $-\log D_{\theta_d}(G_{\theta_g}(I^{LR}))$ instead of $\log \big[1-D_{\theta_d}(G_{\theta_g}(I^{LR}))\big]$.
+	
+\pagebreak
+	
+\section{Mathematical Model}
 
- \chapter{Dataset and Experimental setup}
-\hspace*{0.25 in}Initially, we started by scraping the data off Hubble Legacy Archive. Using puppeteer(headless chrome), we scraped off hundreds of thousands of colorized images it has available. The Hubble Legacy archive is slow and produces grainy images with lots of noise and unprocessed images. A filter for M101 (Messier 101) galaxy rendered more than 80 thousand images with a 1 degree difference between consecutive right ascension. The data is large and has no particularly efficient way to clean without human investment. Cleaning tens of thousands of images by handpicking noiseless and well colored images is time consuming. For training the SRGAN, we need high resolution, well colored images. \\ \\
-\hspace*{0.25 in}Consequently, we scraped the Hubble Heritage project instead. The Hubble Heritage project releases the highest-quality astronomical images. They are all stitched together, colorized and processed to eliminate noise. Hubble Heritage then selects the best, most striking of these for public release. However, there are only $\sim150$ of these images that are actually useful. We scraped images from the main Hubble website as well so as to increase the amount of data we had. This provided an extra approximately $\sim1000$ images.
-Each image is a JPG image with dimensions of $256\times 256$ pixels and contains 3 channels of RGB.
-
- \chapter{Summary and Conclusion}
- \section{Summary}
-\hspace*{0.25 in}Low Resolution and Black and White Images in the Hubble Legacy Archive lie dormant and are needed to be upscaled and colourized for better visual discernment of the astromers. Images are initially scraped from the Hubble Legacy Arhive and the Hubble Legacy Project and a dataset is formed which is cleaned manually and is then fed to two Generative Adversarial Networks consecutively. The images of size ($64\times 64\times 1$) are initially colorized using a first GAN and an output image of size ($64\times 64\times 3$) with three RGB channels is obtained. This is then upscaled to a size of ($(64\cdot n)\times (64\cdot n)\times 3$). The output images are visually superior as well as colorized. These images are expected to be of greater use for astronomers than the older ones.
-
-\section{Conclusion}
-\hspace*{0.25 in}The images are upscaled and colourized using a completely automated algorithm which uses Deep Learning. Generative Adversarial Networks are  successfully used for the implementation and the images obtained are in public forum to be used for research, it is anticipated that this will aid the astronomers vastly in their efforts.
-
-\bibliographystyle{dcu}
-\bibliography{biblo}
-
-
-\begin{appendices}
-
-
-% \chapter{ALGORITHMIC DESIGN}
-\chapter{Mathematical Model}
-
-\section{Artificial Neural Networks}
+\subsection{Artificial Neural Networks}
 \hspace{0.25 in}Figure \ref{fig: ANN} shows a schematic of the simplest multi-layer perceptron network, i.e. a feed-forward neural network. The network is composed of an input layer, hidden layers and output layer. Define $a_i^\ell$ as the $i^{th}$ neuron of the $\ell^{th}$ layer and $a_j^{\ell+1}$ as the $j^{th}$ neuron of the $(\ell+1)^{th}$ layer and $w_{ij}^\ell, b_j^\ell$ is the weight and bias connecting the two neurons, then the output of the $\ell^{th}$ layer is given by:
 \begin{equation}
     a^{\ell+1}_j = g(\sum_{i \in N^\ell}(w_{ij}^{\ell}a_i^{\ell} + b_j^{\ell}))
     \label{ANN_activation}
 \end{equation}
 
-\begin{figure}
+\begin{figure}[!htb]
     \centering
     \input{figures/ANN}
     \caption{A feed forward neural network}
@@ -795,7 +782,7 @@ The loss is calculated using a loss function such as cross entropy function espe
 \end{equation}
 where $y' \in \{0,1\}, y \in (0,1)$. This objective is to minimize this cross entropy over a batch of all training data. This is done using gradient descent where the parameters viz. weights and biases are updated to reduce the overall cross entropy loss.
 
-\section{Convolutional Neural Networks}
+\subsection{Convolutional Neural Networks}
 \hspace*{0.25 in}A convolution is a linear operation that can be viewed as a multiplication or dot product of matrices. The input is a tensor of shape $height$ x $width$ x $channels$ and the convolution operation abstracts the image to a feature map (also called a kernel) of shape $kernel size$ x $kernel size$ x $kernel channels$. The layers can be computed by:
 \begin{equation}
     a^{\ell+1}_j = g(\sum_{i \in F_j}(a_i^\ell \times k_{ij}^{\ell+1} + b_j^{\ell+1}))
@@ -803,7 +790,7 @@ where $y' \in \{0,1\}, y \in (0,1)$. This objective is to minimize this cross en
 \end{equation}
 where $\ell$ is the layer, g is the activation function ReLU, $F_j$ is the receptive field, k is the convolutional kernel and b is the bias.
 
-\section{Residual Networks}
+\subsection{Residual Networks}
 \begin{figure}
     \centering
     \input{figures/residual_block}
@@ -826,7 +813,7 @@ where $a_{\ell+1}$ and $a_\ell$ represent the input and output for the $\ell^{th
     \label{Final Residual notation}
 \end{equation}
 
-\section{Generative Adversarial Networks}
+\subsection{Generative Adversarial Networks}
 \hspace*{0.25 in}A generative network, $G$, is supposed to learn the underlying distribution of a latent space, Y. Instead of visually assessing the quality of network outputs and judge how we can adapt the network to produce convincing results, we incorporate automatic tweaking during training by introducing a discriminative network $D$. The network D takes in both the fabricated outputs generated by G and real inputs from the underlying distribution Y. The network produces a probability of the image belonging to the real or fabricated space.
 
   Let $x \in X$ be a low resolution/grayscale image and $y \in Y$ be it's underlying distribution from the latent space Y. Generator $G$ takes in input $x$ and produces an output $\hat{y}$. We define the mapping $x \rightarrow \hat{y}$ in the following manner:
@@ -845,12 +832,496 @@ With conditional GAN, both generator and discriminator are conditioning on the i
 	\[
 		\min_{\theta_g}\Big[-\log(D_{\theta_d}(x,G_{\theta_g}(x)))+\lambda \Vert G_{\theta_g}(x) - y \Vert_1 \Big]
 	\]
+	
+
+\pagebreak
+\section{UML Diagrams}
+
+\subsection{Activity Diagram:}
+\input{figures/activity_diagram.tikz}
+
+\clearpage
+\subsection{State Transition Diagram:}
+
+\input{figures/state_transition_diagram.tikz}
 
 
+\chapter{Project Implementation}
+\section{Overview of Project modules}
+\hspace{0.25 in}To gather data, the primary module implemented was a data scraper written in node.js which uses puppeteer(headless chrome) to scrape the entire HLA(Hubble Legacy Archive) with the described RA and Dec co-ordinates of the night sky. The module ensured that, out of the entire data available in the Legacy Archive, a certain format of images would be downloaded and stored appropriately. After gathering the data, it was apparent that there were many other processed images present on the Hubble main and other citizen science projects conducted with Hubble Space Telescope. To scrape these, a python script using selenium was written so as to efficiently scrape processed images which had a minimum dimensions of $256 \times 256 \times 3$. With the data gathered, the main components, i.e. the models were built.\\
+\hspace*{0.25 in}The project entails a standard set of GAN modules, broadly, a data pre-processing pipeline, a training pipeline, intermediate state logging and a testing pipeline.
+\begin{itemize}
+	\item \textbf{Data Pre-processing}
+	\begin{itemize}
+		\item The data pre-processing pipeline is an important part of the data pipeline that feeds the data to the training pipeline
+		\item The images, being too large to be loaded into the memory simultaneously, had to be loaded through a data generator
+		\item We implement an instance of \texttt{Keras Image Data Generator} to convert the raw data into training data
+		\item We create two \textit{data generators}, one for generating gray scale images and the other for generating subsequent RGB image
+		\item We create another data pre-processor that converts the given RGB image into L*a*b color space
+		\item The images are then resized to a dimension of $64 \times 64$ 
+		\item We get a vector of image batches which will be the input to the training pipeline
+	\end{itemize}
+	
+	\item \textbf{Training Pipeline}
+	\begin{itemize}
+		\item The training pipeline consists of multiple phases
+		\item Initially, we build the basic neural networks for generator and discriminator networks, i.e. a tensor graph which will function as a computation graph for forward and backward propagation
+		\item The next step is selection of an optimizing algorithm
+		\item After selection of optimizer, a training pipeline is implemented which includes running a session of forward and backward propagation throughout the computation graph and optimizing the trainable variables of the networks
+	\end{itemize}
+	\item \textbf{Intermediate state logging}
+	\begin{itemize}
+		\item Deep Learning models use up a lot of computational resources and are time consuming to train
+		\item Thus, it is essential to set up methods that will extract intermediate states of the model while it is still in the training loop
+		\item These methods are often termed as 'callbacks' and we implement different callbacks to ensure availability of training history, weights and intermediate results during documentation
+		\item A csv logger logs the metrics at the end of each epoch into a csv file for model evaluation
+		\item The model weights are saved if the loss metric improves than the earlier epoch. We implement a mechanism for early stopping where the training loop exits if the model appears to have converged
+	\end{itemize}
+	\item \textbf{Testing pipeline}
+	\begin{itemize}
+		\item Model testing is performed on a testing dataset that is different than the original dataset
+		\item Testing pipeline is implemented by using the saved weights of the trained model and the images are processed through the entire dataset
+		\item We evaluate the images qualitatively as well as quantitatively using visual inspection and distance metrics
+	\end{itemize}
+\end{itemize}
+
+\section{Tools and Technology used}
+\hspace*{0.25 in}We use the following tools:
+\begin{itemize}
+	\item Data gathering: Node.js, puppeteer, selenium
+	\item Data Processing: openCV, Pillow
+	\item Pre-processing \& input pipeline: numpy, tensorflow-keras
+	\item Model building \& training: tensorflow 2.x
+	\item Model evaluation: tensorflow, numpy
+	\item Visualization: matplotlib, Pillow
+\end{itemize}
+
+\section{Algorithm Details}
+\subsection{Generative Networks}
+\hspace*{0.25 in}A generative model is a class of statistical models that are a contrast to the classifier models dubbed as discriminative models. Informally speaking, a generative model creates new data instances based on the distribution of the data itself. Generative models tackle a more difficult task, i.e. to model data. A generative model might capture correlations among underlying distribution and draw conclusions. \cite{goodfellow2014generative} proposed the most famous type of generative model, i.e. Generative Adversarial Network, which is composed of two smaller networks called a discriminator and a generator. The generator's task is to create fake images that convince the discriminator and the discriminator usually classifies between real and fake data. 
+\subsection{Adversarial Networks}
+\hspace*{0.25 in}With two networks that are neural networks, the adversarial modeling framework is the most straightforward to apply. A distribution $p_g$ over data $x$ is called the generator's distribution. To learn this distribution, we define some prior noise on the input variables $p_z(z)$ and represent a mapping to a space with $G(z; \theta_g)$, where $G$ is a differential function of neural network parameterized by $\theta_g$. Another neural network $D(x;\theta_d)$ is defined such that it provides a scalar output, representing the probability that data $x$ comes from the input distribution rather than $p_g$. The goal is to train $D$ to maximize the probability of assigning the correct label to both training examples and samples from $G$. The network $G$ is trained to minimize $log(1-D(G(z))$. 
+
+\SetAlgoNoLine%
+\begin{algorithm}[!htb]
+\For{number of training examples}{
+\For{k steps}{
+	$\bullet$ Sample minibatch of $m$ noise samples $\{z^{(1)}\dots z^{(m)}\}$ from noise prior to $p_g(z)$.\\
+	$\bullet$ Sample minibatch of $m$ examples $\{x^{(1)}\dots x^{(m)}\}$ from data generating distribution $p_{data}(x)$.\\
+	$\bullet$ Update the discriminator by ascending its stochastic gradient:
+		$$
+			\bigtriangledown_{\theta_d}\frac{1}{m}\sum_{i=1}^m\Big[ log D \Big( x^{(i)}\Big) + log \Big( 1 - D \Big( G \Big( z^{(i)} \Big) \Big) \Big) \Big]
+		$$
+ }
+ $\bullet$ Sample minibatch of $m$ noise samples $\{z^{(1)}\dots z^{(m)}\}$ from noise prior to $p_g(z)$.\\
+ $\bullet$ Update generator by descending its stochastic gradient:
+ 		$$
+			\bigtriangledown_{\theta_g}\frac{1}{m}\sum_{i=1}^m log \Big( 1 - D \Big( G \Big( z^{(i)} \Big) \Big) \Big) 
+		$$
+ }
+ \caption{Minibatch stochastic gradient descent training of generative adversarial networks. The number of steps to apply to the discriminator, $k$, is a hyperparameter.}
+\end{algorithm}
+
+\subsection{Conditional GANs}
+\hspace*{0.25 in}As mentioned earlier, GANs are generative models that learn a mapping from a random noise vector $z$ to output $p_g$. The mapping from vector $z$ to an output image $y$ can be represented as $G: z \rightarrow y$ \citep{goodfellow2014generative}. \cite{isola2018imagetoimage} presented a new approach for GANs called Conditional GANs. Instead of learning just from a random noise vector, conditional GANs learn a mapping from input $x$ and the vector $z$ to $y$ such that $G: \{x,z\} \rightarrow y$. By doing this, we train the discriminator to do as well as possible to detect the generator's fake outputs whereas the generator is trained to produce results that are almost indistinguishable from the real data. The objective function of conditional GAN can be expressed as:
+$$
+		\min_{G}\max_{D}\Big[\mathbb{E}_{x,y}\big[ \log D(x,y)\big] + E_{x,z}\big[ \log(1 - D(x, G(x,z))\big]\Big]
+$$
+
+\section{Methodology}
+\subsection{Image Color space}
+\hspace*{0.25 in}An RGB image is essentially a rank 3 tensor of height, width and color where the last axis contains the color data of our image. The data is represented in RGB color space which has 3 numbers for every pixel indicating the amount of \textit{Red, Green, and Blue} values the pixel has. Figure \ref{rgb_colorspace} shows that in the left part of the “main image” has blue color so the blue channel of the image has higher values and turns dark.\\
+\begin{figure}[!htb]
+\begin{center}
+	\includegraphics[width=\textwidth]{figures/rgb_colorspace}
+	\caption{Reg, Green and Blue channels of an image}
+	\label{rgb_colorspace}
+\end{center}
+\end{figure}
+
+In \textbf{L*a*b} color space, we have three numbers for each pixel but these numbers have different meanings. The first channel, L, encodes the \textbf{Lightness} of each pixel and when we visualize this channel it appears as a black and white image. The \textbf{*a and *b} channels encode how much \textbf{green-red} and \textbf{yellow-blue} each pixel is, respectively. In the following image you can see each channel of L*a*b color space separately.
+
+\begin{figure}[!htb]
+\begin{center}
+	\includegraphics[width=\textwidth]{figures/Lab_colorspace}
+	\caption{Lightness, *a and *b channels of the L*a*b colorspace}
+	\label{lab_colorspace}
+\end{center}
+\end{figure}
+
+In most of the papers listed in the Literature Survey, the L*a*b color space is widely used instead of RGB to train the models. Intuitively, to the train a model for colorization, we should give it a grayscale image and we hope that it colors it. In the L*a*b colorspace, the model is fed the L channel, which is essentially a grayscale image, and we perform computations to predict the other two channels (*a and *b). After the predictions, we concatenate the channels and get a colorful image. In case of RGB, there is a need to explicitly convert the three channels down to 1 to make it a grayscale image and then feed it to the network hoping that it predicts three numbers per pixel. This is an unstable task due to sheer increase in volume of combinations from two numbers to three.
+
+We train models using both color spaces and empirically show the significance of the L*a*b colorspace.
+
+\subsection{Transferred learning and model tweaking}
+\hspace*{0.25 in}\cite{isola2018imagetoimage} proposed a general solution to many image-to-image translation tasks. We propose a similar methodology as proposed in the paper with a few minor tweaks, so as to significantly reduce the amount of training data needed and minimize the training time to achieve similar results. Initially, we use a U-net for the generator. The \textit{encoder} of our U-net is a pre-trained ResNet-18 network with half of it's layers clipped off so as to get feature abstractions of the middle layers. \cite{ledig2017photorealistic} showed that training the generator separately in a supervised, deterministic manner helps it generalize the mapping from the input space to outputs. The idea solves the problem of \textit{"The blind leading the blind"} that is persistent in most image-to-image translation tasks to date. \\
+\hspace*{0.25 in}We decide to use the Common Objects in Context (COCO) dataset to pre-train our generator independently using the imagenet weights. This training will be supervised and the loss function used is \textit{mean absolute error} or the \textit{L1 Norm} from the target image. Even though trained deterministically,the problem of rectifying incorrect predictions still persists due to constraints over the convergence of loss metric. To combat this, we use this trained generator and train it once again in an adversarial fashion to generalize it further. We hypothesize that re-training with an adversarial will further rectify the subtle color differences that \textit{mae} couldn't solve.\\
+\hspace*{0.25 in}We use a pre-trained ResNet-50 with imagenet weights as our discriminator with last few layers clipped off. The discriminative network used is something called a "Patch Discriminator" proposed by \cite{isola2018imagetoimage}. In a \textit{vanilla} discriminator proposed by \cite{goodfellow2014generative}, the network produces a scalar output, representing the probability that the data $x$ belongs to the input distribution and not the generator distribution $p_g$. \cite{isola2018imagetoimage} proposed a modification to the discriminative network so as to produce, instead of a single scalar, a vector of probabilities representing different localities of the input distribution (image) $x$. For instance, a discriminator producing a $30 \times 30$ vector represents the probabilities every receptive field that is covered by the output vector. Thus, we can localize the corrections in the image that the generator should make.\\
+\hspace*{0.25 in}Finally, we use the trained generator and trained discriminator and fine-tune it to fit it on our data which is rather small in size compared to the previous datasets. We train these networks in an adversarial fashion using the conditional GAN objective function \citep{isola2018imagetoimage} and couple it with some noise introduced as the L1 norm of generated image tensor to the target image tensor. The reason behind this is to train the generator using an adversarial component while trying to minimize the Manhattan distance between the generator output and target vector space.
+
+\chapter{Software Testing}
+\section{Types of testing}
+\hspace{0.25 in}We test the modules of our entire setup to ensure that the modules are performing as they're intended to. 
+We perform a kind of unit testing to evaluate the output of every function in the code. 
+\section{Test Cases and Test Results}
+\subsection{Data Gathering and Pre-processing}
+\begin{itemize}
+	\item Test Case 1: Image Scraping test
+	\begin{itemize}
+		\item Test Case Description:\\
+			The module function should scan through the legacy archive only in the described co-ordinates and scrape images that are RGB and of dimensions $256 \times 256$
+		\item Status: \textbf{Pass}
+	\end{itemize}
+	\item Image Colorization:
+	\begin{itemize}
+	\item RGB Color Space:
+	\begin{itemize}
+		\item Test Case 2: Pre-processing System: Grayscale Images (Input distribution)
+	\begin{itemize}
+		\item Test Case Description:\\
+			The pre-processing function takes in a stream of raw data and converts the images into a numpy array with dimensions $n \times 64 \times 64 \times 1$ where $n$ is the batch size. The output image vector should contain black \& white images
+		\item Status: \textbf{Pass}
+	\end{itemize}
+		\item Test Case 3: Pre-processing System: Color Images (Target distribution)
+	\begin{itemize}
+		\item Test Case Description:\\
+			The target distribution should contain color counter-parts of the respective input data. The function should output a numpy array with dimensions $n \times 64 \times 64 \times 3$ where $n$ is the batch size.
+		\item Status: \textbf{Pass}
+
+	\end{itemize}
+	\end{itemize}
+	\item L*a*b Color Space:
+	\begin{itemize}
+		\item Test Case 2: Pre-processing System: RGB to L*a*b conversion
+	\begin{itemize}
+		\item Test Case Description:\\
+			The pre-processing function takes in a stream of raw data and converts the images into a numpy array with dimensions $n \times 64 \times 64 \times 3$ where $n$ is the batch size. The output is an image tensor in L*a*b color space. The L channel is provided for the grayscale input 
+		\item Status: \textbf{Pass}
+	\end{itemize}
+		\item Test Case 3: Pre-processing System: L*a*b to RGB conversion
+	\begin{itemize}
+		\item Test Case Description:\\
+			The function takes in its input as an image tensor in L*a*b colorspace. The function should output a numpy array with dimensions $n \times 64 \times 64 \times 3$ where $n$ is the batch size and the image output is converted back to the RGB space
+		\item Status: \textbf{Pass}
+
+	\end{itemize}
+	\end{itemize}
+	\end{itemize}
+	\item Image Super-resolution:
+	\begin{itemize}
+		\item Test Case 4: Pre-processing System: Low Resolution Images (Input distribution)
+		\begin{itemize}
+			\item Test Case Description:\\
+			The pre-processing function takes in the raw data and produces low resolution $64 \times 64 \times 3$ images. The output should be a numpy vector of $n$ dimensions representing the mini-batch size
+			\item Status: \textbf{Pass}
+		\end{itemize}
+		\item Test Case 5: Pre-processing System: High Resolution Images (Target distribution)
+		\begin{itemize}
+			\item Test Case Description:\\
+			The target distribution contains the labelled data that is a high resolution image of dimensions $256 \times 256 \times 3$. The function produces a numpy vector of size $n$ where $n$ is the size of mini-batch
+			\item Status: \textbf{Pass}
+		\end{itemize}
+	\end{itemize}
+\end{itemize}
+
+\subsection{Model Implementation}
+\begin{itemize}
+	\item Image Colorization Model
+	\begin{itemize}
+		\item Test Case 1: Generator network
+		\begin{itemize}
+			\item Test Case Description:\\
+			The generator network is a tensor graph implemented in tensorflow. The computation graph should have an input layer of dimensions $n \times 64 \times 64 \times 1$ which is propagated through till the final layer. The final layer output should be a tensor of dimensions $n \times 64 \times 64 \times 3$ where $n$ is the mini-batch size
+			\item Status: \textbf{Pass}
+		\end{itemize}
+		\item Test Case 2: Discriminator network
+		\begin{itemize}
+			\item Test Case Description:\\
+			The discriminator network is a tensor graph implemented in tensorflow. The computation graph should have an input layer of dimensions $n \times 64 \times 64 \times 3$ which is propagated through till the final layer. The final layer output should be a tensor of dimensions $n \times 30 \times 30 \times 1$ where $n$ is the mini-batch size
+			\item Status: \textbf{Pass}
+		\end{itemize}
+	\end{itemize}
+	\item Image Super-resolution Model
+	\begin{itemize}
+		\item Test Case 1: Generator network
+		\begin{itemize}
+			\item Test Case Description:\\
+			The generator network is a tensor graph. The computation graph should have an input layer of dimensions $n \times 64 \times 64 \times 3$. The final layer output should be a tensor of dimensions $n \times 256 \times 256 \times 3$ where $n$ is the mini-batch size
+			\item Status: \textbf{Pass}
+		\end{itemize}
+		\item Test Case 2: Discriminator network
+		\begin{itemize}
+			\item Test Case Description:\\
+			The discriminator network is a tensor graph. The computation graph should have an input layer of dimensions $n \times 256 \times 256 \times 3$. The final layer output should be a tensor of dimensions $n \times 1$ where $n$ is the mini-batch size
+			\item Status: \textbf{Pass}
+		\end{itemize}
+	\end{itemize}
+\end{itemize}
+
+\subsection{Training Loop}
+\begin{itemize}
+	\item Test Case 1: Forward propagation
+	\begin{itemize}
+		\item Test Case Description:\\
+		The forward propagation function should run the computation graph over all the training samples and calculate losses of the generator and discriminator. The loss should be calculated according to the GAN objective function and final output should be the cost of the entire training epoch.
+		\item Status: \textbf{Pass}
+	\end{itemize}
+	\item Test Case 2: Backward propagation
+	\begin{itemize}
+		\item Test Case Description:\\
+		The backward propagation should calculate gradients of the objective function based on the cost calculated during the forward propagation. The gradients should be used to update the trainable variables of the network using gradient descent with momentum and weighted average sum, i.e. Adam.
+		\item Status: \textbf{Pass}
+	\end{itemize}
+	\item Test Case 3: Callbacks and intermediate results logging
+	\begin{itemize}
+		\item Test Case Description:\\
+		While training the model, the callback functionality should keep track of the intermediate training results. It should perform the following:\\
+		$\bullet$ A csv file containing history of the entire training session\\
+		$\bullet$ Save the model weights on a best performance basis by keeping track of the earlier losses\\
+		$\bullet$ Keep track of the convergence and stop the model training if the model converges early
+		
+		\item Status: \textbf{Pass}
+	\end{itemize}
+\end{itemize}
+
+\subsection{Evaluation system}
+\begin{itemize}
+	\item Model performance evaluation
+	\begin{itemize}
+		\item Test Case 1: Model history plotting
+		\begin{itemize}
+			\item Test Case Description:\\
+			The function should plot the model losses throughout the training loop and present a graph of the said plot
+			\item Status: \textbf{Pass}
+		\end{itemize}
+		\item Test Case 2: Output plotting
+		\begin{itemize}
+			\item Test Case Description:\\
+			The function should take in the predictions by the model and save the images with their respective ground truth images for evaluation
+			\item Status: \textbf{Pass}
+		\end{itemize}
+		\item Test Case 3: Model evaluation (L1 norm)
+		\begin{itemize}
+			\item Test Case Description:\\
+			The function should take in two numpy vectors consisting of predicted values and ground truths respectively. The function output should be a single number consisting of the L1 norm (Manhattan distance) between the target and predictions
+			\item Status: \textbf{Pass}
+		\end{itemize}
+	\end{itemize}
+\end{itemize}
 
 
+\chapter{Results}
+\section{Dataset and Experimental setup}
+\hspace*{0.25 in}Initially, we started by scraping the data off Hubble Legacy Archive. Using puppeteer(headless chrome), we scraped off hundreds of thousands of colorized images it has available. The Hubble Legacy archive is slow and produces grainy images with lots of noise and unprocessed images. A filter for M101 (Messier 101) galaxy rendered more than 80 thousand images with a 1 degree difference between consecutive right ascension. The data is large and has no particularly efficient way to clean without human investment. Cleaning tens of thousands of images by handpicking noiseless and well colored images is time consuming. For training the SRGAN, we need high resolution, well colored images. \\
+\hspace*{0.25 in}Consequently, we scraped the Hubble Heritage project instead. The Hubble Heritage project releases the highest-quality astronomical images. They are all stitched together, colorized and processed to eliminate noise. Hubble Heritage then selects the best, most striking of these for public release. However, there are only $\sim150$ of these images that are actually useful. We scraped images from the main Hubble website as well so as to increase the amount of data we had. This provided an extra approximately $\sim1000$ images.
+Each image is a JPG image with dimensions of $256\times 256$ pixels and contains 3 channels of RGB.\\
+\hspace*{0.25 in}We use a mini-batch gradient descent with a batch size of 10, 16 and 32 for different iterations. We use Adam optimizer with $\beta_1 = 0.5$ and $\beta_2 = 0.999$. The generator and discriminator has a learning rate of $2e-4$ which remains constant throughout the training. We train the model with different epochs ranging between 20,50 and 100, saving the best model weights determined by L1 norm between the output of the generator and the target image. We use early stopping with a patience value of 10. The image size is $64\times64$. Our implementation is using Python, numpy, Tensorflow and tf-keras. It takes about 24 hours to complete training over the COCO dataset and about 12 to 13 hours to fit the model on given astronomical data on a NVIDIA Tesla K80 GPU.
+\pagebreak
+\section{Results and Discussions}
+\hspace*{0.25 in}In the following section, we briefly compare and summarize the results of the implemented architectures and evaluate their performance. The evaluation is done qualitatively as well as quantitatively. We compare the performance of each model using L1 and L2 norm distance between the predictions and targets. Though unreliable, this method provides us with a somewhat decent ground to perform a comparative study and evaluate the reliability of such metrics on GAN evaluation compared to qualitative, visual evaluation.\\
+\hspace*{0.25 in}To evaluate the model performance by virtue of convergence of the objective function, we plot the generator loss throughout the training on two different networks.\\
+\begin{figure}[!htb]
+	\centering
+	\begin{subfigure}[b]{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/basic_generator_loss}
+		\caption{U-net Generator loss}
+		\label{fig: u-net_loss}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/basic_discriminator_loss}
+		\caption{Discriminator loss}
+		\label{fig: disc_cus_loss}
+	\end{subfigure}
+	\caption{Curve plots for Basic U-net \& Custom discriminator}
+	\label{fig: basic_unet_curves}
+\end{figure}
+
+Figure \ref{fig: u-net_loss} and \ref{fig: disc_cus_loss} shows that the generator converges quite nicely. The discriminator on the other hand oscillates because of the convergence that the generator shows. GAN losses are pretty non-intuitive but we can draw some observations from the loss curves. It seems that the pattern of oscillation and convergence repeats when networks are trained in an adversarial fashion. 
+
+\begin{figure}[!htb]
+	\centering
+	\begin{subfigure}[b]{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/resnet18_generator_loss}
+		\caption{ResNet18 U-net Generator}
+		\label{fig: resnet_loss}
+	\end{subfigure}
+		\hspace{0.1 in}
+	\begin{subfigure}[b]{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/resnet18_discriminator_loss}
+		\caption{ResNet50 discriminator loss}
+		\label{fig: resnet50_disc_loss}
+	\end{subfigure}
+	\caption{Curve plots for ResNet18 U-net \& ResNet50 discriminator}
+	\label{fig: resnet18_curves}
+\end{figure}
+
+Figure \ref{fig: resnet_loss} and \ref{fig: resnet50_disc_loss} show the same trend repeating even when trained using pre-trained weights with state of the art networks that show excellent results. It is observed that the ResNet U-net with a pre-trained ResNet-18 for its backbone converges decently in the beginning but later shows spikes when nearing the end of training loop. The ResNet50 used as a discriminator shows identical behavior as the custom discriminator above refer fig.\ref{fig: disc_cus_loss}. 
+
+We draw some conclusions based on our understanding of the plots. It seems that the loss convergence doesn't signify whether the model is predicting expected results. The loss function just converges to the minimum value that the cost function descends to, permitted by the learning rate. It would normally signify that the GAN has found some optimum point in the vector space that is at the lowest potential and cant decrease any further. It essentially means that the GAN has leaned enough. Due to the large number of dimensions, owing to the high amount of trainable variables, such combinations, where the function converges, can be huge in volume. Thus, these numbers don't provide any better understanding of the bias or variance the model is facing. Also, we discover that if the loss hasn't converged well, it doesn't necessarily mean that the model hasn't learned anything. On visual inspection, the generated results show similar results to the ground truth, even with high generator losses. This might be due to presence of a content loss parameter in the loss function where we try to minimize the function by  minimizing the L1 norm between the generator predictions and target.
+
+The discriminator shows an increase in the objective loss function in the initial epochs and then settles down in the later phase around an oscillation point. This shows that the discriminator is converging to some permanent number or rather, oscillating around it. We assume this point to be a point of stability between the two networks as the networks are in a constant adversarial battle, meaning if one performs better, the other is bound to perform worse.
+\pagebreak
+\subsection{Image Colorization}
+\hspace*{0.25 in}We present a comparative study of the following models: Basic U-net generator with a custom, residual VGG16 discriminator, hereafter referred to as Basic U-net. A modified U-net with pre-trained ResNet18 as its backbone. We evaluate this model by training it in RGB color space to predict 3 numbers for every pixel and in L*a*b color space where the model predicts the a and b channel alone. We then further train this model to fine-tune it to the task of colorizing astronomical images.
+
+\begin{figure}[!htb]
+	\includegraphics[width=\textwidth]{figures/comparison_color}
+	\caption{Results of the colorization study. The first two images in the top row are the ground truth and input image respectively. The next images belong to the output of following, serially: Basic U-net, ResNet18 in RGB colorspace, ResNet18 fine-tuned in L*a*b colorspace, ResNet18 pre-trained U-net in L*a*b colorspace}
+	\label{color_results}
+\end{figure}
+
+From figure \ref{color_results} we observe that on this particular example, the Basic U-net performs better at predicting results that closely map to the ground truth but the fine-tuned ResNet-18 shows promising results over a larger set of inputs. It can also be observed that the Basic U-net architecture does a decent job of faking the sharpness in the original image and that makes the image appear more realistic as compared to rather blurry outputs from the other networks. 
+
+We also observe that the model trained in the RGB color space performs poorly at predicting values of the three color channels and that results in dominance of one channel (blue in this case) over others. This causes the output, even though reconstructed quite accurately, to have a varied color pattern with high emphasis on one color channel. This might be because of presence of deep layers which cause gradients of certain colors to diminish over time, causing the model to be strongly biased towards the blue color in this case. An increase in the volume of training data and some random pixel shuffling in forward propagation might solve this problem. 
+
+The pre-trained ResNet18 U-net performs decently with the weights gathered by training it over the COCO dataset. The model still lacks the specific coloring intuition in astronomical images and plainly colors specific parts of the images in light colors, leaving majority of the image unaltered. This causes the images to have a slight gray tinge.
+
+Figure \ref{fig: comparisons} shows how the other models perform in different color spaces. We can observe that the Basic U-net model performs good at predicting the outputs but doesn't predict the brightness level of pixels quite accurately. The model seems to be overfitting on the dataset and suffers a high variance on output because there are a lot of testing samples which demonstrate the poor performance of the Basic U-net model as can be seen in figure \ref{fig: u-net_overfit}.
+
+\begin{figure}[!htb]
+	\centering
+	\begin{subfigure}[b]{0.4\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/overfit_1}
+		\caption{Sample 2}
+		\label{fig: overfit1}
+	\end{subfigure}
+		\hspace{0.1 in}
+	\begin{subfigure}[b]{0.4\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/overfit_2}
+		\caption{Sample 2}
+		\label{fig: overfit2}
+	\end{subfigure}
+	\caption{Performance of Basic U-net over samples different from the dataset. The left part is the prediction, right part is the ground truth}
+	\label{fig: u-net_overfit}
+\end{figure}
 
 
+\begin{figure}[!htb]
+	\centering
+	\begin{subfigure}[t]{0.8\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/samples_main}
+		\caption{Ground Truth}
+		\label{fig: main_color_samples}
+	\end{subfigure}
+		\hspace{0.1 in}
+	\begin{subfigure}[b]{0.8\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/samples_full-trained}
+		\caption{ResNet18 Full trained L*a*b}
+		\label{fig: resnet18_full}
+	\end{subfigure}
+	\caption{Results of fine-tuned ResNet18 in L*a*b colorspace compared with ground truth images}
+\end{figure}
+\pagebreak
+Figure \ref{fig: main_color_samples} shows the ground truth images and figure \ref{fig: resnet18_full} shows the predictions of the ResNet18 full trained model in the L*a*b color space. This model seems to perform best, visually. 
+\pagebreak
+\begin{figure}[!htb]
+	\centering
+	\begin{subfigure}[b]{0.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/samples_pix2pix}
+		\caption{Basic U-net}
+		\label{fig: u-net_samples}
+	\end{subfigure}
+		
+	\begin{subfigure}[b]{0.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/samples_pre-trained}
+		\caption{ResNet18 pre-trained L*a*b}
+		\label{fig: resnet18_pre}
+	\end{subfigure}
+		
+	\begin{subfigure}[b]{0.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/samples_coco}
+		\caption{ResNet18 pre-trained RGB}
+		\label{fig: resnet18_rgb}
+	\end{subfigure}
+	\caption{Results of colorization models (from top to bottom): Basic U-net, ResNet18 U-net pre-trained in L*a*b color space, ResNet18 U-net pre-trained in RGB color space}
+	\label{fig: comparisons}
+\end{figure}
+
+\pagebreak
+
+To quantitatively estimate the model performance, we measure the L1 and L2 distance between the predictions and the ground truth images in both RGB as well as L*a*b colorspace. 
+
+\input{tables/colorization_results}
+
+Table \ref{color_results} shows that the RGB color space performs poorly on the task of colorization. In terms of the L1 distance, the best performance is achieved on the ResNet18 U-net with pre-trained weights. This goes to prove the unreliability of distance metrics in model performance evaluation. The model, although quantitatively, performs better than the fine-tuned model but in reality, fails to produce images that might be visually appealing. The L2 distance metric shows how the fine-tuned model might, in reality, be fitting slightly better over the data to predict correct color combination as its output. We still consider the results from the fine tuned model to be better than the other performing models and further investigate the per-channel predictions by the model.
+
+\input{tables/channel_wise_color}
+
+Table \ref{tab:channel_wise_results} shows the RGB channel averages of the outputs produced by the fine tuned model. It can be observed that the feature embeddings produced by the model in *a, *b color spaces maps to the green channel with the least error. This might be indicative that the model is performing poorly on images that have a high content of red-blue colors. 
+
+To further evaluate the actual outputs produced in the L*a*b color space, we compare the *a, *b channels of the ResNet18 architectures. 
+
+\input{tables/lab_color_results} 
+In table \ref{tab:lab_color_results}, L1 distance, we can see the performance of fine-tuned model to be better in channel *a but poor in *b compared to the pre-trained model. The L2 distance metric rules out the possibility of the fine-tuned model performing better than the pre-trained model. In reality, the fine-tuned model is orders of magnitude better at predicting output abstractions with the L channel as its input, thus contradicting the quantitative results.
+
+\subsection{Image Super Resolution}
+\hspace*{0.25 in}We implement the basic SR-GAN proposed by Ledig and train it to improve super-resolution task. We compare the trained model with pre-trained SRGAN model, EDSR-GAN proposed by \cite{lim2017enhanced} and WDSR-GAN proposed by \cite{yu2018wide}.
+
+\begin{figure}[!htb]
+	\includegraphics[width=0.8\textwidth]{figures/comparison_upscale}
+	\caption{Results of the super-resolving models. The first two images in the top row are the input image and ground truth respectively. The next images belong to the output of following, serially: Fine-tuned SRGAN, pre-trained SRGAN, EDSR, WDSR}
+	\label{fig: sr_results}
+\end{figure}
+
+Figure \ref{fig: sr_results} shows how the networks perform on the task of predicting pixels while upscaling of the image. All the networks perform really well and its difficult to distinguish the outputs visually. It may be observed that the fine-tuned network produces images that look slightly better than the other counter-parts. The best performing network seems to be the WDSR-GAN with a very little error in predicting the output. 
+
+\begin{figure}[!htb]
+	\centering
+	\begin{subfigure}[b]{0.8\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/inputsamples_superR}
+		\caption{Input Distribution}
+		\label{fig: sr_input_samples}
+	\end{subfigure}
+		
+	\begin{subfigure}[b]{0.8\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/samples_SRGAN}
+		\caption{SRGAN fine-tuned output}
+		\label{fig: sr__outputs}
+	\end{subfigure}
+	\caption{Results of SRGAN. \ref{fig: sr_input_samples} shows the input data and \ref{fig: sr__outputs} shows the corresponding output}
+	\label{fig: sr_comparisons}
+\end{figure}
+
+It is evident that the model produces acceptable results on visual inspection. The main reason behind this might, again, be the random pixel shuffling between every upscaling pass. 
+
+As opposed to colorization, super-resolution needs a quantitative estimation to determine which model performs best among the give models. 
+
+\input{tables/super-resolution_results}
+
+\pagebreak
+Table \ref{tab:Super-resolution_results} shows the L1 and L2 distances of predicted results by each model with the ground truth image. It is observed that Ledig's SRGAN, after a bit of fine-tuning performs really well in comparison to the the pre-trained version. To further improve this, \cite{lim2017enhanced} proposed an optimized version of SRGAN by removing the unnecessary modules in the conventional resnets and showed that Enhanced Deep Residual Networks performed better at upscaling task. When trained in an adversarial manner, the ED-SRGAN performs better than the traditional SRGAN. \cite{yu2018wide} further improved the idea by increasing the widening factor ($\times 2$ and $\times 4$) to ($\times 6$ and $\times 9$). This Wide Activation Deep Super Resolution network further improved the performance for single image super-resolution. When we implement this in an adversarial manner, we achieve excellent results. It is evident from the results that the best performing network is the WDSR.
+
+\chapter{Summary and Conclusion}
+\section{Summary and Conclusion}
+\hspace*{0.25 in}The project mainly tackles the problem of colorizing astronomical images and super-resolving them for astronomical inspection. We explore various methodologies proposed till date that efficient colorize and super-scale images with results that are significantly closer to the ground truth distribution. We scrape the data from Hubble Legacy Archive, Hubble Main website and Hubble Heritage project and created a filtered and clean dataset of 4700 images. We split the data and use 500 images, roughly 10\% of the data for testing purposes. To compensate for the lack of data, we implement several pre-trained architectures and fine-tune their abstractions over our dataset to find the most effective solution.\\
+\hspace*{0.25 in}For the colorizing model, we explore usage of U-net architectures starting from a basic U-net model and experiment with different color spaces and empirically confirm the superiority of L*a*b color space in image colorization problem. We use the state of the art ResNet-18 to provide as a backbone of the encoder and build a U-net around it. The pre-trained network over COCO dataset in RGB colorspace produces significantly weaker results as compared to the subsequent network in L*a*b colorspace. The best performing model turns out to be the ResNet18 U-net which is fine-tuned over our particular dataset to produce appealing and similar results to the ground truth.\\
+\hspace*{0.25 in}The Super-resolution model is based largely on the SRGAN proposed by \cite{ledig2017photorealistic}. We use the generator weights and sample results from the training set to inspect the results. It is found that the model performs really well on the pre-trained weights and we decide to fine-tune it to our application. After fine-tuning the model, we train other state of the art single image super-resolution models such as EDSR \citep{lim2017enhanced} and WDSR \citep{yu2018wide}. These provide further insights into the problem and simultaneously, improve the results.\\
+\hspace*{0.25 in}While studying and improving the performance of these models, we explore performance metrics of GANs and evaluation methodologies implemented to test out conditional GANs. It is evident that the loss curves of generator and discriminator do not provide us with any intuition about the model performance. We also discover that standard distance metrics cannot be used to evaluate GANs and quantitative methods that exist to evaluate GANs are unreliable. We prove so by contradiction of qualitative samples and quantitative measurements of the best performing architecture for colorization models. However, we observe that quantitative estimation is quite reliable for the problem of single image super-resolution and can be helped to determine which model is better suited for the task.
+
+\section{Future Scope}
+\hspace*{0.25 in}Though we obtain moderately good results, a vast amount of algorithms still remain unscratched. A more powerful model such as SE-ResNext, EfficientNet and more state-of-the-art models can be implemented and trained over millions of images from the Imagenet. With even more hardware resources and availability of data, we can explore computationally heavy models for a better approximation. An image stitching algorithm can be applied on the produced images to generate large scale astronomical images for scientific study. Colorization can be improved by the virtue of exploring different loss functions using weighted losses to reduce loss problem for low saturation regions. We can introduce a gradient penalty for the SRGAN architecture and include the WGAN \citep{arjovsky2017wasserstein} which will stabilize the discriminator to stay within the space of 1-Lipschitz function. Progressively growing GANs \citep{karras2018progressive} can be applied so that the dimensions can be further improved with more stability and greater sharpness.
+
+\section{Applications}
+\hspace*{0.25 in}The images are upscaled and colourized using a completely automated algorithm which uses Deep Learning. Generative Adversarial Networks are  successfully used for the implementation. The algorithm can directly be applied for creating images that can be studied by astronomers. It is anticipated that this will aid the astronomers vastly in their efforts.
+
+\bibliographystyle{dcu}
+\bibliography{biblo}
+
+
+\begin{appendices}
 
 \chapter{Plagiarism Report }
 
@@ -947,20 +1418,6 @@ With conditional GAN, both generator and discriminator are conditioning on the i
 \end{figure}
 
 \begin{figure}
-	\centering
-    \includegraphics[width=\textwidth, height=\textheight]{plagiarism/dataset_experimental_setup.pdf}
-    \caption{Plagiarism report for Experimental Setup}
-    \label{PlagiarismExperiment}
-\end{figure}
-
-\begin{figure}
-	\centering
-    \includegraphics[width=\textwidth, height=\textheight]{plagiarism/summary_conclusion.pdf}
-    \caption{Plagiarism report for Summary and conclusion}
-    \label{PlagiarismSummary}
-\end{figure}
-
-\begin{figure}
 	\begin{subfigure}[H]{\textwidth}
 		\centering
     	\includegraphics[scale=0.7, page=1]{plagiarism/mathematical_model.pdf}
@@ -977,7 +1434,129 @@ With conditional GAN, both generator and discriminator are conditioning on the i
     \label{PlagiarismMath_1}
 \end{figure}
 
+\begin{figure}
+	\begin{subfigure}[H]{\textwidth}
+		\centering
+    	\includegraphics[scale=0.7, page=1]{plagiarism/project_implementation.pdf}
+    \end{subfigure}
+ \caption{Plagiarism report Project Implementation}
+    \label{PlagiarismImplementation}
+\end{figure}
+\begin{figure}\ContinuedFloat
+    \begin{subfigure}[H]{\textwidth}
+    	\centering
+    	\includegraphics[scale=0.7, page=2]{plagiarism/project_implementation.pdf}
+    \end{subfigure}
+    \caption{Plagiarism report for Project Implementation (contd.)}
+    \label{PlagiarismImplementation_1}
+\end{figure}
 
+\begin{figure}
+	\centering
+    \includegraphics[scale=0.7]{plagiarism/algorithm_details.pdf}
+    \caption{Plagiarism report for Algorithm Details}
+    \label{PlagiarismAlgorithms}
+\end{figure}
+
+\begin{figure}
+	\begin{subfigure}[H]{\textwidth}
+		\centering
+    	\includegraphics[scale=0.7, page=1]{plagiarism/methodology.pdf}
+    \end{subfigure}
+ \caption{Plagiarism report Methodology}
+    \label{PlagiarismMethodology}
+\end{figure}
+\begin{figure}\ContinuedFloat
+    \begin{subfigure}[H]{\textwidth}
+    	\centering
+    	\includegraphics[scale=0.7, page=2]{plagiarism/methodology.pdf}
+    \end{subfigure}
+    \caption{Plagiarism report for Methodology (contd.)}
+    \label{PlagiarismMethodology_1}
+\end{figure}
+
+\begin{figure}
+	\begin{subfigure}[H]{\textwidth}
+		\centering
+    	\includegraphics[scale=0.7, page=1]{plagiarism/software_testing.pdf}
+    \end{subfigure}
+ \caption{Plagiarism report Software Testing}
+    \label{PlagiarismSoftwareTesting}
+\end{figure}
+\begin{figure}\ContinuedFloat
+    \begin{subfigure}[H]{\textwidth}
+    	\centering
+    	\includegraphics[scale=0.7, page=2]{plagiarism/software_testing.pdf}
+    \end{subfigure}
+    \caption{Plagiarism report for Software Testing (contd.)}
+    \label{PlagiarismSoftwareTesting_1}
+\end{figure}
+\begin{figure}\ContinuedFloat
+    \begin{subfigure}[H]{\textwidth}
+    	\centering
+    	\includegraphics[scale=0.7, page=3]{plagiarism/software_testing.pdf}
+    \end{subfigure}
+    \caption{Plagiarism report for Software Testing (contd.)}
+    \label{PlagiarismSoftwareTesting_2}
+\end{figure}
+
+
+\begin{figure}
+	\centering
+    \includegraphics[width=\textwidth, height=\textheight]{plagiarism/dataset_experimental_setup.pdf}
+    \caption{Plagiarism report for Experimental Setup}
+    \label{PlagiarismExperiment}
+\end{figure}
+
+\begin{figure}
+	\begin{subfigure}[H]{\textwidth}
+		\centering
+    	\includegraphics[scale=0.7, page=1]{plagiarism/results_1.pdf}
+    \end{subfigure}
+ \caption{Plagiarism report Results}
+    \label{PlagiarismResults}
+\end{figure}
+\begin{figure}\ContinuedFloat
+    \begin{subfigure}[H]{\textwidth}
+    	\centering
+    	\includegraphics[scale=0.7, page=2]{plagiarism/results_1.pdf}
+    \end{subfigure}
+    \caption{Plagiarism report for Results (contd.)}
+    \label{PlagiarismResults_1}
+\end{figure}
+\begin{figure}\ContinuedFloat
+    \begin{subfigure}[H]{\textwidth}
+    	\centering
+    	\includegraphics[scale=0.7, page=1]{plagiarism/results_2.pdf}
+    \end{subfigure}
+    \caption{Plagiarism report for Results (contd.)}
+    \label{PlagiarismResults_2}
+\end{figure}
+\begin{figure}\ContinuedFloat
+    \begin{subfigure}[H]{\textwidth}
+    	\centering
+    	\includegraphics[scale=0.7, page=2]{plagiarism/results_2.pdf}
+    \end{subfigure}
+    \caption{Plagiarism report for Results (contd.)}
+    \label{PlagiarismResults_3}
+\end{figure}
+
+\begin{figure}
+	\begin{subfigure}[H]{\textwidth}
+		\centering
+    	\includegraphics[scale=0.7, page=1]{plagiarism/summary_conclusion.pdf}
+    \end{subfigure}
+ \caption{Plagiarism report Summary and Conclusion}
+    \label{PlagiarismSummary}
+\end{figure}
+\begin{figure}\ContinuedFloat
+    \begin{subfigure}[H]{\textwidth}
+    	\centering
+    	\includegraphics[scale=0.7, page=2]{plagiarism/summary_conclusion.pdf}
+    \end{subfigure}
+    \caption{Plagiarism report for Summary and Conclusion (contd.)}
+    \label{PlagiarismSummary_1}
+\end{figure}
 
 \end{appendices}
 
